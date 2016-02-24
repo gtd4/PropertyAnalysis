@@ -1,0 +1,18 @@
+﻿@model PropertyAnalysisTool.Models.PropertyFilterViewModel
+<div class="row">
+    <div class="property-filter">
+        <div id="regions-container">
+            @Html.DropDownListFor(m => m.SelectedLocationId, Model.Locations)
+        </div>
+
+        <div id="districts-container">
+
+            @Html.DropDownListFor(m => m.SelectedDistrictId, Model.Districts)
+        </div>
+
+        <div id="suburbs-container">
+            @Html.DropDownListFor(m => m.SelectedSuburbId, Model.Suburbs)
+        </div>
+
+    </div>
+</div>

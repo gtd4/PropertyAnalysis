@@ -1,0 +1,81 @@
+﻿@model List<PropertyAnalysisTool.Models.PropertyModel>
+@{
+    ViewBag.Title = "Home Page";
+
+}
+
+<div class="row">
+    <div class="col-sm-8" id="property-list">
+        @{Html.RenderPartial("PropertyListingPartial", Model);}
+    </div>
+    <div class="col-sm-4">
+        @{Html.RenderAction("Index", "PropertyFilter");}
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        function UpdateFilter(localityId, districtId, SuburbId)
+        {
+            $.ajax({
+                url: "/PropertyFilter/Index",
+                type: "GET",
+                data: {
+                    LocalityId: localityId,
+                    DistrictId: districtId,
+                    SuburbId: SuburbId,
+                    rng: Math.random()
+                }
+            }).done(function (partialViewResult) {
+
+                $("#propertyfilter-container").html(partialViewResult);
+
+            });
+
+            UpdateProperties(localityId, districtId, SuburbId)
+        }
+
+        function UpdateProperties(localityId, districtId, SuburbId)
+        {
+            $.ajax({
+                url: "/Home/UpdatePropertyListings",
+                type: "GET",
+                data: {
+                    LocalityId: localityId,
+                    DistrictId: districtId,
+                    SuburbId: SuburbId,
+                    rng: Math.random()
+                }
+            }).done(function (partialViewResult) {
+
+                $("#property-list").html(partialViewResult);
+
+            });
+        }
+
+        $(function () {
+
+            $("#propertyfilter-container").on('change', '#SelectedLocationId', function () {
+
+                UpdateFilter($(this).val(), 0, 0)
+
+            });
+
+            $("#propertyfilter-container").on('change', '#SelectedDistrictId', function () {
+
+                UpdateFilter($("#SelectedLocationId").val(), $("#SelectedDistrictId").val(), 0)
+                
+
+            });
+
+            $("#propertyfilter-container").on('change', '#SelectedSuburbId', function () {
+
+                UpdateProperties($("#SelectedLocationId").val(), $("#SelectedDistrictId").val(), $("#SelectedSuburbId").val());
+
+            });
+        });
+
+    </script>
+}

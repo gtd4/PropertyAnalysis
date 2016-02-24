@@ -1,0 +1,29 @@
+﻿@model List<PropertyAnalysisTool.Models.PropertyModel>
+
+@{ 
+    var rowCount = 0;
+}
+<div class="row">
+    @foreach (var property in Model)
+    {
+
+
+        <div class="col-lg-4 col-sm-6">
+            <div class="thumbnail">
+
+                <img src="@property.PictureHref" />
+                @Html.ActionLink(property.Title, "Details", "Home", new { id = property.ListingId }, null)
+
+                <p>@property.PriceDisplay</p>
+                <p>R.V: $@property.RateableValue</p>
+                <p></p>
+
+            </div>
+        </div>
+
+        rowCount++;
+
+
+    }
+
+</div>

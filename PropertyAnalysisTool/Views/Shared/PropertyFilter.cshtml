@@ -1,0 +1,9 @@
+﻿@model PropertyAnalysisTool.Models.PropertyFilterViewModel
+
+@using (Html.BeginForm())
+{
+    <div id="propertyfilter-container">
+        @Html.Partial("PropertyFilterPartial", Model)
+    </div>
+}
+

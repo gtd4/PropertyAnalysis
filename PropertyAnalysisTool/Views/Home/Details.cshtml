@@ -1,0 +1,27 @@
+﻿@model PropertyAnalysisTool.Models.PropertyModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="thumbnail">
+
+            @Html.ActionLink(Model.Title, "Details", "Home", new { id = Model.ListingId }, null)
+            <img src="@Model.Photos.First().PhotoUrl.Thumbnail" />
+
+            <p>@Model.PriceDisplay</p>
+            <p>R.V: $@Model.RateableValue</p>
+            <p></p>
+            <img src="@Model.PictureHref" />
+            <p>@Model.Description</p>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <p>Property Analysis</p>
+        <h3>Desired Yield:</h3>
+        <p>Todo: Create a slider/control to adjust for desired rental yield, this will then update Rental cost to show how much rent would be needed to achieve yield, yield will update if rent is updated to show yield about</p>
+
+        <h3>Rental Income: This will auto update to show min rent to acheive desired yield, if manually updated then yield will update to show how much yield you will recieve based on rental amount</h3>
+    </div>
+</div>
