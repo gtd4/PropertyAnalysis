@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace PropertyAnalysisTool.Controllers
 {
@@ -19,9 +20,7 @@ namespace PropertyAnalysisTool.Controllers
         string consumerKey = "C92E96B9131B76EF6CC533B1A96D841E";
         string consumerSecret = "7BF2D361B8348A18EF4757E7836B65CD";
 
-
-
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
 
@@ -33,24 +32,88 @@ namespace PropertyAnalysisTool.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
 
-                var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery").Result;
-
+                var response = client.GetAsync(string.Format("https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery&rows=12&page={0}", page)).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
-
                     string responseString = response.Content.ReadAsStringAsync().Result;
                     tpr = JsonConvert.DeserializeObject<TradeMePropertyResultsViewModel>(responseString);
+                    var totalCount = tpr.TotalCount;
+
+                    
+
+                    
                 }
 
-               
             }
-            var model = tpr.Properties;
+            var totalPages = tpr.TotalCount / tpr.PageSize;
+            if (tpr.TotalCount % tpr.PageSize != 0)
+            {
+                totalPages++;
+            }
+
+            var model = tpr;
+            model.TotalPages = totalPages;
+            model.Page = page;
+
 
             return View(model);
         }
 
-        public ActionResult UpdatePropertyListings(int localityId = 0, int districtId = 0, int suburbId = 0)
+        public ActionResult CheaperThanRV()
+        {
+            var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
+
+            TradeMePropertyResultsViewModel tpr = new TradeMePropertyResultsViewModel();
+            var ctRVList = new List<PropertyModel>();
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
+
+                var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery&rows=500").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseString = response.Content.ReadAsStringAsync().Result;
+                    tpr = JsonConvert.DeserializeObject<TradeMePropertyResultsViewModel>(responseString);
+
+                    //get how many pages we are going to loop through
+                    var totalPages = tpr.TotalCount / tpr.PageSize;
+                    if(tpr.TotalCount % tpr.PageSize != 0)
+                    {
+                        totalPages++;
+                    }
+
+                    //get initialListings
+                    ctRVList.AddRange(tpr.Properties.Where(x => x.RateableValue > 0));
+
+                    for (int i = 1; i < totalPages; i++)
+                    {
+                        var url = string.Format("https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery&page={0}&rows=12", i);
+
+                        response = client.GetAsync(url).Result;
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            responseString = response.Content.ReadAsStringAsync().Result;
+                            tpr = JsonConvert.DeserializeObject<TradeMePropertyResultsViewModel>(responseString);
+
+                            ctRVList.AddRange(tpr.Properties.Where(x => x.RateableValue > 0 ));
+                        }
+                    }
+                }
+
+
+            }
+
+            var model = ctRVList.Where(prop => prop.Price > 0 && prop.Price < prop.RateableValue).Distinct().ToList();
+            return View("Index", model);
+        }
+
+        public ActionResult UpdatePropertyListings(int localityId = 0, int districtId = 0, int suburbId = 0, int page = 1)
         {
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
 
@@ -62,7 +125,7 @@ namespace PropertyAnalysisTool.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
 
-                var url = BuildApiUrl(localityId, districtId, suburbId);
+                var url = BuildApiUrl(localityId, districtId, suburbId, page);
 
                 var response = client.GetAsync(url).Result;
 
@@ -71,37 +134,45 @@ namespace PropertyAnalysisTool.Controllers
 
                     string responseString = response.Content.ReadAsStringAsync().Result;
                     tpr = JsonConvert.DeserializeObject<TradeMePropertyResultsViewModel>(responseString);
+
+                    
                 }
 
             }
-            var model = tpr.Properties;
+            var totalPages = tpr.TotalCount / (tpr.PageSize > 0 ? tpr.PageSize : 1);
+            if (tpr.PageSize > 1 && tpr.TotalCount % tpr.PageSize != 0)
+            {
+                totalPages++;
+            }
+            var model = tpr;
+            model.TotalPages = totalPages;
+            model.Page = page;
+
             return PartialView("PropertyListingPartial", model);
         }
 
-        private string BuildApiUrl(int localityId, int districtId, int suburbId)
+        private string BuildApiUrl(int localityId, int districtId, int suburbId, int page)
         {
-            var url = "https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery";
+            var url = "https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery&rows=12";
 
             var sb = new StringBuilder(url);
 
             if (localityId != 0)
             {
-                var regionFilter = string.Format("&region={0}", localityId);
-                sb.Append(regionFilter);
+                sb.AppendFormat("&region={0}", localityId);
             }
 
             if (districtId != 0)
             {
-                var regionFilter = string.Format("&district={0}", districtId);
-                sb.Append(regionFilter);
+                sb.AppendFormat("&district={0}", districtId);
             }
 
             if (suburbId != 0)
             {
-                var regionFilter = string.Format("&suburb={0}", suburbId);
-                sb.Append(regionFilter);
+                sb.AppendFormat("&suburb={0}", suburbId);
             }
 
+            sb.AppendFormat("&page={0}", page);
             return sb.ToString();
         }
 
@@ -117,10 +188,7 @@ namespace PropertyAnalysisTool.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
 
-                
-
                 var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Listings/" + id + ".json").Result;
-
 
                 if (response.IsSuccessStatusCode)
                 {

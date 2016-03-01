@@ -4,12 +4,12 @@
 }
 
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-6">
         <div class="thumbnail">
 
-            @Html.ActionLink(Model.Title, "Details", "Home", new { id = Model.ListingId }, null)
+           
             <img src="@Model.Photos.First().PhotoUrl.Thumbnail" />
-
+            <h2>@Model.Title</h2>
             <p>@Model.PriceDisplay</p>
             <p>R.V: $@Model.RateableValue</p>
             <p></p>
@@ -17,11 +17,60 @@
             <p>@Model.Description</p>
         </div>
     </div>
-    <div class="col-lg-8">
-        <p>Property Analysis</p>
-        <h3>Desired Yield:</h3>
+    <div class="col-lg-6">
+        <h2>Property Analysis</h2>
+
+        <h3>Purchase Price</h3>
+        @Html.EditorFor(property => property.Price)
+        
+        <h3>Desired Gross Yield Percentage:</h3>
+        @Html.EditorFor(property => property.InitialYieldPercentage)
+
+        <h3>Rent To Achieve</h3>
+        @Html.EditorFor(property => property.InitialRent)
         <p>Todo: Create a slider/control to adjust for desired rental yield, this will then update Rental cost to show how much rent would be needed to achieve yield, yield will update if rent is updated to show yield about</p>
 
         <h3>Rental Income: This will auto update to show min rent to acheive desired yield, if manually updated then yield will update to show how much yield you will recieve based on rental amount</h3>
+        <p>Gross rental yield = Annual rental income (weekly rental income x 52) / property value* x 100</p>
+        <p>Rent = Yield / 100 * property value / 52</p>
     </div>
 </div>
+
+@section scripts
+{
+    <script>
+        function SetRent(yieldVal, propVal)
+        {
+            var rent = yieldVal / 100 * propVal / 52;
+            return rent;
+        }
+
+        $(function()
+        {
+            //Update rent values if price is updated
+            $("#Price").keyup(function () {
+                var price = $(this).val();
+                var yieldVal = $("#InitialYieldPercentage").val();
+
+                console.log(price);
+                var rent = Math.round(SetRent(yieldVal, price));
+
+                $("#InitialRent").val(rent);
+
+            });
+
+            //Update rent values if Yield is updated
+            $("#InitialYieldPercentage").keyup(function () {
+
+                var price = $("#Price").val();
+                var yieldVal = $(this).val();
+                console.log(price);
+                var rent = Math.round(SetRent(yieldVal, price));
+
+                $("#InitialRent").val(rent);
+            });
+
+        });
+    </script>
+
+}

@@ -1,12 +1,14 @@
-﻿@model List<PropertyAnalysisTool.Models.PropertyModel>
+﻿@model PropertyAnalysisTool.Models.TradeMePropertyResultsViewModel
 @{
     ViewBag.Title = "Home Page";
 
 }
 
 <div class="row">
+    
     <div class="col-sm-8" id="property-list">
         @{Html.RenderPartial("PropertyListingPartial", Model);}
+        
     </div>
     <div class="col-sm-4">
         @{Html.RenderAction("Index", "PropertyFilter");}
@@ -17,8 +19,7 @@
 {
     <script>
 
-        function UpdateFilter(localityId, districtId, SuburbId)
-        {
+        function UpdateFilter(localityId, districtId, SuburbId) {
             $.ajax({
                 url: "/PropertyFilter/Index",
                 type: "GET",
@@ -37,15 +38,15 @@
             UpdateProperties(localityId, districtId, SuburbId)
         }
 
-        function UpdateProperties(localityId, districtId, SuburbId)
-        {
+        function UpdateProperties(localityId, districtId, suburbId, page) {
             $.ajax({
                 url: "/Home/UpdatePropertyListings",
                 type: "GET",
                 data: {
                     LocalityId: localityId,
                     DistrictId: districtId,
-                    SuburbId: SuburbId,
+                    SuburbId: suburbId,
+                    Page: page,
                     rng: Math.random()
                 }
             }).done(function (partialViewResult) {
@@ -66,7 +67,7 @@
             $("#propertyfilter-container").on('change', '#SelectedDistrictId', function () {
 
                 UpdateFilter($("#SelectedLocationId").val(), $("#SelectedDistrictId").val(), 0)
-                
+
 
             });
 

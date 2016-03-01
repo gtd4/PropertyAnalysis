@@ -8,8 +8,9 @@ namespace PropertyAnalysisTool.Models
 {
     public class PropertyModel
     {
+
         [JsonProperty("ListingId")]
-        public int ListingId{get; set;}
+        public int ListingId { get; set; }
 
         [JsonProperty("Title")]
         public string Title { get; set; }
@@ -84,7 +85,47 @@ namespace PropertyAnalysisTool.Models
         public List<PhotoModel> Photos { get; set; }
 
         [JsonProperty("WasPrice")]
-        public List<PhotoModel> WasPrice { get; set; }
+        public decimal WasPrice { get; set; }
+
+        public decimal InitialRent {
+            get
+            {
+                return InitialYieldPercentage / 100 * Price / 52; ;
+            }
+
+            set
+            {
+                InitialRent = value;
+            }
+            
+        }
+
+        public decimal Price
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(new string(this.PriceDisplay.Where(char.IsDigit).ToArray())))
+                {
+                    return Int32.Parse(new string(this.PriceDisplay.Where(char.IsDigit).ToArray()));
+                }
+                return 0;
+            }
+        }
+
+        private decimal _initialYieldPercentage = 10;
+
+        public decimal InitialYieldPercentage
+        {
+            get
+            {
+                return _initialYieldPercentage;
+            }
+
+            set
+            {
+                _initialYieldPercentage = value;
+            }
+        }
 
     }
 }

@@ -33,8 +33,39 @@ img{
     max-height: 150px;
 }
 
-.thumbnail
+
+/*section form zooming content hover*/
+/*-------------------------------------------------*/
+.zoom-container{
+     float: left;
+    position: relative;
+    width: 100%;
+    height: 270px;
+    margin: 0 auto;
+    
+}
+
+.property-listing
 {
+    position: absolute;
+  top: 0;
+  left: 0;
+   -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+  width: 100%;
     height: 250px;
     margin-bottom: 20px;
 }
+
+.image-card img {
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+
+.zoom-container:hover .property-listing {
+  -webkit-transform: scale(1.08);
+  transform: scale(1.08);
+}
+
+/*-----------------------------------------------*/
