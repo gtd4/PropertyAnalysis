@@ -90,7 +90,7 @@ namespace PropertyAnalysisTool.Models
         public decimal InitialRent {
             get
             {
-                return InitialYieldPercentage / 100 * Price / 52; ;
+                return Math.Round(InitialYieldPercentage / 100 * Price / 52);
             }
 
             set

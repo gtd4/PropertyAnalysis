@@ -7,7 +7,7 @@
     <div class="col-lg-6">
         <div class="thumbnail">
 
-           
+
             <img src="@Model.Photos.First().PhotoUrl.Thumbnail" />
             <h2>@Model.Title</h2>
             <p>@Model.PriceDisplay</p>
@@ -22,9 +22,12 @@
 
         <h3>Purchase Price</h3>
         @Html.EditorFor(property => property.Price)
-        
+
         <h3>Desired Gross Yield Percentage:</h3>
         @Html.EditorFor(property => property.InitialYieldPercentage)
+
+        <h3>Estimated Vacancy Rate in Weeks</h3>
+        <input type="number" id="vacancy-rate" value="2" />
 
         <h3>Rent To Achieve</h3>
         @Html.EditorFor(property => property.InitialRent)
@@ -39,21 +42,30 @@
 @section scripts
 {
     <script>
-        function SetRent(yieldVal, propVal)
-        {
-            var rent = yieldVal / 100 * propVal / 52;
+        function SetRent() {
+            var propVal = $("#Price").val();
+            var yieldVal = $("#InitialYieldPercentage").val();
+            var vacancyRate = $("#vacancy-rate").val();
+
+            var rent = yieldVal / 100 * propVal / (52 - vacancyRate);
             return rent;
         }
 
-        $(function()
-        {
+        function SetYield() {
+            var propVal = $("#Price").val();
+            var rent = $("#InitialRent").val();
+            var vacancyRate = $("#vacancy-rate").val();
+
+            var yieldVal = rent * (52 - vacancyRate) / propVal * 100;
+            return yieldVal;
+        }
+
+        $(function () {
             //Update rent values if price is updated
             $("#Price").keyup(function () {
-                var price = $(this).val();
-                var yieldVal = $("#InitialYieldPercentage").val();
 
-                console.log(price);
-                var rent = Math.round(SetRent(yieldVal, price));
+                var rent = Math.round(SetRent());
+
 
                 $("#InitialRent").val(rent);
 
@@ -62,12 +74,28 @@
             //Update rent values if Yield is updated
             $("#InitialYieldPercentage").keyup(function () {
 
-                var price = $("#Price").val();
-                var yieldVal = $(this).val();
-                console.log(price);
-                var rent = Math.round(SetRent(yieldVal, price));
+
+                var rent = Math.round(SetRent());
 
                 $("#InitialRent").val(rent);
+            });
+
+            //update rent if vacancy rate is updated
+            $("#vacancy-rate").keyup(function () {
+
+
+                var rent = Math.round(SetRent());
+
+                $("#InitialRent").val(rent);
+            });
+
+            //update yield if rent is updated
+            $("#InitialRent").keyup(function () {
+
+
+                var yieldVal = SetYield();
+
+                $("#InitialYieldPercentage").val(yieldVal);
             });
 
         });
