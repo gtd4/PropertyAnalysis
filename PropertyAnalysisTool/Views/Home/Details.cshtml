@@ -4,7 +4,7 @@
 }
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-4">
         <div class="thumbnail">
 
 
@@ -17,7 +17,7 @@
             <p>@Model.Description</p>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-4">
         <h2>Property Analysis</h2>
 
         <h3>Purchase Price</h3>
@@ -27,15 +27,52 @@
         @Html.EditorFor(property => property.InitialYieldPercentage)
 
         <h3>Estimated Vacancy Rate in Weeks</h3>
-        <input type="number" id="vacancy-rate" value="2" />
+        @Html.EditorFor(property => property.InitialVacancyRate)
 
         <h3>Rent To Achieve</h3>
         @Html.EditorFor(property => property.InitialRent)
-        <p>Todo: Create a slider/control to adjust for desired rental yield, this will then update Rental cost to show how much rent would be needed to achieve yield, yield will update if rent is updated to show yield about</p>
+        @*<p>Todo: Create a slider/control to adjust for desired rental yield, this will then update Rental cost to show how much rent would be needed to achieve yield, yield will update if rent is updated to show yield about</p>*@
 
-        <h3>Rental Income: This will auto update to show min rent to acheive desired yield, if manually updated then yield will update to show how much yield you will recieve based on rental amount</h3>
-        <p>Gross rental yield = Annual rental income (weekly rental income x 52) / property value* x 100</p>
-        <p>Rent = Yield / 100 * property value / 52</p>
+        @*<h3>Rental Income: This will auto update to show min rent to acheive desired yield, if manually updated then yield will update to show how much yield you will recieve based on rental amount</h3>
+            <p>Gross rental yield = Annual rental income (weekly rental income x 52) / property value* x 100</p>
+            <p>Rent = Yield / 100 * property value / 52</p>*@
+
+        <p>If Gross Yield is under interest rate, then loss</p>
+        <p>
+            5-6% low cashflow - need great growth
+        </p>
+        <p>
+            7-8% break even - still need good growth
+        </p><p>
+            9-10% or more - good cashflow
+        </p>
+        <p>
+            If you want to own a lot of properties, then need high yield (that pay for themselves)
+        </p>
+        <p>
+            It keeps banks happy with income
+        </p>
+        <p>
+            property portfolio will pay for itself
+        </p>
+        <p>
+            interest rates will rise at some point, so need a buffer
+        </p>
+    </div>
+    <div class="col-lg-4">
+        <p>Interest Rate</p>
+        @Html.EditorFor(property => property.InitialInterestRate)
+
+        <p>Interest Per Annum</p>
+        @Html.EditorFor(property => property.AnnualInterestCost)
+        <p>Purchase Price * Interest Rate</p>
+
+        <p>required rent to cover interest</p>
+        @Html.EditorFor(property => property.RentToCoverInterest)
+
+        <p>Surplus Per Week</p>
+        @Html.EditorFor(property => property.InitialSurplus)
+
     </div>
 </div>
 
@@ -45,7 +82,7 @@
         function SetRent() {
             var propVal = $("#Price").val();
             var yieldVal = $("#InitialYieldPercentage").val();
-            var vacancyRate = $("#vacancy-rate").val();
+            var vacancyRate = $("#InitialVacancyRate").val();
 
             var rent = yieldVal / 100 * propVal / (52 - vacancyRate);
             return rent;
@@ -54,20 +91,62 @@
         function SetYield() {
             var propVal = $("#Price").val();
             var rent = $("#InitialRent").val();
-            var vacancyRate = $("#vacancy-rate").val();
+            var vacancyRate = $("#InitialVacancyRate").val();
 
             var yieldVal = rent * (52 - vacancyRate) / propVal * 100;
             return yieldVal;
+        }
+
+        function SetSurplus()
+        {
+            var rent = $("#InitialRent").val();
+            var rentToCoverInterest = $("#RentToCoverInterest").val();
+
+            var surplus = rent - rentToCoverInterest;
+
+            $("#InitialSurplus").val(surplus);
+
+
+        }
+
+        function SetRentToCoverInterest()
+        {
+            SetInterestPerAnnum();
+            var interestCost = $("#AnnualInterestCost").val();
+            var vacancy = $("#InitialVacancyRate").val();
+
+            var rentToCoverInterest = interestCost / (52 - vacancy);
+
+            $("#RentToCoverInterest").val(rentToCoverInterest);
+
+        }
+
+        function SetInterestPerAnnum()
+        {
+            var price = $("#Price").val();
+            var interest = $("#InitialInterestRate").val();
+
+            var annualInterest = price * interest / 100;
+
+            $("#AnnualInterestCost").val(annualInterest);
         }
 
         $(function () {
             //Update rent values if price is updated
             $("#Price").keyup(function () {
 
+                
+                SetInterestPerAnnum();
+
                 var rent = Math.round(SetRent());
-
-
+                
+                //update the rent value
                 $("#InitialRent").val(rent);
+
+                SetRentToCoverInterest();
+                SetSurplus();
+
+                //update the Interest Per Annum
 
             });
 
@@ -81,7 +160,7 @@
             });
 
             //update rent if vacancy rate is updated
-            $("#vacancy-rate").keyup(function () {
+            $("#InitialVacancyRate").keyup(function () {
 
 
                 var rent = Math.round(SetRent());

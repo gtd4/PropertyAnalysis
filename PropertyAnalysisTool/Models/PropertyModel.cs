@@ -87,16 +87,13 @@ namespace PropertyAnalysisTool.Models
         [JsonProperty("WasPrice")]
         public decimal WasPrice { get; set; }
 
-        public decimal InitialRent {
+        public decimal InitialRent
+        {
             get
             {
-                return Math.Round(InitialYieldPercentage / 100 * Price / 52);
+                return Math.Round(InitialYieldPercentage / 100 * Price / (52 - InitialVacancyRate));
             }
 
-            set
-            {
-                InitialRent = value;
-            }
             
         }
 
@@ -112,18 +109,55 @@ namespace PropertyAnalysisTool.Models
             }
         }
 
-        private decimal _initialYieldPercentage = 10;
-
         public decimal InitialYieldPercentage
         {
             get
             {
-                return _initialYieldPercentage;
+                return 10;
             }
 
-            set
+        }
+
+        public decimal InitialVacancyRate
+        {
+            get
             {
-                _initialYieldPercentage = value;
+                return 2;
+            }
+        }
+
+        public decimal InitialInterestRate
+        {
+            get
+            {
+                return 5;
+            }
+
+        }
+
+        public decimal AnnualInterestCost
+        {
+            get
+            {
+                return Price * InitialInterestRate / 100;
+            }
+
+
+        }
+
+        public decimal RentToCoverInterest
+        {
+            get
+            {
+                return AnnualInterestCost / (52 - InitialVacancyRate);
+            }
+        }
+
+        public decimal InitialSurplus
+        {
+            get
+            {
+                return InitialRent - RentToCoverInterest;
             }
         }
 
