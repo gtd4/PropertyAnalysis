@@ -73,6 +73,22 @@
         <p>Surplus Per Week</p>
         @Html.EditorFor(property => property.InitialSurplus)
 
+        <p>Expenses</p>
+
+        <p>Rates Annual</p>
+        @Html.EditorFor(property => property.InitialRates)
+        <p>Repairs</p>
+        @Html.EditorFor(property => property.InitialRepairs)
+        <p>Insurance</p>
+        @Html.EditorFor(property => property.InitialInsurance)
+        <p>Property Management</p>
+        @Html.EditorFor(property => property.PropertyManagementAmount)
+        <p>Total Expenses</p>
+        @Html.EditorFor(property => property.TotalInitalExpense)
+
+        <p>Min Rent To Cover Mortgage and Expenses</p>
+        @Html.EditorFor(property => property.RentToCoverMortgageExpenses)
+
     </div>
 </div>
 
@@ -84,8 +100,10 @@
             var yieldVal = $("#InitialYieldPercentage").val();
             var vacancyRate = $("#InitialVacancyRate").val();
 
-            var rent = yieldVal / 100 * propVal / (52 - vacancyRate);
-            return rent;
+            var rent = Math.round(yieldVal / 100 * propVal / (52 - vacancyRate));
+
+            $("#InitialRent").val(rent);
+
         }
 
         function SetYield() {
@@ -93,88 +111,110 @@
             var rent = $("#InitialRent").val();
             var vacancyRate = $("#InitialVacancyRate").val();
 
-            var yieldVal = rent * (52 - vacancyRate) / propVal * 100;
-            return yieldVal;
+            var yieldVal = Math.round(rent * (52 - vacancyRate) / propVal * 100);
+            $("#InitialYieldPercentage").val(yieldVal);
         }
 
-        function SetSurplus()
-        {
+        function SetSurplus() {
             var rent = $("#InitialRent").val();
             var rentToCoverInterest = $("#RentToCoverInterest").val();
 
-            var surplus = rent - rentToCoverInterest;
+            var surplus = Math.round(rent - rentToCoverInterest);
 
             $("#InitialSurplus").val(surplus);
 
 
         }
 
-        function SetRentToCoverInterest()
-        {
+        function SetRentToCoverInterest() {
             SetInterestPerAnnum();
             var interestCost = $("#AnnualInterestCost").val();
             var vacancy = $("#InitialVacancyRate").val();
 
-            var rentToCoverInterest = interestCost / (52 - vacancy);
+            var rentToCoverInterest = Math.round(interestCost / (52 - vacancy));
 
             $("#RentToCoverInterest").val(rentToCoverInterest);
 
         }
 
-        function SetInterestPerAnnum()
-        {
+        function SetInterestPerAnnum() {
             var price = $("#Price").val();
             var interest = $("#InitialInterestRate").val();
 
-            var annualInterest = price * interest / 100;
+            var annualInterest = Math.round(price * interest / 100);
 
             $("#AnnualInterestCost").val(annualInterest);
+        }
+
+        function UpdateTotalExpenses()
+        {
+            var rates = Number($("#InitialRates").val());
+            var repairs = Number($("#InitialRepairs").val());
+            var insurance = Number($("#InitialInsurance").val());
+            var propertyManagement = Number($("#PropertyManagementAmount").val());
+            var vacancyRate = $("#InitialVacancyRate").val();
+            var totalExpense = Math.round(rates + repairs + insurance + propertyManagement);
+            var totalInterest = Number($("#AnnualInterestCost").val());
+
+            var rentToCoverExpense = (totalExpense +  totalInterest)/ (52 - vacancyRate);
+            $("#RentToCoverMortgageExpenses").val(rentToCoverExpense);
+            $("#TotalInitalExpense").val(totalExpense);
+
+        }
+
+        function UpdateValues() {
+            SetRent();
+            SetInterestPerAnnum();
+            SetRentToCoverInterest();
+            SetSurplus();
         }
 
         $(function () {
             //Update rent values if price is updated
             $("#Price").keyup(function () {
-
-                
-                SetInterestPerAnnum();
-
-                var rent = Math.round(SetRent());
-                
-                //update the rent value
-                $("#InitialRent").val(rent);
-
-                SetRentToCoverInterest();
-                SetSurplus();
-
-                //update the Interest Per Annum
-
+                UpdateValues();
+                UpdateTotalExpenses();
             });
 
             //Update rent values if Yield is updated
             $("#InitialYieldPercentage").keyup(function () {
 
 
-                var rent = Math.round(SetRent());
-
-                $("#InitialRent").val(rent);
+                UpdateValues();
+                UpdateTotalExpenses();
             });
 
             //update rent if vacancy rate is updated
             $("#InitialVacancyRate").keyup(function () {
 
+                UpdateValues();
+                UpdateTotalExpenses();
 
-                var rent = Math.round(SetRent());
-
-                $("#InitialRent").val(rent);
             });
 
             //update yield if rent is updated
             $("#InitialRent").keyup(function () {
+                SetYield();
+                SetInterestPerAnnum();
+                SetRentToCoverInterest();
+                SetSurplus();
+            });
 
+            $("#InitialInterestRate").keyup(function () {
+                UpdateValues();
+            });
 
-                var yieldVal = SetYield();
-
-                $("#InitialYieldPercentage").val(yieldVal);
+            $("#InitialRates").keyup(function () {
+                UpdateTotalExpenses();
+            });
+            $("#InitialRepairs").keyup(function () {
+                UpdateTotalExpenses();
+            });
+            $("#InitialInsurance").keyup(function () {
+                UpdateTotalExpenses();
+            });
+            $("#PropertyManagementAmount").keyup(function () {
+                UpdateTotalExpenses();
             });
 
         });

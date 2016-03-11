@@ -91,7 +91,7 @@ namespace PropertyAnalysisTool.Models
         {
             get
             {
-                return Math.Round(InitialYieldPercentage / 100 * Price / (52 - InitialVacancyRate));
+                return Math.Round(InitialYieldPercentage / 100 * Price / (VacancyRate));
             }
 
             
@@ -149,7 +149,7 @@ namespace PropertyAnalysisTool.Models
         {
             get
             {
-                return AnnualInterestCost / (52 - InitialVacancyRate);
+                return AnnualInterestCost / (VacancyRate);
             }
         }
 
@@ -158,6 +158,78 @@ namespace PropertyAnalysisTool.Models
             get
             {
                 return InitialRent - RentToCoverInterest;
+            }
+        }
+
+        public decimal InitialRates
+        {
+            get
+            {
+                return 2000;
+            }
+        }
+
+        public decimal InitialRepairs
+        {
+            get
+            {
+                return 1000;
+            }
+        }
+
+        public decimal InitialInsurance
+        {
+            get
+            {
+                return 1000;
+            }
+        }
+
+        public decimal PropertyManagementPercentage
+        {
+            get
+            {
+                return 8;
+            }
+        }
+
+        public decimal PropertyManagementAmount
+        {
+            get
+            {
+                return InitialRent * (VacancyRate) * (PropertyManagementPercentage / 100);
+            }
+        }
+
+        public decimal TotalInitalExpense
+        {
+            get
+            {
+                return PropertyManagementAmount + InitialInsurance + InitialRepairs + InitialRates;
+            }
+        }
+
+        public decimal RentToCoverMortgageExpenses
+        {
+            get
+            {
+                return (TotalInitalExpense + AnnualInterestCost) / VacancyRate;
+            }
+        }
+
+        public decimal ProposedAnnualRentalIncome
+        {
+            get
+            {
+                return (InitialRent) * VacancyRate;
+            }
+        }
+
+        public decimal VacancyRate
+        {
+            get
+            {
+                return 52 - InitialVacancyRate;
             }
         }
 
