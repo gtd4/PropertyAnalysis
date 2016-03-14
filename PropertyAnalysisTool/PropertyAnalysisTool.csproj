@@ -210,6 +210,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ComparePropertyModel.cs" />
     <Compile Include="Models\District.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Region.cs" />
@@ -285,6 +286,8 @@
     <Content Include="Views\Shared\PropertyFilter.cshtml" />
     <Content Include="Views\Shared\PropertyFilterPartial.cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.cshtml" />
+    <Content Include="Views\Home\Compare.cshtml" />
+    <Content Include="Views\Shared\ComparePropertyPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

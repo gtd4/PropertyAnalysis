@@ -16,16 +16,18 @@
                 <div class="zoom-container">
                     <div class="thumbnail property-listing">
                         <a href="@Url.Action("Details", "Home", new { id = property.ListingId }, null)">
-                            <img src="@property.PictureHref" />
-                            <p>@property.Title</p>
+                            <img class="prop-img" src="@property.PictureHref" />
+                            <h4 class="prop-title">@property.Title</h4>
 
                             <p>@property.PriceDisplay</p>
                             <p>R.V: $@property.RateableValue</p>
-                            
+
+                            <button type="button" class="btn btn-primary compare-button" value="@property.ListingId">Add To Compare List</button>
+
+
                         </a>
-                        <p>
-                            <button type="button" class="btn btn-primary compare">Add To Compare List</button>
-                        </p>
+
+
                     </div>
                 </div>
             </div>

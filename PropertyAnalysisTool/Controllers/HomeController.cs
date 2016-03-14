@@ -38,9 +38,9 @@ namespace PropertyAnalysisTool.Controllers
                     tpr = JsonConvert.DeserializeObject<TradeMePropertyResultsViewModel>(responseString);
                     var totalCount = tpr.TotalCount;
 
-                    
 
-                    
+
+
                 }
 
             }
@@ -78,7 +78,7 @@ namespace PropertyAnalysisTool.Controllers
 
                     //get how many pages we are going to loop through
                     var totalPages = tpr.TotalCount / tpr.PageSize;
-                    if(tpr.TotalCount % tpr.PageSize != 0)
+                    if (tpr.TotalCount % tpr.PageSize != 0)
                     {
                         totalPages++;
                     }
@@ -97,7 +97,7 @@ namespace PropertyAnalysisTool.Controllers
                             responseString = response.Content.ReadAsStringAsync().Result;
                             tpr = JsonConvert.DeserializeObject<TradeMePropertyResultsViewModel>(responseString);
 
-                            ctRVList.AddRange(tpr.Properties.Where(x => x.RateableValue > 0 ));
+                            ctRVList.AddRange(tpr.Properties.Where(x => x.RateableValue > 0));
                         }
                     }
                 }
@@ -200,10 +200,34 @@ namespace PropertyAnalysisTool.Controllers
             return View(model);
         }
 
-        public ActionResult Compare(int id1, int id2, int id3)
+        public ActionResult Compare(/*int[] Ids*/)
         {
+            var Ids = new int[] { 4492010, 4221318};
             //Get upto 3 properties and compare their values side by side
-            return View();
+            var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
+            var model = new ComparePropertyModel();
+            using (var client = new HttpClient())
+            {
+
+                foreach (var id in Ids)
+                {
+                    InitClient(authHeader, client);
+
+                    var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Listings/" + id + ".json").Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseString = response.Content.ReadAsStringAsync().Result;
+
+                        var prop = JsonConvert.DeserializeObject<PropertyModel>(responseString);
+
+                        model.Properties.Add(prop);
+
+                    }
+                }
+
+            }
+            return View(model);
         }
 
         public ActionResult About()
