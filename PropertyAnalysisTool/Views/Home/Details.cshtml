@@ -4,7 +4,11 @@
 }
 
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-sm-12">
+        <h1>Property Analysis</h1>
+
+    </div>
+    <div class="col-lg-3">
         <div class="thumbnail">
 
 
@@ -13,29 +17,71 @@
             <p>@Model.PriceDisplay</p>
             <p>R.V: $@Model.RateableValue</p>
             <p></p>
-            <img src="@Model.PictureHref" />
             <p>@Model.Description</p>
         </div>
     </div>
-    <div class="col-lg-4">
-        <h2>Property Analysis</h2>
+    <div class="col-lg-3">
+        <div class="thumbnail">
 
-        <h3>Purchase Price</h3>
-        @Html.EditorFor(property => property.Price)
+            <h3>Purchase Price</h3>
+            @Html.EditorFor(property => property.Price)
 
-        <h3>Desired Gross Yield Percentage:</h3>
-        @Html.EditorFor(property => property.InitialYieldPercentage)
+            <h3>Gross Yield</h3>
+            @Html.EditorFor(property => property.InitialYieldPercentage)
 
-        <h3>Estimated Vacancy Rate in Weeks</h3>
-        @Html.EditorFor(property => property.InitialVacancyRate)
+            <h3>Vacancy Rate in Weeks</h3>
+            @Html.EditorFor(property => property.InitialVacancyRate)
 
-        <h3>Rent To Achieve</h3>
-        @Html.EditorFor(property => property.InitialRent)
-        @*<p>Todo: Create a slider/control to adjust for desired rental yield, this will then update Rental cost to show how much rent would be needed to achieve yield, yield will update if rent is updated to show yield about</p>*@
+            <h3>Rent To Achieve @*(@Html.DisplayFor(property => property.ProposedAnnualRentalIncome))*@</h3>
+            @Html.EditorFor(property => property.InitialRent)
 
-        @*<h3>Rental Income: This will auto update to show min rent to acheive desired yield, if manually updated then yield will update to show how much yield you will recieve based on rental amount</h3>
-            <p>Gross rental yield = Annual rental income (weekly rental income x 52) / property value* x 100</p>
-            <p>Rent = Yield / 100 * property value / 52</p>*@
+
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="thumbnail">
+            <h3>Interest Rate</h3>
+            @Html.EditorFor(property => property.InitialInterestRate)
+
+            <h3>Yearly Interest</h3>
+            @Html.EditorFor(property => property.AnnualInterestCost)
+            <p>Purchase Price * Interest Rate</p>
+
+            <h3>Rent to cover interest</h3>
+            @Html.EditorFor(property => property.RentToCoverInterest)
+
+            <h3>Surplus Per Week</h3>
+            @Html.EditorFor(property => property.SurplusBeforeExpenses)
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="thumbnail">
+            <h3>Expenses</h3>
+
+            <h3>Rates Annual</h3>
+            @Html.EditorFor(property => property.InitialRates)
+            <h3>Maintenance</h3>
+            @Html.EditorFor(property => property.InitialRepairs)
+            <h3>Insurance</h3>
+            @Html.EditorFor(property => property.InitialInsurance)
+            <h3>Property Management (8%)</h3>
+            @Html.EditorFor(property => property.PropertyManagementAmount)
+            <h3>Total Expenses</h3>
+            @Html.EditorFor(property => property.TotalInitalExpense)
+
+            <h3>Rent To Cover Mortgage and Expenses</h3>
+            @Html.EditorFor(property => property.RentToCoverMortgageExpenses)
+
+            <h3>Surplus After Expenses</h3>
+            @Html.EditorFor(property => property.SurplusAfterExpense)
+
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-12">
 
         <p>If Gross Yield is under interest rate, then loss</p>
         <p>
@@ -58,37 +104,6 @@
         <p>
             interest rates will rise at some point, so need a buffer
         </p>
-    </div>
-    <div class="col-lg-4">
-        <p>Interest Rate</p>
-        @Html.EditorFor(property => property.InitialInterestRate)
-
-        <p>Interest Per Annum</p>
-        @Html.EditorFor(property => property.AnnualInterestCost)
-        <p>Purchase Price * Interest Rate</p>
-
-        <p>required rent to cover interest</p>
-        @Html.EditorFor(property => property.RentToCoverInterest)
-
-        <p>Surplus Per Week</p>
-        @Html.EditorFor(property => property.InitialSurplus)
-
-        <p>Expenses</p>
-
-        <p>Rates Annual</p>
-        @Html.EditorFor(property => property.InitialRates)
-        <p>Repairs</p>
-        @Html.EditorFor(property => property.InitialRepairs)
-        <p>Insurance</p>
-        @Html.EditorFor(property => property.InitialInsurance)
-        <p>Property Management</p>
-        @Html.EditorFor(property => property.PropertyManagementAmount)
-        <p>Total Expenses</p>
-        @Html.EditorFor(property => property.TotalInitalExpense)
-
-        <p>Min Rent To Cover Mortgage and Expenses</p>
-        @Html.EditorFor(property => property.RentToCoverMortgageExpenses)
-
     </div>
 </div>
 
@@ -118,10 +133,13 @@
         function SetSurplus() {
             var rent = $("#InitialRent").val();
             var rentToCoverInterest = $("#RentToCoverInterest").val();
+            var rentoToCoverExpense = $("#RentToCoverMortgageExpenses").val();
 
-            var surplus = Math.round(rent - rentToCoverInterest);
+            var surplusBeforeExpense = Math.round(rent - rentToCoverInterest);
+            var surplusAfterExpense = Math.round(rent - rentoToCoverExpense);
 
-            $("#InitialSurplus").val(surplus);
+            $("#SurplusBeforeExpenses").val(surplusBeforeExpense);
+            $("#SurplusAfterExpense").val(surplusAfterExpense);
 
 
         }
@@ -146,8 +164,7 @@
             $("#AnnualInterestCost").val(annualInterest);
         }
 
-        function UpdateTotalExpenses()
-        {
+        function UpdateTotalExpenses() {
             var rates = Number($("#InitialRates").val());
             var repairs = Number($("#InitialRepairs").val());
             var insurance = Number($("#InitialInsurance").val());
@@ -156,7 +173,7 @@
             var totalExpense = Math.round(rates + repairs + insurance + propertyManagement);
             var totalInterest = Number($("#AnnualInterestCost").val());
 
-            var rentToCoverExpense = (totalExpense +  totalInterest)/ (52 - vacancyRate);
+            var rentToCoverExpense = Math.round((totalExpense + totalInterest) / (52 - vacancyRate));
             $("#RentToCoverMortgageExpenses").val(rentToCoverExpense);
             $("#TotalInitalExpense").val(totalExpense);
 
@@ -166,14 +183,26 @@
             SetRent();
             SetInterestPerAnnum();
             SetRentToCoverInterest();
+            UpdateTotalExpenses();
             SetSurplus();
+        }
+
+        function UpdatePropertyManagementCosts()
+        {
+            var annualRent = Number($("#InitialRent").val() * (52 - $("#InitialVacancyRate").val()));
+
+            var pmCost = Math.round(annualRent * 8 / 100);
+
+            $("#PropertyManagementAmount").val(pmCost)
         }
 
         $(function () {
             //Update rent values if price is updated
             $("#Price").keyup(function () {
                 UpdateValues();
+                UpdatePropertyManagementCosts();
                 UpdateTotalExpenses();
+                
             });
 
             //Update rent values if Yield is updated
@@ -181,6 +210,7 @@
 
 
                 UpdateValues();
+                UpdatePropertyManagementCosts();
                 UpdateTotalExpenses();
             });
 
@@ -188,6 +218,7 @@
             $("#InitialVacancyRate").keyup(function () {
 
                 UpdateValues();
+                UpdatePropertyManagementCosts();
                 UpdateTotalExpenses();
 
             });
@@ -197,6 +228,10 @@
                 SetYield();
                 SetInterestPerAnnum();
                 SetRentToCoverInterest();
+                
+                UpdatePropertyManagementCosts();
+                UpdateTotalExpenses();
+
                 SetSurplus();
             });
 

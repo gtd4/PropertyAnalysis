@@ -28,9 +28,7 @@ namespace PropertyAnalysisTool.Controllers
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
+                InitClient(authHeader, client);
 
                 var response = client.GetAsync(string.Format("https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery&rows=12&page={0}", page)).Result;
 
@@ -69,9 +67,7 @@ namespace PropertyAnalysisTool.Controllers
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
+                InitClient(authHeader, client);
 
                 var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery&rows=500").Result;
 
@@ -121,9 +117,7 @@ namespace PropertyAnalysisTool.Controllers
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
+                InitClient(authHeader, client);
 
                 var url = BuildApiUrl(localityId, districtId, suburbId, page);
 
@@ -135,7 +129,7 @@ namespace PropertyAnalysisTool.Controllers
                     string responseString = response.Content.ReadAsStringAsync().Result;
                     tpr = JsonConvert.DeserializeObject<TradeMePropertyResultsViewModel>(responseString);
 
-                    
+
                 }
 
             }
@@ -149,6 +143,13 @@ namespace PropertyAnalysisTool.Controllers
             model.Page = page;
 
             return PartialView("PropertyListingPartial", model);
+        }
+
+        private static void InitClient(string authHeader, HttpClient client)
+        {
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
         }
 
         private string BuildApiUrl(int localityId, int districtId, int suburbId, int page)
@@ -184,9 +185,7 @@ namespace PropertyAnalysisTool.Controllers
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
+                InitClient(authHeader, client);
 
                 var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Listings/" + id + ".json").Result;
 
@@ -199,6 +198,12 @@ namespace PropertyAnalysisTool.Controllers
                 }
             }
             return View(model);
+        }
+
+        public ActionResult Compare(int id1, int id2, int id3)
+        {
+            //Get upto 3 properties and compare their values side by side
+            return View();
         }
 
         public ActionResult About()

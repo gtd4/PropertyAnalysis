@@ -153,7 +153,7 @@ namespace PropertyAnalysisTool.Models
             }
         }
 
-        public decimal InitialSurplus
+        public decimal SurplusBeforeExpenses
         {
             get
             {
@@ -230,6 +230,14 @@ namespace PropertyAnalysisTool.Models
             get
             {
                 return 52 - InitialVacancyRate;
+            }
+        }
+
+        public decimal SurplusAfterExpense
+        {
+            get
+            {
+                return InitialRent - RentToCoverMortgageExpenses;
             }
         }
 
