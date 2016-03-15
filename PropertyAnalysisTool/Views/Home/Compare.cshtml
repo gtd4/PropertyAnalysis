@@ -8,13 +8,13 @@
     <div class="col-sm-12">
         <h1>Compare</h1>
     </div>
-    @foreach(var property in Model.Properties)
+    @foreach (var property in Model.Properties)
     {
         <div class="@containerSize">
             @{Html.RenderPartial("ComparePropertyPartial", property);}
 
         </div>
-    }
+                }
 </div>
 
 @section scripts
@@ -107,63 +107,10 @@
         }
 
         $(function () {
-            //Update rent values if price is updated
-            //$("#Price").keyup(function () {
-            //    UpdateValues();
-            //    UpdatePropertyManagementCosts();
-            //    UpdateTotalExpenses();
 
-            //});
-
-            ////Update rent values if Yield is updated
-            //$("#InitialYieldPercentage").keyup(function () {
-
-
-            //    UpdateValues();
-            //    UpdatePropertyManagementCosts();
-            //    UpdateTotalExpenses();
-            //});
-
-            //update rent if vacancy rate is updated
-            //$("#InitialVacancyRate").keyup(function () {
-
-            //    UpdateValues();
-            //    UpdatePropertyManagementCosts();
-            //    UpdateTotalExpenses();
-
-            //});
-
-            //update yield if rent is updated
-            //$("#InitialRent").keyup(function () {
-            //    SetYield();
-            //    SetInterestPerAnnum();
-            //    SetRentToCoverInterest();
-
-            //    UpdatePropertyManagementCosts();
-            //    UpdateTotalExpenses();
-
-            //    SetSurplus();
-            //});
-
-            //$("#InitialInterestRate").keyup(function () {
-            //    UpdateValues();
-            //});
-
-            //$("#InitialRates").keyup(function () {
-            //    UpdateTotalExpenses();
-            //});
-            //$("#InitialRepairs").keyup(function () {
-            //    UpdateTotalExpenses();
-            //});
-            //$("#InitialInsurance").keyup(function () {
-            //    UpdateTotalExpenses();
-            //});
-            //$("#PropertyManagementAmount").keyup(function () {
-            //    UpdateTotalExpenses();
-            //});
 
             $(".comparison-container").on("keyup", "#Price", function () {
-                
+
 
                 var parent = $(this).parents(".comparison-container");
 
@@ -218,7 +165,7 @@
                 var parent = $(this).parents(".comparison-container");
 
                 UpdateValues(parent);
-                
+
             });
 
             $(".comparison-container").on("keyup", "#InitialRates", function () {
@@ -226,7 +173,7 @@
 
                 var parent = $(this).parents(".comparison-container");
 
-                UpdateTotalExpenses(parent);       
+                UpdateTotalExpenses(parent);
             });
 
             $(".comparison-container").on("keyup", "#InitialRepairs", function () {
@@ -253,7 +200,7 @@
                 UpdateTotalExpenses(parent);
             });
 
-  
+
 
         });
     </script>
