@@ -203,7 +203,7 @@
 
             });
 
-            $(".compare-button").click(function (e) {
+            $("#property-list").on("click", ".compare-button", function (e) {
 
                 e.preventDefault();
 
@@ -212,6 +212,8 @@
                 var image = $(this).siblings(".prop-img").prop("src");
 
                 BuildCompareListItem(title, image, id);
+
+                return true;
 
             });
 
@@ -229,6 +231,19 @@
                 //hide compare button
                 ToggleComparePropertyButton();
             });
+
+            $(".compare-properties").click(function () {
+
+                var url = "/home/compare?";
+
+                for(var i =0; i< compareList.length;i++)
+                {
+                    url = url.concat("id" + (i + 1) + "=" + compareList[i]+"&");
+                }
+
+                window.location = url;
+            });
+
         });
 
     </script>

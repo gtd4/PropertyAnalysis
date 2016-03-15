@@ -200,9 +200,9 @@ namespace PropertyAnalysisTool.Controllers
             return View(model);
         }
 
-        public ActionResult Compare(/*int[] Ids*/)
+        public ActionResult Compare(int id1 = 0, int id2 = 0, int id3 = 0)
         {
-            var Ids = new int[] { 4492010, 4221318};
+            var Ids = new int[] { id1, id2, id3};
             //Get upto 3 properties and compare their values side by side
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
             var model = new ComparePropertyModel();
