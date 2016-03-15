@@ -94,8 +94,9 @@
             SetInterestPerAnnum(parent);
             SetRentToCoverInterest(parent);
             UpdateTotalExpenses(parent);
+
+            UpdatePropertyManagementCosts(parent);
             SetSurplus(parent);
-            //    UpdatePropertyManagementCosts();
         }
 
         function UpdatePropertyManagementCosts(parent) {
@@ -107,7 +108,6 @@
         }
 
         $(function () {
-
 
             $(".comparison-container").on("keyup", "#Price", function () {
 
@@ -124,8 +124,8 @@
                 var parent = $(this).parents(".comparison-container");
 
                 UpdateValues(parent);
-                UpdatePropertyManagementCosts(parent);
-                UpdateTotalExpenses(parent);
+                //UpdatePropertyManagementCosts(parent);
+                //UpdateTotalExpenses(parent);
 
 
             });
@@ -136,8 +136,8 @@
                 var parent = $(this).parents(".comparison-container");
 
                 UpdateValues(parent);
-                UpdatePropertyManagementCosts(parent);
-                UpdateTotalExpenses(parent);
+                //UpdatePropertyManagementCosts(parent);
+               // UpdateTotalExpenses(parent);
 
 
             });
@@ -148,14 +148,7 @@
                 var parent = $(this).parents(".comparison-container");
 
                 SetYield(parent);
-                SetInterestPerAnnum(parent);
-                SetRentToCoverInterest(parent);
-
-                UpdatePropertyManagementCosts(parent);
-                UpdateTotalExpenses(parent);
-
-                SetSurplus(parent);
-
+                UpdateValues(parent)
 
             });
 
