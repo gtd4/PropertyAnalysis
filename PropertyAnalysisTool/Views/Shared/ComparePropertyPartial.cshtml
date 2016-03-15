@@ -6,224 +6,77 @@
 <div class="row">
     @*Property Info*@
 
+    <div class="comparison-container">
+        <div class="col-lg-12 compare">
+            <div class="thumbnail compare-property-details">
+                <img src="@Model.Photos.First().PhotoUrl.Thumbnail" />
+                <h2>@Model.Title</h2>
+                <p>@Model.PriceDisplay</p>
+                <p>R.V: $@Model.RateableValue</p>
+                <p></p>
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <div class="col-lg-12 compare">
+            <div class="thumbnail">
 
-    <div class="col-lg-12 compare">
-        <div class="thumbnail compare-property-details">
-            <img src="@Model.Photos.First().PhotoUrl.Thumbnail" />
-            <h2>@Model.Title</h2>
-            <p>@Model.PriceDisplay</p>
-            <p>R.V: $@Model.RateableValue</p>
-            <p></p>
-            <p>@Model.Description</p>
+                <h3>Purchase Price</h3>
+                @Html.EditorFor(property => property.Price)
+
+
+                <h3>Gross Yield</h3>
+                @Html.EditorFor(property => property.InitialYieldPercentage)
+
+                <h3>Vacancy Rate in Weeks</h3>
+                @Html.EditorFor(property => property.InitialVacancyRate)
+
+                <h3>Rent To Achieve @*(@Html.DisplayFor(property => property.ProposedAnnualRentalIncome))*@</h3>
+                @Html.EditorFor(property => property.InitialRent)
+
+
+            </div>
+        </div>
+
+        <div class="col-lg-12 compare">
+            <div class="thumbnail">
+                <h3>Interest Rate</h3>
+                @Html.EditorFor(property => property.InitialInterestRate)
+
+                <h3>Yearly Interest</h3>
+                @Html.EditorFor(property => property.AnnualInterestCost)
+                <p>Purchase Price * Interest Rate</p>
+
+                <h3>Rent to cover interest</h3>
+                @Html.EditorFor(property => property.RentToCoverInterest)
+
+                <h3>Surplus Per Week</h3>
+                @Html.EditorFor(property => property.SurplusBeforeExpenses)
+            </div>
+        </div>
+
+        <div class="col-lg-12 compare">
+            <div class="thumbnail">
+                <h3>Expenses</h3>
+
+                <h3>Rates Annual</h3>
+                @Html.EditorFor(property => property.InitialRates)
+                <h3>Maintenance</h3>
+                @Html.EditorFor(property => property.InitialRepairs)
+                <h3>Insurance</h3>
+                @Html.EditorFor(property => property.InitialInsurance)
+                <h3>Property Management (8%)</h3>
+                @Html.EditorFor(property => property.PropertyManagementAmount)
+                <h3>Total Expenses</h3>
+                @Html.EditorFor(property => property.TotalInitalExpense)
+
+                <h3>Rent To Cover Mortgage and Expenses</h3>
+                @Html.EditorFor(property => property.RentToCoverMortgageExpenses)
+
+                <h3>Surplus After Expenses</h3>
+                @Html.EditorFor(property => property.SurplusAfterExpense)
+
+            </div>
         </div>
     </div>
-    <div class="col-lg-12 compare">
-        <div class="thumbnail">
-
-            <h3>Purchase Price</h3>
-            @Html.EditorFor(property => property.Price)
-
-            <h3>Gross Yield</h3>
-            @Html.EditorFor(property => property.InitialYieldPercentage)
-
-            <h3>Vacancy Rate in Weeks</h3>
-            @Html.EditorFor(property => property.InitialVacancyRate)
-
-            <h3>Rent To Achieve @*(@Html.DisplayFor(property => property.ProposedAnnualRentalIncome))*@</h3>
-            @Html.EditorFor(property => property.InitialRent)
-
-
-        </div>
-    </div>
-
-    <div class="col-lg-12 compare">
-        <div class="thumbnail">
-            <h3>Interest Rate</h3>
-            @Html.EditorFor(property => property.InitialInterestRate)
-
-            <h3>Yearly Interest</h3>
-            @Html.EditorFor(property => property.AnnualInterestCost)
-            <p>Purchase Price * Interest Rate</p>
-
-            <h3>Rent to cover interest</h3>
-            @Html.EditorFor(property => property.RentToCoverInterest)
-
-            <h3>Surplus Per Week</h3>
-            @Html.EditorFor(property => property.SurplusBeforeExpenses)
-        </div>
-    </div>
-
-    <div class="col-lg-12 compare">
-        <div class="thumbnail">
-            <h3>Expenses</h3>
-
-            <h3>Rates Annual</h3>
-            @Html.EditorFor(property => property.InitialRates)
-            <h3>Maintenance</h3>
-            @Html.EditorFor(property => property.InitialRepairs)
-            <h3>Insurance</h3>
-            @Html.EditorFor(property => property.InitialInsurance)
-            <h3>Property Management (8%)</h3>
-            @Html.EditorFor(property => property.PropertyManagementAmount)
-            <h3>Total Expenses</h3>
-            @Html.EditorFor(property => property.TotalInitalExpense)
-
-            <h3>Rent To Cover Mortgage and Expenses</h3>
-            @Html.EditorFor(property => property.RentToCoverMortgageExpenses)
-
-            <h3>Surplus After Expenses</h3>
-            @Html.EditorFor(property => property.SurplusAfterExpense)
-
-        </div>
-    </div>
-
 </div>
 
-@section scripts
-{
-    <script>
-        function SetRent() {
-            var propVal = $("#Price").val();
-            var yieldVal = $("#InitialYieldPercentage").val();
-            var vacancyRate = $("#InitialVacancyRate").val();
-
-            var rent = Math.round(yieldVal / 100 * propVal / (52 - vacancyRate));
-
-            $("#InitialRent").val(rent);
-
-        }
-
-        function SetYield() {
-            var propVal = $("#Price").val();
-            var rent = $("#InitialRent").val();
-            var vacancyRate = $("#InitialVacancyRate").val();
-
-            var yieldVal = Math.round(rent * (52 - vacancyRate) / propVal * 100);
-            $("#InitialYieldPercentage").val(yieldVal);
-        }
-
-        function SetSurplus() {
-            var rent = $("#InitialRent").val();
-            var rentToCoverInterest = $("#RentToCoverInterest").val();
-            var rentoToCoverExpense = $("#RentToCoverMortgageExpenses").val();
-
-            var surplusBeforeExpense = Math.round(rent - rentToCoverInterest);
-            var surplusAfterExpense = Math.round(rent - rentoToCoverExpense);
-
-            $("#SurplusBeforeExpenses").val(surplusBeforeExpense);
-            $("#SurplusAfterExpense").val(surplusAfterExpense);
-
-
-        }
-
-        function SetRentToCoverInterest() {
-            SetInterestPerAnnum();
-            var interestCost = $("#AnnualInterestCost").val();
-            var vacancy = $("#InitialVacancyRate").val();
-
-            var rentToCoverInterest = Math.round(interestCost / (52 - vacancy));
-
-            $("#RentToCoverInterest").val(rentToCoverInterest);
-
-        }
-
-        function SetInterestPerAnnum() {
-            var price = $("#Price").val();
-            var interest = $("#InitialInterestRate").val();
-
-            var annualInterest = Math.round(price * interest / 100);
-
-            $("#AnnualInterestCost").val(annualInterest);
-        }
-
-        function UpdateTotalExpenses() {
-            var rates = Number($("#InitialRates").val());
-            var repairs = Number($("#InitialRepairs").val());
-            var insurance = Number($("#InitialInsurance").val());
-            var propertyManagement = Number($("#PropertyManagementAmount").val());
-            var vacancyRate = $("#InitialVacancyRate").val();
-            var totalExpense = Math.round(rates + repairs + insurance + propertyManagement);
-            var totalInterest = Number($("#AnnualInterestCost").val());
-
-            var rentToCoverExpense = Math.round((totalExpense + totalInterest) / (52 - vacancyRate));
-            $("#RentToCoverMortgageExpenses").val(rentToCoverExpense);
-            $("#TotalInitalExpense").val(totalExpense);
-
-        }
-
-        function UpdateValues() {
-            SetRent();
-            SetInterestPerAnnum();
-            SetRentToCoverInterest();
-            UpdateTotalExpenses();
-            SetSurplus();
-        }
-
-        function UpdatePropertyManagementCosts() {
-            var annualRent = Number($("#InitialRent").val() * (52 - $("#InitialVacancyRate").val()));
-
-            var pmCost = Math.round(annualRent * 8 / 100);
-
-            $("#PropertyManagementAmount").val(pmCost)
-        }
-
-        $(function () {
-            //Update rent values if price is updated
-            $("#Price").keyup(function () {
-                UpdateValues();
-                UpdatePropertyManagementCosts();
-                UpdateTotalExpenses();
-
-            });
-
-            //Update rent values if Yield is updated
-            $("#InitialYieldPercentage").keyup(function () {
-
-
-                UpdateValues();
-                UpdatePropertyManagementCosts();
-                UpdateTotalExpenses();
-            });
-
-            //update rent if vacancy rate is updated
-            $("#InitialVacancyRate").keyup(function () {
-
-                UpdateValues();
-                UpdatePropertyManagementCosts();
-                UpdateTotalExpenses();
-
-            });
-
-            //update yield if rent is updated
-            $("#InitialRent").keyup(function () {
-                SetYield();
-                SetInterestPerAnnum();
-                SetRentToCoverInterest();
-
-                UpdatePropertyManagementCosts();
-                UpdateTotalExpenses();
-
-                SetSurplus();
-            });
-
-            $("#InitialInterestRate").keyup(function () {
-                UpdateValues();
-            });
-
-            $("#InitialRates").keyup(function () {
-                UpdateTotalExpenses();
-            });
-            $("#InitialRepairs").keyup(function () {
-                UpdateTotalExpenses();
-            });
-            $("#InitialInsurance").keyup(function () {
-                UpdateTotalExpenses();
-            });
-            $("#PropertyManagementAmount").keyup(function () {
-                UpdateTotalExpenses();
-            });
-
-        });
-    </script>
-
-}
