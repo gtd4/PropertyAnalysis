@@ -68,11 +68,12 @@
             });
         }
 
-        function BuildItemContainer() {
+        function BuildItemContainer(propId) {
 
             var itemContainer = jQuery("<div/>",
             {
                 class: 'compare-item-container col-sm-12',
+                id: propId,
 
             });
 
@@ -111,7 +112,7 @@
 
         }
 
-        function BuildDeleteContainer() {
+        function BuildDeleteContainer(propId) {
             var deleteContainer = jQuery("<div/>",
                 {
                     class: "compare-delete-container",
@@ -119,8 +120,9 @@
 
             var deleteButton = jQuery("<button/>",
             {
-                class: "btn btn-danger btncompare-delete-button",
+                class: "btn btn-danger compare-delete-button",
                 text: "Remove",
+                value: propId,
             }).appendTo(deleteContainer);
 
             return deleteContainer;
@@ -156,7 +158,7 @@
 
             var compareListContainer = $(".compare-list");
 
-            var itemContainer = BuildItemContainer();
+            var itemContainer = BuildItemContainer(propId);
             var imgContainer = BuildImgContainer(imgSrc);
             var titleContainer = BuildTitleContainer(title);
             var deleteContainer = BuildDeleteContainer(propId);
@@ -167,6 +169,17 @@
 
             $(itemContainer).appendTo(compareListContainer);
 
+        }
+
+        function RemoveFromCompareList(propId)
+        {
+            var index = jQuery.inArray(propId, compareList);
+
+            if(index != -1)
+            {
+                compareList.splice(index, 1);
+                return true;
+            }
         }
 
         $(function () {
@@ -200,6 +213,21 @@
 
                 BuildCompareListItem(title, image, id);
 
+            });
+
+            $(".compare-list").on('click', '.compare-delete-button', function () {
+
+                var propId = $(this).val();
+                //remove entire container
+                var selector = "#" + propId;
+
+                $(".compare-list").find(selector).remove();
+
+                //remove item for compareList
+                RemoveFromCompareList(propId);
+
+                //hide compare button
+                ToggleComparePropertyButton();
             });
         });
 
