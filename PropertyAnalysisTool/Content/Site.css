@@ -109,3 +109,9 @@ img{
 {
     display: none;
 }
+
+.compare-property-details
+{
+    height: 400px;
+    overflow-y:auto;
+}

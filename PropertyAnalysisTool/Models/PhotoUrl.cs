@@ -10,5 +10,8 @@ namespace PropertyAnalysisTool.Models
     {
         [JsonProperty("Thumbnail")]
         public string Thumbnail { get; set; }
+
+        [JsonProperty("Large")]
+        public string Large { get; set; }
     }
 }

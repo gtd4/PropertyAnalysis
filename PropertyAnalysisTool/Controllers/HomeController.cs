@@ -15,10 +15,18 @@ namespace PropertyAnalysisTool.Controllers
 {
     public class HomeController : Controller
     {
+        //sandbox
         string oauthToken = "503E1ECB2CD3D44A98BE089160073C57";
         string oauthSecret = "6994C47CF7D5B369F9702A50D0D81B17";
         string consumerKey = "C92E96B9131B76EF6CC533B1A96D841E";
         string consumerSecret = "7BF2D361B8348A18EF4757E7836B65CD";
+
+        //prod details
+        //string consumerKey = "48C11C46E3C1969737776DECD5F144B3";
+        //string consumerSecret = "C841EE5BE675F879097974C6BB163202";
+        //string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
+        //string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
+        const int pageSize = 12;
 
         public ActionResult Index(int page = 1)
         {
@@ -30,22 +38,22 @@ namespace PropertyAnalysisTool.Controllers
             {
                 InitClient(authHeader, client);
 
-                var response = client.GetAsync(string.Format("https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery&rows=12&page={0}", page)).Result;
+                var url = BuildApiUrl(page);
+
+                var response = client.GetAsync(url).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
                     string responseString = response.Content.ReadAsStringAsync().Result;
                     tpr = JsonConvert.DeserializeObject<TradeMePropertyResultsViewModel>(responseString);
+
                     var totalCount = tpr.TotalCount;
-
-
-
 
                 }
 
             }
-            var totalPages = tpr.TotalCount / tpr.PageSize;
-            if (tpr.TotalCount % tpr.PageSize != 0)
+            var totalPages = tpr.TotalCount / pageSize;
+            if (tpr.TotalCount % pageSize != 0)
             {
                 totalPages++;
             }
@@ -133,11 +141,13 @@ namespace PropertyAnalysisTool.Controllers
                 }
 
             }
-            var totalPages = tpr.TotalCount / (tpr.PageSize > 0 ? tpr.PageSize : 1);
-            if (tpr.PageSize > 1 && tpr.TotalCount % tpr.PageSize != 0)
+
+            var totalPages = tpr.TotalCount / pageSize;
+            if (tpr.TotalCount % pageSize != 0)
             {
                 totalPages++;
             }
+
             var model = tpr;
             model.TotalPages = totalPages;
             model.Page = page;
@@ -154,7 +164,11 @@ namespace PropertyAnalysisTool.Controllers
 
         private string BuildApiUrl(int localityId, int districtId, int suburbId, int page)
         {
-            var url = "https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?photo_size=Gallery&rows=12";
+            //replace environment in url to switch between sandbox and prod site requests
+            var prodEnv = "https://api.trademe.co.nz/v1/";
+            var debugEnv = "https://api.tmsandbox.co.nz/v1/";
+
+            var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows=12", debugEnv);
 
             var sb = new StringBuilder(url);
 
@@ -175,6 +189,11 @@ namespace PropertyAnalysisTool.Controllers
 
             sb.AppendFormat("&page={0}", page);
             return sb.ToString();
+        }
+
+        private string BuildApiUrl(int page)
+        {
+            return BuildApiUrl(0, 0, 0, page);
         }
 
         public ActionResult Details(int id)

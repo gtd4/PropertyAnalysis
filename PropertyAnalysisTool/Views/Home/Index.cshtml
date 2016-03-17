@@ -1,4 +1,6 @@
 ﻿@model PropertyAnalysisTool.Models.TradeMePropertyResultsViewModel
+
+
 @{
     ViewBag.Title = "Home Page";
 
@@ -200,6 +202,19 @@
             $("#propertyfilter-container").on('change', '#SelectedSuburbId', function () {
 
                 UpdateProperties($("#SelectedLocationId").val(), $("#SelectedDistrictId").val(), $("#SelectedSuburbId").val());
+
+            });
+
+            $("#property-list").on("click", ".page", function (e){
+
+                e.preventDefault();
+                var locationId = $("#SelectedLocationId").val();
+                var districtId = $("#SelectedDistrictId").val();
+                var suburbId = $("#SelectedSuburbId").val();
+                var page = $(this).val();
+
+                UpdateProperties(locationId, districtId, suburbId, page)
+
 
             });
 

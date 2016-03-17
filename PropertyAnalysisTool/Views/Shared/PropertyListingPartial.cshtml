@@ -2,6 +2,7 @@
 
 @{
     var rowCount = 0;
+    var pageNum = 1;
 }
 <div class="row">
 
@@ -32,28 +33,46 @@
                 </div>
             </div>
             rowCount++;
-
-
         }
-        @*<div class="col-sm-12 pager">
-                <ul class="list-inline">
-                    @for (var i = 0; i < Model.TotalPages; i++)
-                    {
-                        <li>
-                            <div class="col-sm-1">
-                                @Html.ActionLink((i + 1).ToString(), "Index", "Home", new { page = i }, null)
-                            </div>
-                        </li>
-                    }
-                </ul>
-
-            </div>*@
     }
     else
     {
-        <div class="col-lg-12">
-            <h3>No Results Sorry</h3>
-        </div>
+    <div class="col-lg-12">
+        <h3>No Results Sorry</h3>
+    </div>
     }
 
+</div>
+
+<div class="row">
+    <div class="col-sm-12 text-center">
+        @if (Model.MaxPagination > 1)
+            {
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                @for (var i = 0; i < Model.MaxPagination; i++)
+                {
+                    pageNum = Model.PaginationStart + i;
+                    var active = pageNum == Model.Page ? "active" : "";
+                    <li class="page @active" value="@pageNum"><a href="#">@pageNum</a></li>
+                }
+
+                @if (pageNum < Model.TotalPages)
+                {
+                    <li class="disabled"><a href="#">...</a></li>
+                    <li class="page" value="@Model.TotalPages"><a href="#">@Model.TotalPages</a></li>
+                }
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        }
+    </div>
 </div>
