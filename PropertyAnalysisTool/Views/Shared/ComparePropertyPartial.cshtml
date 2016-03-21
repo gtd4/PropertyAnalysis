@@ -9,7 +9,10 @@
     <div class="calculator-container">
         <div class="col-lg-12 compare">
             <div class="thumbnail compare-property-details">
-                <img src="@Model.Photos.First().PhotoUrl.Large" />
+                <div class="details-image-container">
+
+                    @{Html.RenderPartial("PropertyImageLargeSliderPartial", Model.Photos); }
+                </div>
                 <h2>@Model.Title</h2>
                 <p>@Model.PriceDisplay</p>
                 <p>R.V: $@Model.RateableValue</p>

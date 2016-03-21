@@ -87,6 +87,12 @@ namespace PropertyAnalysisTool.Models
         [JsonProperty("WasPrice")]
         public decimal WasPrice { get; set; }
 
+        [JsonProperty("Bedrooms")]
+        public string Bedrooms { get; set; }
+
+        [JsonProperty("Bathrooms")]
+        public string Bathrooms { get; set; }
+
         public decimal InitialRent
         {
             get

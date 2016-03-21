@@ -49,6 +49,11 @@ namespace PropertyAnalysisTool.Controllers
 
                     var totalCount = tpr.TotalCount;
 
+                    foreach(var property in tpr.Properties)
+                    {
+                        var photo = property.Photos;
+                    }
+
                 }
 
             }
@@ -117,7 +122,7 @@ namespace PropertyAnalysisTool.Controllers
             return View("Index", model);
         }
 
-        public ActionResult UpdatePropertyListings(int localityId = 0, int districtId = 0, int suburbId = 0, int page = 1)
+        public ActionResult UpdatePropertyListings(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxbathroom = 0, int page = 1)
         {
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
 
@@ -127,7 +132,7 @@ namespace PropertyAnalysisTool.Controllers
             {
                 InitClient(authHeader, client);
 
-                var url = BuildApiUrl(localityId, districtId, suburbId, page);
+                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, page);
 
                 var response = client.GetAsync(url).Result;
 
@@ -162,7 +167,7 @@ namespace PropertyAnalysisTool.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
         }
 
-        private string BuildApiUrl(int localityId, int districtId, int suburbId, int page)
+        private string BuildApiUrl(int localityId, int districtId, int suburbId, int minBed, int maxBed, int minBath, int maxBath, int page)
         {
             //replace environment in url to switch between sandbox and prod site requests
             var prodEnv = "https://api.trademe.co.nz/v1/";
@@ -187,13 +192,33 @@ namespace PropertyAnalysisTool.Controllers
                 sb.AppendFormat("&suburb={0}", suburbId);
             }
 
+            if(minBed != 0)
+            {
+                sb.AppendFormat("&bedrooms_min={0}", minBed);
+            }
+
+            if (maxBed != 0)
+            {
+                sb.AppendFormat("&bedrooms_max={0}", maxBed);
+            }
+
+            if (minBath != 0)
+            {
+                sb.AppendFormat("&bathrooms_min={0}", minBath);
+            }
+
+            if (maxBath != 0)
+            {
+                sb.AppendFormat("&bathrooms_max={0}", maxBath);
+            }
+
             sb.AppendFormat("&page={0}", page);
             return sb.ToString();
         }
 
         private string BuildApiUrl(int page)
         {
-            return BuildApiUrl(0, 0, 0, page);
+            return BuildApiUrl(0, 0, 0, 0, 0, 0, 0, page);
         }
 
         public ActionResult Details(int id)
@@ -205,18 +230,24 @@ namespace PropertyAnalysisTool.Controllers
             using (var client = new HttpClient())
             {
                 InitClient(authHeader, client);
-
-                var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Listings/" + id + ".json").Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseString = response.Content.ReadAsStringAsync().Result;
-
-                    model = JsonConvert.DeserializeObject<PropertyModel>(responseString);
-
-                }
+                model = GetPropertyDetails(id, model, client);
             }
             return View(model);
+        }
+
+        private static PropertyModel GetPropertyDetails(int id, PropertyModel model, HttpClient client)
+        {
+            var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Listings/" + id + ".json").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string responseString = response.Content.ReadAsStringAsync().Result;
+
+                model = JsonConvert.DeserializeObject<PropertyModel>(responseString);
+
+            }
+
+            return model;
         }
 
         public ActionResult Compare(int id1 = 0, int id2 = 0, int id3 = 0)

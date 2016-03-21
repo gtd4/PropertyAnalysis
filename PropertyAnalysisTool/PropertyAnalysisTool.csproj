@@ -220,6 +220,7 @@
     <Compile Include="Models\PropertyFilterModel.cs" />
     <Compile Include="Models\PropertyFilterViewModel.cs" />
     <Compile Include="Models\PropertyModel.cs" />
+    <Compile Include="Models\PropertySliderViewModel.cs" />
     <Compile Include="Models\Suburb.cs" />
     <Compile Include="Models\TradeMeLocationModel.cs" />
     <Compile Include="Models\TradeMePropertyResultsViewModel.cs" />
@@ -289,7 +290,8 @@
     <Content Include="Views\Shared\PropertyListingPartial.cshtml" />
     <Content Include="Views\Home\Compare.cshtml" />
     <Content Include="Views\Shared\ComparePropertyPartial.cshtml" />
-    <Content Include="Views\Shared\PropertyImageLargeSlider.cshtml" />
+    <Content Include="Views\Shared\PropertyImageLargeSliderPartial.cshtml" />
+    <Content Include="Views\Shared\PropertyImageListingSliderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,7 +15,14 @@
 
                 <div class="details-image-container">
 
-                    @{Html.RenderPartial("PropertyImageLargeSlider", Model.Photos); }
+                    @if (Model.HasGallery)
+                    {
+                        Html.RenderPartial("PropertyImageLargeSliderPartial", Model.Photos);
+                    }
+                    else
+                    {
+                        <img alt="No Image Present"/>
+                    }
                 </div>
                 <h2>@Model.Title</h2>
                 <p>@Model.PriceDisplay</p>
@@ -42,7 +49,7 @@
 
 
                 </div>
-            <br />
+                <br />
                 <div class="thumbnail">
                     <h3>Interest Rate</h3>
                     @Html.EditorFor(property => property.InitialInterestRate)

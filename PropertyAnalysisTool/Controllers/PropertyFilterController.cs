@@ -13,7 +13,7 @@ namespace PropertyAnalysisTool.Controllers
     public class PropertyFilterController : Controller
     {
         // GET: PropertyFilter
-        public ActionResult Index(int localityId = 0, int districtId = 0, int suburbId = 0)
+        public ActionResult Index(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxBathroom = 0)
         {
             using (var client = new HttpClient())
             {
@@ -37,29 +37,76 @@ namespace PropertyAnalysisTool.Controllers
                     //ToDo: Look into how to improve this.
                     var loc = JsonConvert.DeserializeObject<List<Region>>(responseString);
 
-                    model.Locations = GetLocations(loc.ToList<TradeMeLocationModel>(), localityId);
+                    model.Locations = GetLocations(loc.ToList<TradeMeLocationModel>(), localityId, "Regions");
 
                     var districts = localityId == 0 ? new List<District>() : loc.Where(x => x.Id == localityId).First().Districts;
-                    model.Districts = GetLocations(districts.ToList<TradeMeLocationModel>(), districtId);
+                    model.Districts = GetLocations(districts.ToList<TradeMeLocationModel>(), districtId, "Districts");
 
                     var suburbs = districtId == 0 ? new List<Suburb>() : districts.Where(x => x.Id == districtId).First().Suburbs;
-                    model.Suburbs = GetLocations(suburbs.ToList<TradeMeLocationModel>(), suburbId);
+                    model.Suburbs = GetLocations(suburbs.ToList<TradeMeLocationModel>(), suburbId, "Suburbs");
+
+                    model.BedroomsMin = PopulateMinMaxLists(minBedroom);
+                    model.BedroomsMax = PopulateMinMaxLists(maxBedroom);
+
+                    model.BathroomsMin = PopulateMinMaxLists(minBathroom);
+                    model.BathroomsMax = PopulateMinMaxLists(maxBathroom);
 
                     model.SelectedLocationId = localityId;
                     model.SelectedDistrictId = districtId;
                     model.SelectedSuburbId = suburbId;
+                    model.MinBedRoom = minBedroom;
+                    model.MaxBedRoom = maxBedroom;
+                    model.MinBathRoom = minBathroom;
+                    model.MaxBathRoom = maxBathroom;
+
                 }
                 return PartialView("PropertyFilter", model);
             }
 
         }
 
-        private IEnumerable<SelectListItem> GetLocations(List<TradeMeLocationModel> loc, int id)
+        private IEnumerable<SelectListItem> PopulateMinMaxLists(int num)
+        {
+            var numlist = new List<SelectListItem>();
+            var item = new SelectListItem
+            {
+                Value = "0",
+                Text = "Any",
+                Selected = num == 0,
+            };
+
+            numlist.Add(item);
+            for (var i = 1; i < 6; i++)
+            {
+                item = new SelectListItem
+                {
+                    Value = i.ToString(),
+                    Text = i.ToString(),
+                    Selected = i == num,
+                };
+
+                numlist.Add(item);
+            }
+
+            item = new SelectListItem
+            {
+                Value = "6",
+                Text = "6+",
+                Selected = num == 6,
+            };
+
+            numlist.Add(item);
+
+            return numlist;
+
+        }
+
+        private IEnumerable<SelectListItem> GetLocations(List<TradeMeLocationModel> loc, int id, string locationType)
         {
             var emptyItem = new Region
             {
                 Id = 0,
-                Name = "All Regions",
+                Name = string.Format("All {0}", locationType),
 
             };
 

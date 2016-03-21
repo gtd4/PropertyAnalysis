@@ -14,5 +14,19 @@
             @Html.DropDownListFor(m => m.SelectedSuburbId, Model.Suburbs)
         </div>
 
+        <div id="bedrooms-container">
+            <p>Bedrooms</p>
+            @Html.DropDownListFor(m => m.MinBedRoom, Model.BedroomsMin)
+            to
+            @Html.DropDownListFor(m => m.MaxBedRoom, Model.BedroomsMax)
+        </div>
+
+        <div id="bathrooms-container">
+            <p>Bathrooms</p>
+            @Html.DropDownListFor(m => m.MinBathRoom, Model.BathroomsMin)
+            to
+            @Html.DropDownListFor(m => m.MaxBathRoom, Model.BathroomsMax)
+        </div>
+
     </div>
 </div>

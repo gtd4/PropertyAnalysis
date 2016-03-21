@@ -7,7 +7,7 @@
 }
 
 <div class="row">
-    
+
     <div class="col-xs-8" id="property-list">
         @{Html.RenderPartial("PropertyListingPartial", Model);}
 
@@ -33,7 +33,7 @@
     <script>
         var compareList = [];
 
-        function UpdateFilter(localityId, districtId, SuburbId) {
+        function UpdateFilter(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed) {
             $.ajax({
                 url: "/PropertyFilter/Index",
                 type: "GET",
@@ -41,6 +41,10 @@
                     LocalityId: localityId,
                     DistrictId: districtId,
                     SuburbId: SuburbId,
+                    minBedroom: minBed,
+                    maxBedroom: maxBed,
+                    minBathroom: minBath,
+                    maxbathroom: maxBath,
                     rng: Math.random()
                 }
             }).done(function (partialViewResult) {
@@ -49,10 +53,10 @@
 
             });
 
-            UpdateProperties(localityId, districtId, SuburbId)
+            UpdateProperties(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed)
         }
 
-        function UpdateProperties(localityId, districtId, suburbId, page) {
+        function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, page) {
             $.ajax({
                 url: "/Home/UpdatePropertyListings",
                 type: "GET",
@@ -60,6 +64,10 @@
                     LocalityId: localityId,
                     DistrictId: districtId,
                     SuburbId: suburbId,
+                    minBedroom: minBed,
+                    maxBedroom: maxBed,
+                    minBathroom: minBath,
+                    maxbathroom: maxBath,
                     Page: page,
                     rng: Math.random()
                 }
@@ -67,6 +75,9 @@
 
                 $("#property-list").html(partialViewResult);
 
+            }).error(function(partialViewResult)
+            {
+                console.log(partialViewResult);
             });
         }
 
@@ -173,12 +184,10 @@
 
         }
 
-        function RemoveFromCompareList(propId)
-        {
+        function RemoveFromCompareList(propId) {
             var index = jQuery.inArray(propId, compareList);
 
-            if(index != -1)
-            {
+            if (index != -1) {
                 compareList.splice(index, 1);
                 return true;
             }
@@ -188,33 +197,115 @@
 
             $("#propertyfilter-container").on('change', '#SelectedLocationId', function () {
 
-                UpdateFilter($(this).val(), 0, 0)
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                var suburb = $("#SelectedSuburbId").val();
+                var minBed = $("#MinBedRoom").val();
+                var maxBed = $("#MaxBedRoom").val();
+                var minBath = $("#MinBathRoom").val();
+                var maxBath = $("#MaxBathRoom").val();
+
+                UpdateFilter($(this).val(), 0, 0, minBath, maxBath, minBed, maxBed)
 
             });
 
             $("#propertyfilter-container").on('change', '#SelectedDistrictId', function () {
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                var suburb = $("#SelectedSuburbId").val();
+                var minBed = $("#MinBedRoom").val();
+                var maxBed = $("#MaxBedRoom").val();
+                var minBath = $("#MinBathRoom").val();
+                var maxBath = $("#MaxBathRoom").val();
 
-                UpdateFilter($("#SelectedLocationId").val(), $("#SelectedDistrictId").val(), 0)
-
+                UpdateFilter(location, district, 0, minBath, maxBath, minBed, maxBed)
 
             });
 
             $("#propertyfilter-container").on('change', '#SelectedSuburbId', function () {
 
-                UpdateProperties($("#SelectedLocationId").val(), $("#SelectedDistrictId").val(), $("#SelectedSuburbId").val());
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                var suburb = $("#SelectedSuburbId").val();
+                var minBed = $("#MinBedRoom").val();
+                var maxBed = $("#MaxBedRoom").val();
+                var minBath = $("#MinBathRoom").val();
+                var maxBath = $("#MaxBathRoom").val();
+
+                UpdateFilter(location, district, suburb, minBath, maxBath, minBed, maxBed)
+            });
+
+            $("#propertyfilter-container").on('change', '#MinBedRoom', function () {
+
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                var suburb = $("#SelectedSuburbId").val();
+                var minBed = $("#MinBedRoom").val();
+                var maxBed = $("#MaxBedRoom").val();
+                var minBath = $("#MinBathRoom").val();
+                var maxBath = $("#MaxBathRoom").val();
+
+                UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, 0);
 
             });
 
-            $("#property-list").on("click", ".page", function (e){
+
+
+            $("#propertyfilter-container").on('change', '#MaxBedRoom', function () {
+
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                var suburb = $("#SelectedSuburbId").val();
+                var minBed = $("#MinBedRoom").val();
+                var maxBed = $("#MaxBedRoom").val();
+                var minBath = $("#MinBathRoom").val();
+                var maxBath = $("#MaxBathRoom").val();
+
+                UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, 0);
+
+            });
+
+            $("#propertyfilter-container").on('change', '#MinBathRoom', function () {
+
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                var suburb = $("#SelectedSuburbId").val();
+                var minBed = $("#MinBedRoom").val();
+                var maxBed = $("#MaxBedRoom").val();
+                var minBath = $("#MinBathRoom").val();
+                var maxBath = $("#MaxBathRoom").val();
+
+                UpdateProperties(location, district, suburb, minBath, maxBath, minBed, maxBed, 0);
+
+            });
+
+            $("#propertyfilter-container").on('change', '#MaxBathRoom', function () {
+
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                var suburb = $("#SelectedSuburbId").val();
+                var minBed = $("#MinBedRoom").val();
+                var maxBed = $("#MaxBedRoom").val();
+                var minBath = $("#MinBathRoom").val();
+                var maxBath = $("#MaxBathRoom").val();
+
+                UpdateProperties(location, district, suburb, minBath, maxBath, minBed, maxBed, 0);
+
+            });
+
+            $("#property-list").on("click", ".page", function (e) {
 
                 e.preventDefault();
-                var locationId = $("#SelectedLocationId").val();
-                var districtId = $("#SelectedDistrictId").val();
-                var suburbId = $("#SelectedSuburbId").val();
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                var suburb = $("#SelectedSuburbId").val();
+                var minBed = $("#MinBedRoom").val();
+                var maxBed = $("#MaxBedRoom").val();
+                var minBath = $("#MinBathRoom").val();
+                var maxBath = $("#MaxBathRoom").val();
                 var page = $(this).val();
 
-                UpdateProperties(locationId, districtId, suburbId, page)
-
+                UpdateProperties(location, district, suburb, minBath, maxBath, minBed, maxBed, page);
 
             });
 
@@ -251,9 +342,8 @@
 
                 var url = "/home/compare?";
 
-                for(var i =0; i< compareList.length;i++)
-                {
-                    url = url.concat("id" + (i + 1) + "=" + compareList[i]+"&");
+                for (var i = 0; i < compareList.length; i++) {
+                    url = url.concat("id" + (i + 1) + "=" + compareList[i] + "&");
                 }
 
                 window.location = url;

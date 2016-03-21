@@ -19,7 +19,8 @@
                         <a href="@Url.Action("Details", "Home", new { id = property.ListingId }, null)">
                             <img class="prop-img" src="@property.PictureHref" />
                             <h4 class="prop-title">@property.Title</h4>
-
+                            <p>BedRooms: @property.Bedrooms</p>
+                            <p>Bathrooms: @property.Bathrooms</p>
                             <p>@property.PriceDisplay</p>
                             <p>R.V: $@property.RateableValue</p>
 

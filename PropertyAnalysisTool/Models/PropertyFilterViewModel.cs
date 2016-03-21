@@ -12,8 +12,22 @@ namespace PropertyAnalysisTool.Models
         public IEnumerable<SelectListItem> Districts { get; set; }
         public IEnumerable<SelectListItem> Suburbs { get; set; }
 
+        public IEnumerable<SelectListItem> BedroomsMin { get; set; }
+
+        public IEnumerable<SelectListItem> BedroomsMax { get; set; }
+
+        public IEnumerable<SelectListItem> BathroomsMin { get; set; }
+
+        public IEnumerable<SelectListItem> BathroomsMax { get; set; }
+
         public int SelectedLocationId { get; set; }
         public int SelectedDistrictId { get; set; }
         public int SelectedSuburbId { get; set; }
+
+        public int MinBedRoom { get; set; }
+        public int MaxBedRoom { get; set; }
+
+        public int MinBathRoom { get; set; }
+        public int MaxBathRoom { get; set; }
     }
 }
