@@ -26,6 +26,7 @@ namespace PropertyAnalysisTool.Controllers
         string consumerSecret = "C841EE5BE675F879097974C6BB163202";
         string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
         string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
+
         const int pageSize = 12;
 
         const string prodEnv = "https://api.trademe.co.nz/v1/";

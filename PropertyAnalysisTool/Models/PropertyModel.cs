@@ -66,6 +66,15 @@ namespace PropertyAnalysisTool.Models
         [JsonProperty("RegionId")]
         public int RegionId { get; set; }
 
+        [JsonProperty("Region")]
+        public string Region { get; set; }
+
+        [JsonProperty("Suburb")]
+        public string Suburb { get; set; }
+
+        [JsonProperty("District")]
+        public string District { get; set; }
+
         [JsonProperty("PriceDisplay")]
         public string PriceDisplay { get; set; }
 
@@ -92,6 +101,20 @@ namespace PropertyAnalysisTool.Models
 
         [JsonProperty("Bathrooms")]
         public string Bathrooms { get; set; }
+
+        [JsonProperty("Address")]
+        public string Address { get; set; }
+
+        [JsonProperty("Attributes")]
+        public List<Attribute> Attributes { get; set; }
+
+        public string Location
+        {
+            get
+            {
+                return Attributes.Any() ? Attributes.Where(x => string.Equals(x.Name.ToLower(), "Location".ToLower())).FirstOrDefault().Value : null;
+            }
+        }
 
         public decimal InitialRent
         {
@@ -247,5 +270,17 @@ namespace PropertyAnalysisTool.Models
             }
         }
 
+        public string FullAddress
+        {
+            get
+            {
+                return string.IsNullOrEmpty(Location) ? string.Format("{0}, {1}, {2}", Address, Suburb, District) : Location;
+            }
+        }
+
+        public PropertyModel()
+        {
+            Attributes = new List<Attribute>();
+        }
     }
 }

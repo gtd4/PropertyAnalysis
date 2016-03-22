@@ -117,7 +117,11 @@ $(function () {
         var parent = $(this).parents(".calculator-container");
 
         SetYield(parent);
-        UpdateValues(parent)
+        SetInterestPerAnnum(parent);
+        SetRentToCoverInterest(parent);
+        UpdatePropertyManagementCosts(parent);
+        UpdateTotalExpenses(parent);
+        SetSurplus(parent);
 
     });
 
