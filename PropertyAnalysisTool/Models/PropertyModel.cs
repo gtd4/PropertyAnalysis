@@ -25,7 +25,8 @@ namespace PropertyAnalysisTool.Models
         public decimal BuyNowPrice { get; set; }
 
         [JsonProperty("StartDate")]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate
+        { get; set; }
 
         [JsonProperty("EndDate")]
         public DateTime EndDate { get; set; }
@@ -278,9 +279,18 @@ namespace PropertyAnalysisTool.Models
             }
         }
 
+        public string ListedDate
+        {
+            get{
+                return string.Format("{0:dd MMM yy}", StartDate);
+            }
+        }
+
         public PropertyModel()
         {
             Attributes = new List<Attribute>();
         }
+
+        
     }
 }
