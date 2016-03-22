@@ -75,8 +75,7 @@
 
                 $("#property-list").html(partialViewResult);
 
-            }).error(function(partialViewResult)
-            {
+            }).error(function (partialViewResult) {
                 console.log(partialViewResult);
             });
         }
@@ -193,104 +192,72 @@
             }
         }
 
+        function FilterUpdate() {
+            var location = $("#SelectedLocationId").val();
+            var district = $("#SelectedDistrictId").val();
+            var suburb = $("#SelectedSuburbId").val();
+            var minBed = $("#MinBedRoom").val();
+            var maxBed = $("#MaxBedRoom").val();
+            var minBath = $("#MinBathRoom").val();
+            var maxBath = $("#MaxBathRoom").val();
+
+            UpdateFilter(location, district, suburb, minBath, maxBath, minBed, maxBed)
+        }
+
+        function PropertyUpdate()
+        {
+            var location = $("#SelectedLocationId").val();
+            var district = $("#SelectedDistrictId").val();
+            var suburb = $("#SelectedSuburbId").val();
+            var minBed = $("#MinBedRoom").val();
+            var maxBed = $("#MaxBedRoom").val();
+            var minBath = $("#MinBathRoom").val();
+            var maxBath = $("#MaxBathRoom").val();
+
+            UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, 0);
+
+        }
+
         $(function () {
+
+            
 
             $("#propertyfilter-container").on('change', '#SelectedLocationId', function () {
 
-                var location = $("#SelectedLocationId").val();
-                var district = $("#SelectedDistrictId").val();
-                var suburb = $("#SelectedSuburbId").val();
-                var minBed = $("#MinBedRoom").val();
-                var maxBed = $("#MaxBedRoom").val();
-                var minBath = $("#MinBathRoom").val();
-                var maxBath = $("#MaxBathRoom").val();
-
-                UpdateFilter($(this).val(), 0, 0, minBath, maxBath, minBed, maxBed)
+                FilterUpdate();
 
             });
 
             $("#propertyfilter-container").on('change', '#SelectedDistrictId', function () {
-                var location = $("#SelectedLocationId").val();
-                var district = $("#SelectedDistrictId").val();
-                var suburb = $("#SelectedSuburbId").val();
-                var minBed = $("#MinBedRoom").val();
-                var maxBed = $("#MaxBedRoom").val();
-                var minBath = $("#MinBathRoom").val();
-                var maxBath = $("#MaxBathRoom").val();
-
-                UpdateFilter(location, district, 0, minBath, maxBath, minBed, maxBed)
+                FilterUpdate();
 
             });
 
             $("#propertyfilter-container").on('change', '#SelectedSuburbId', function () {
 
-                var location = $("#SelectedLocationId").val();
-                var district = $("#SelectedDistrictId").val();
-                var suburb = $("#SelectedSuburbId").val();
-                var minBed = $("#MinBedRoom").val();
-                var maxBed = $("#MaxBedRoom").val();
-                var minBath = $("#MinBathRoom").val();
-                var maxBath = $("#MaxBathRoom").val();
-
-                UpdateFilter(location, district, suburb, minBath, maxBath, minBed, maxBed)
+                FilterUpdate();
             });
 
             $("#propertyfilter-container").on('change', '#MinBedRoom', function () {
 
-                var location = $("#SelectedLocationId").val();
-                var district = $("#SelectedDistrictId").val();
-                var suburb = $("#SelectedSuburbId").val();
-                var minBed = $("#MinBedRoom").val();
-                var maxBed = $("#MaxBedRoom").val();
-                var minBath = $("#MinBathRoom").val();
-                var maxBath = $("#MaxBathRoom").val();
-
-                UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, 0);
-
+                PropertyUpdate();
             });
 
 
 
             $("#propertyfilter-container").on('change', '#MaxBedRoom', function () {
 
-                var location = $("#SelectedLocationId").val();
-                var district = $("#SelectedDistrictId").val();
-                var suburb = $("#SelectedSuburbId").val();
-                var minBed = $("#MinBedRoom").val();
-                var maxBed = $("#MaxBedRoom").val();
-                var minBath = $("#MinBathRoom").val();
-                var maxBath = $("#MaxBathRoom").val();
-
-                UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, 0);
-
+                PropertyUpdate();
             });
 
             $("#propertyfilter-container").on('change', '#MinBathRoom', function () {
 
-                var location = $("#SelectedLocationId").val();
-                var district = $("#SelectedDistrictId").val();
-                var suburb = $("#SelectedSuburbId").val();
-                var minBed = $("#MinBedRoom").val();
-                var maxBed = $("#MaxBedRoom").val();
-                var minBath = $("#MinBathRoom").val();
-                var maxBath = $("#MaxBathRoom").val();
-
-                UpdateProperties(location, district, suburb, minBath, maxBath, minBed, maxBed, 0);
-
+                PropertyUpdate();
             });
 
             $("#propertyfilter-container").on('change', '#MaxBathRoom', function () {
 
-                var location = $("#SelectedLocationId").val();
-                var district = $("#SelectedDistrictId").val();
-                var suburb = $("#SelectedSuburbId").val();
-                var minBed = $("#MinBedRoom").val();
-                var maxBed = $("#MaxBedRoom").val();
-                var minBath = $("#MinBathRoom").val();
-                var maxBath = $("#MaxBathRoom").val();
-
-                UpdateProperties(location, district, suburb, minBath, maxBath, minBed, maxBed, 0);
-
+                PropertyUpdate();
             });
 
             $("#property-list").on("click", ".page", function (e) {

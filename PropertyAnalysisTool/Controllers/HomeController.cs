@@ -16,17 +16,20 @@ namespace PropertyAnalysisTool.Controllers
     public class HomeController : Controller
     {
         //sandbox
-        string oauthToken = "503E1ECB2CD3D44A98BE089160073C57";
-        string oauthSecret = "6994C47CF7D5B369F9702A50D0D81B17";
-        string consumerKey = "C92E96B9131B76EF6CC533B1A96D841E";
-        string consumerSecret = "7BF2D361B8348A18EF4757E7836B65CD";
+        //string oauthToken = "503E1ECB2CD3D44A98BE089160073C57";
+        //string oauthSecret = "6994C47CF7D5B369F9702A50D0D81B17";
+        //string consumerKey = "C92E96B9131B76EF6CC533B1A96D841E";
+        //string consumerSecret = "7BF2D361B8348A18EF4757E7836B65CD";
 
         //prod details
-        //string consumerKey = "48C11C46E3C1969737776DECD5F144B3";
-        //string consumerSecret = "C841EE5BE675F879097974C6BB163202";
-        //string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
-        //string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
+        string consumerKey = "48C11C46E3C1969737776DECD5F144B3";
+        string consumerSecret = "C841EE5BE675F879097974C6BB163202";
+        string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
+        string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
         const int pageSize = 12;
+
+        const string prodEnv = "https://api.trademe.co.nz/v1/";
+        const string devEnv = "https://api.tmsandbox.co.nz/v1/";
 
         public ActionResult Index(int page = 1)
         {
@@ -170,10 +173,7 @@ namespace PropertyAnalysisTool.Controllers
         private string BuildApiUrl(int localityId, int districtId, int suburbId, int minBed, int maxBed, int minBath, int maxBath, int page)
         {
             //replace environment in url to switch between sandbox and prod site requests
-            var prodEnv = "https://api.trademe.co.nz/v1/";
-            var debugEnv = "https://api.tmsandbox.co.nz/v1/";
-
-            var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows=12", debugEnv);
+            var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows=12", prodEnv);
 
             var sb = new StringBuilder(url);
 
@@ -237,7 +237,7 @@ namespace PropertyAnalysisTool.Controllers
 
         private static PropertyModel GetPropertyDetails(int id, PropertyModel model, HttpClient client)
         {
-            var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Listings/" + id + ".json").Result;
+            var response = client.GetAsync(string.Format("{0}Listings/{1}.json", prodEnv, id)).Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -256,6 +256,7 @@ namespace PropertyAnalysisTool.Controllers
             //Get upto 3 properties and compare their values side by side
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
             var model = new ComparePropertyModel();
+
             using (var client = new HttpClient())
             {
 
@@ -263,7 +264,7 @@ namespace PropertyAnalysisTool.Controllers
                 {
                     InitClient(authHeader, client);
 
-                    var response = client.GetAsync("https://api.tmsandbox.co.nz/v1/Listings/" + id + ".json").Result;
+                    var response = client.GetAsync(string.Format("{0}/Listings/{1}.json", prodEnv, id)).Result;
 
                     if (response.IsSuccessStatusCode)
                     {

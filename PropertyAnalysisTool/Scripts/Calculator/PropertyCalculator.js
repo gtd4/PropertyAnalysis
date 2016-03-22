@@ -134,6 +134,7 @@ $(function () {
         var parent = $(this).parents(".calculator-container");
 
         UpdateTotalExpenses(parent);
+        SetSurplus(parent);
     });
 
     $(".calculator-container").on("keyup", "#InitialRepairs", function () {
@@ -141,6 +142,7 @@ $(function () {
         var parent = $(this).parents(".calculator-container");
 
         UpdateTotalExpenses(parent);
+        SetSurplus(parent);
     });
 
     $(".calculator-container").on("keyup", "#InitialInsurance", function () {
@@ -148,6 +150,7 @@ $(function () {
         var parent = $(this).parents(".calculator-container");
 
         UpdateTotalExpenses(parent);
+        SetSurplus(parent);
     });
 
     $(".calculator-container").on("keyup", "#PropertyManagementAmount", function () {
@@ -155,6 +158,7 @@ $(function () {
         var parent = $(this).parents(".calculator-container");
 
         UpdateTotalExpenses(parent);
+        SetSurplus(parent);
     });
 
 
