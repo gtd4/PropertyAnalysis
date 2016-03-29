@@ -13,7 +13,7 @@ namespace PropertyAnalysisTool.Controllers
     public class PropertyFilterController : Controller
     {
         // GET: PropertyFilter
-        public ActionResult Index(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxBathroom = 0)
+        public ActionResult Index(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxBathroom = 0, int priceMin = 0, int priceMax = 0)
         {
             using (var client = new HttpClient())
             {
@@ -51,6 +51,9 @@ namespace PropertyAnalysisTool.Controllers
                     model.BathroomsMin = PopulateMinMaxLists(minBathroom);
                     model.BathroomsMax = PopulateMinMaxLists(maxBathroom);
 
+                    model.PriceMin = PopulatePriceLists(priceMin);
+                    model.PriceMax = PopulatePriceLists(priceMax);
+
                     model.SelectedLocationId = localityId;
                     model.SelectedDistrictId = districtId;
                     model.SelectedSuburbId = suburbId;
@@ -59,9 +62,50 @@ namespace PropertyAnalysisTool.Controllers
                     model.MinBathRoom = minBathroom;
                     model.MaxBathRoom = maxBathroom;
 
+                    model.MinPrice = priceMin;
+                    model.MaxPrice = priceMax;
+
                 }
                 return PartialView("PropertyFilter", model);
             }
+
+        }
+
+        private IEnumerable<SelectListItem> PopulatePriceLists(int num)
+        {
+            var numlist = new List<SelectListItem>();
+            var item = new SelectListItem
+            {
+                Value = "0",
+                Text = "Any",
+                Selected = num == 0,
+            };
+
+            numlist.Add(item);
+
+            for (var i = 10; i < 100; i+=5)
+            {
+                item = new SelectListItem
+                {
+                    Value = (i * 10000).ToString(),
+                    Text = string.Format("{0}K", (i * 10).ToString()),
+                    Selected = i == num,
+                };
+
+                numlist.Add(item);
+            }
+
+            item = new SelectListItem
+            {
+                Value = "1000000",
+                Text = "1M",
+                Selected = num == 1000000,
+            };
+
+            numlist.Add(item);
+
+            return numlist;
+
 
         }
 

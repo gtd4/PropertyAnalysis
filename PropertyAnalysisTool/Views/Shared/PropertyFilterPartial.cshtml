@@ -1,32 +1,38 @@
 ﻿@model PropertyAnalysisTool.Models.PropertyFilterViewModel
-<div class="row">
-    <div class="property-filter">
-        <div id="regions-container">
-            @Html.DropDownListFor(m => m.SelectedLocationId, Model.Locations)
-        </div>
 
-        <div id="districts-container">
-
-            @Html.DropDownListFor(m => m.SelectedDistrictId, Model.Districts)
-        </div>
-
-        <div id="suburbs-container">
-            @Html.DropDownListFor(m => m.SelectedSuburbId, Model.Suburbs)
-        </div>
-
-        <div id="bedrooms-container">
-            <p>Bedrooms</p>
-            @Html.DropDownListFor(m => m.MinBedRoom, Model.BedroomsMin)
-            to
-            @Html.DropDownListFor(m => m.MaxBedRoom, Model.BedroomsMax)
-        </div>
-
-        <div id="bathrooms-container">
-            <p>Bathrooms</p>
-            @Html.DropDownListFor(m => m.MinBathRoom, Model.BathroomsMin)
-            to
-            @Html.DropDownListFor(m => m.MaxBathRoom, Model.BathroomsMax)
-        </div>
-
+<div class="property-filter">
+    <div id="regions-container">
+        @Html.DropDownListFor(m => m.SelectedLocationId, Model.Locations)
     </div>
+
+    <div id="districts-container">
+
+        @Html.DropDownListFor(m => m.SelectedDistrictId, Model.Districts)
+    </div>
+
+    <div id="suburbs-container">
+        @Html.DropDownListFor(m => m.SelectedSuburbId, Model.Suburbs)
+    </div>
+
+    <div id="bedrooms-container">
+        <p>Bedrooms</p>
+        @Html.DropDownListFor(m => m.MinBedRoom, Model.BedroomsMin)
+        to
+        @Html.DropDownListFor(m => m.MaxBedRoom, Model.BedroomsMax)
+    </div>
+
+    <div id="bathrooms-container">
+        <p>Bathrooms</p>
+        @Html.DropDownListFor(m => m.MinBathRoom, Model.BathroomsMin)
+        to
+        @Html.DropDownListFor(m => m.MaxBathRoom, Model.BathroomsMax)
+    </div>
+
+    <div id="price-container">
+        <p>Price</p>
+        @Html.DropDownListFor(m => m.MinPrice, Model.PriceMin)
+        to
+        @Html.DropDownListFor(m => m.MaxPrice, Model.PriceMax)
+    </div>
+
 </div>

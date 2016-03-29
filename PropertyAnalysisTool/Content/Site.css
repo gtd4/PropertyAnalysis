@@ -122,3 +122,35 @@ textarea {
     max-height: 300px;
 
 }
+
+/*.to-compare
+{
+    position:fixed;
+    min-width: 100px;
+    max-width: 450px;
+}*/
+
+.compare-item-container
+{
+    border: 1px solid #dddddd;
+    margin-bottom: 5px;
+    padding: 4px;
+    border-radius: 4px;
+    max-width:100%;
+
+}
+
+.compare-title-container
+{
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    display: block;
+    overflow: hidden;
+    max-width:255px;
+    width: 50%;
+    
+}
+
+.prop-details p{
+    text-decoration: none;
+}

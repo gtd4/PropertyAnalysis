@@ -20,6 +20,10 @@ namespace PropertyAnalysisTool.Models
 
         public IEnumerable<SelectListItem> BathroomsMax { get; set; }
 
+        public IEnumerable<SelectListItem> PriceMax { get; set; }
+
+        public IEnumerable<SelectListItem> PriceMin { get; set; }
+
         public int SelectedLocationId { get; set; }
         public int SelectedDistrictId { get; set; }
         public int SelectedSuburbId { get; set; }
@@ -29,5 +33,8 @@ namespace PropertyAnalysisTool.Models
 
         public int MinBathRoom { get; set; }
         public int MaxBathRoom { get; set; }
+
+        public int MinPrice { get; set; }
+        public int MaxPrice { get; set; }
     }
 }

@@ -12,9 +12,12 @@
         @{Html.RenderPartial("PropertyListingPartial", Model);}
 
     </div>
+
     <div class="col-xs-4">
-        @{Html.RenderAction("Index", "PropertyFilter");}
         <div class="row">
+            <div class="col-sm-12">
+                @{Html.RenderAction("Index", "PropertyFilter");}
+            </div>
             <div class="to-compare col-sm-12">
                 <h3>To Compare</h3>
 
@@ -25,7 +28,10 @@
 
             </div>
         </div>
+
+
     </div>
+
 </div>
 
 @section scripts
@@ -33,7 +39,7 @@
     <script>
         var compareList = [];
 
-        function UpdateFilter(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed) {
+        function UpdateFilter(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice) {
             $.ajax({
                 url: "/PropertyFilter/Index",
                 type: "GET",
@@ -45,6 +51,8 @@
                     maxBedroom: maxBed,
                     minBathroom: minBath,
                     maxbathroom: maxBath,
+                    PriceMin: minPrice,
+                    PriceMax: maxPrice,
                     rng: Math.random()
                 }
             }).done(function (partialViewResult) {
@@ -53,10 +61,10 @@
 
             });
 
-            UpdateProperties(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed)
+            UpdateProperties(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice)
         }
 
-        function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, page) {
+        function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page) {
             $.ajax({
                 url: "/Home/UpdatePropertyListings",
                 type: "GET",
@@ -68,6 +76,8 @@
                     maxBedroom: maxBed,
                     minBathroom: minBath,
                     maxbathroom: maxBath,
+                    PriceMin: minPrice,
+                    PriceMax: maxPrice,
                     Page: page,
                     rng: Math.random()
                 }
@@ -192,20 +202,21 @@
             }
         }
 
-        function FilterUpdate() {
-            var location = $("#SelectedLocationId").val();
-            var district = $("#SelectedDistrictId").val();
-            var suburb = $("#SelectedSuburbId").val();
+        function FilterUpdate(location, district, suburb) {
+            //var location = $("#SelectedLocationId").val();
+            //var district = $("#SelectedDistrictId").val();
+            //var suburb = $("#SelectedSuburbId").val();
             var minBed = $("#MinBedRoom").val();
             var maxBed = $("#MaxBedRoom").val();
             var minBath = $("#MinBathRoom").val();
             var maxBath = $("#MaxBathRoom").val();
+            var minPrice = $("#MinPrice").val();
+            var maxPrice = $("#MaxPrice").val();
 
-            UpdateFilter(location, district, suburb, minBath, maxBath, minBed, maxBed)
+            UpdateFilter(location, district, suburb, minBath, maxBath, minBed, maxBed, minPrice, maxPrice)
         }
 
-        function PropertyUpdate()
-        {
+        function PropertyUpdate() {
             var location = $("#SelectedLocationId").val();
             var district = $("#SelectedDistrictId").val();
             var suburb = $("#SelectedSuburbId").val();
@@ -213,29 +224,38 @@
             var maxBed = $("#MaxBedRoom").val();
             var minBath = $("#MinBathRoom").val();
             var maxBath = $("#MaxBathRoom").val();
+            var minPrice = $("#MinPrice").val();
+            var maxPrice = $("#MaxPrice").val();
 
-            UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, 0);
+            UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, minPrice, maxPrice, 0);
 
         }
 
         $(function () {
 
-            
+
 
             $("#propertyfilter-container").on('change', '#SelectedLocationId', function () {
 
-                FilterUpdate();
+                var location = $("#SelectedLocationId").val();
+                FilterUpdate(location, 0, 0);
 
             });
 
             $("#propertyfilter-container").on('change', '#SelectedDistrictId', function () {
-                FilterUpdate();
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                
+                FilterUpdate(location, district, 0);
 
             });
 
             $("#propertyfilter-container").on('change', '#SelectedSuburbId', function () {
+                var location = $("#SelectedLocationId").val();
+                var district = $("#SelectedDistrictId").val();
+                var suburb = $("#SelectedSuburbId").val();
 
-                FilterUpdate();
+                FilterUpdate(location, district, suburb);
             });
 
             $("#propertyfilter-container").on('change', '#MinBedRoom', function () {
@@ -260,6 +280,16 @@
                 PropertyUpdate();
             });
 
+            $("#propertyfilter-container").on('change', '#MinPrice', function () {
+
+                PropertyUpdate();
+            });
+
+            $("#propertyfilter-container").on('change', '#MaxPrice', function () {
+
+                PropertyUpdate();
+            });
+
             $("#property-list").on("click", ".page", function (e) {
 
                 e.preventDefault();
@@ -270,9 +300,11 @@
                 var maxBed = $("#MaxBedRoom").val();
                 var minBath = $("#MinBathRoom").val();
                 var maxBath = $("#MaxBathRoom").val();
+                var minPrice = $("#MinPrice").val();
+                var maxPrice = $("#MaxPrice").val();
                 var page = $(this).val();
 
-                UpdateProperties(location, district, suburb, minBath, maxBath, minBed, maxBed, page);
+                UpdateProperties(location, district, suburb, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page);
 
             });
 

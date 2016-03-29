@@ -126,7 +126,7 @@ namespace PropertyAnalysisTool.Controllers
             return View("Index", model);
         }
 
-        public ActionResult UpdatePropertyListings(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxbathroom = 0, int page = 1)
+        public ActionResult UpdatePropertyListings(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxbathroom = 0, int priceMin = 0, int priceMax = 0, int page = 1)
         {
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
 
@@ -136,7 +136,7 @@ namespace PropertyAnalysisTool.Controllers
             {
                 InitClient(authHeader, client);
 
-                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, page);
+                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, page);
 
                 var response = client.GetAsync(url).Result;
 
@@ -171,7 +171,7 @@ namespace PropertyAnalysisTool.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
         }
 
-        private string BuildApiUrl(int localityId, int districtId, int suburbId, int minBed, int maxBed, int minBath, int maxBath, int page)
+        private string BuildApiUrl(int localityId, int districtId, int suburbId, int minBed, int maxBed, int minBath, int maxBath, int priceMin, int priceMax, int page)
         {
             //replace environment in url to switch between sandbox and prod site requests
             var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows=12", prodEnv);
@@ -213,13 +213,23 @@ namespace PropertyAnalysisTool.Controllers
                 sb.AppendFormat("&bathrooms_max={0}", maxBath);
             }
 
+            if(priceMin != 0)
+            {
+                sb.AppendFormat("&price_min={0}", priceMin);
+            }
+
+            if(priceMax != 0)
+            {
+                sb.AppendFormat("&price_max={0}", priceMax);
+            }
+
             sb.AppendFormat("&page={0}", page);
             return sb.ToString();
         }
 
         private string BuildApiUrl(int page)
         {
-            return BuildApiUrl(0, 0, 0, 0, 0, 0, 0, page);
+            return BuildApiUrl(0, 0, 0, 0, 0, 0, 0, 0, 0, page);
         }
 
         public ActionResult Details(int id)
