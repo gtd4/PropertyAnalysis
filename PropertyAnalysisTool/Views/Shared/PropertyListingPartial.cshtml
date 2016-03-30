@@ -51,10 +51,11 @@
 <div class="row">
     <div class="col-sm-12 text-center">
         @if (Model.MaxPagination > 1)
-            {
+        {
             <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
+                @{var prevCls = Model.Page > 1 ? "" : "disabled";}
+                <li class="@prevCls">
+                    <a href="#" aria-label="Previous" id="previous" value="@Model.Page">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -71,8 +72,10 @@
                     <li class="disabled"><a href="#">...</a></li>
                     <li class="page" value="@Model.TotalPages"><a href="#">@Model.TotalPages</a></li>
                 }
-                <li>
-                    <a href="#" aria-label="Next">
+                @{var nextCls = Model.Page < Model.TotalPages ? "" : "disabled";}
+                <li class="@nextCls">
+                   
+                    <a href="#" aria-label="Next" id="next" value="@Model.Page">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

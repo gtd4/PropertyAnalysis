@@ -15,9 +15,11 @@
 
     <div class="col-xs-4">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6 property-filter-container">
                 @{Html.RenderAction("Index", "PropertyFilter");}
             </div>
+        </div>
+        <div class="row">
             <div class="to-compare col-sm-12">
                 <h3>To Compare</h3>
 
@@ -82,7 +84,7 @@
                     rng: Math.random()
                 }
             }).done(function (partialViewResult) {
-
+                window.scrollTo(0, 0);
                 $("#property-list").html(partialViewResult);
 
             }).error(function (partialViewResult) {
@@ -216,7 +218,7 @@
             UpdateFilter(location, district, suburb, minBath, maxBath, minBed, maxBed, minPrice, maxPrice)
         }
 
-        function PropertyUpdate() {
+        function PropertyUpdate(page) {
             var location = $("#SelectedLocationId").val();
             var district = $("#SelectedDistrictId").val();
             var suburb = $("#SelectedSuburbId").val();
@@ -227,7 +229,7 @@
             var minPrice = $("#MinPrice").val();
             var maxPrice = $("#MaxPrice").val();
 
-            UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, minPrice, maxPrice, 0);
+            UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, minPrice, maxPrice, page);
 
         }
 
@@ -245,7 +247,7 @@
             $("#propertyfilter-container").on('change', '#SelectedDistrictId', function () {
                 var location = $("#SelectedLocationId").val();
                 var district = $("#SelectedDistrictId").val();
-                
+
                 FilterUpdate(location, district, 0);
 
             });
@@ -260,39 +262,62 @@
 
             $("#propertyfilter-container").on('change', '#MinBedRoom', function () {
 
-                PropertyUpdate();
+                PropertyUpdate(0);
             });
 
 
 
             $("#propertyfilter-container").on('change', '#MaxBedRoom', function () {
 
-                PropertyUpdate();
+                PropertyUpdate(0);
             });
 
             $("#propertyfilter-container").on('change', '#MinBathRoom', function () {
 
-                PropertyUpdate();
+                PropertyUpdate(0);
             });
 
             $("#propertyfilter-container").on('change', '#MaxBathRoom', function () {
 
-                PropertyUpdate();
+                PropertyUpdate(0);
             });
 
             $("#propertyfilter-container").on('change', '#MinPrice', function () {
 
-                PropertyUpdate();
+                PropertyUpdate(0);
             });
 
             $("#propertyfilter-container").on('change', '#MaxPrice', function () {
 
-                PropertyUpdate();
+                PropertyUpdate(0);
             });
 
             $("#property-list").on("click", ".page", function (e) {
 
                 e.preventDefault();
+               
+                var page = $(this).val();
+
+                PropertyUpdate(page);
+
+            });
+
+            $("#property-list").on("click", "#previous", function (e) {
+                e.preventDefault();
+
+                var page = $(".active").val();
+
+                page--;
+                PropertyUpdate(page);
+
+
+
+
+            });
+
+            $("#property-list").on("click", "#next", function (e) {
+                e.preventDefault();
+
                 var location = $("#SelectedLocationId").val();
                 var district = $("#SelectedDistrictId").val();
                 var suburb = $("#SelectedSuburbId").val();
@@ -302,9 +327,13 @@
                 var maxBath = $("#MaxBathRoom").val();
                 var minPrice = $("#MinPrice").val();
                 var maxPrice = $("#MaxPrice").val();
-                var page = $(this).val();
+                var page = $(".active").val();
 
-                UpdateProperties(location, district, suburb, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page);
+                page++;
+                PropertyUpdate(page);
+
+
+
 
             });
 
