@@ -22,7 +22,7 @@ namespace PropertyAnalysisTool.Controllers
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var url = "https://api.tmsandbox.co.nz/v1/Localities.json";
+                var url = "https://api.trademe.co.nz/v1/Localities.json";
 
                 var response = client.GetAsync(url).Result;
 
