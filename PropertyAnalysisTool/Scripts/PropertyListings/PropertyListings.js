@@ -72,6 +72,8 @@ function CheckIfInCompareList()
             $(this).text("Remove From Compare List");
             return true;
         }
+
+        
     })
     
 }
@@ -462,6 +464,18 @@ $(function () {
 
         //hide compare button
         ToggleComparePropertyButton();
+
+        var propListButton = $("#property-list").find(selector);
+
+        //update button colour
+        $(propListButton).removeClass("btn-danger");
+        $(propListButton).addClass("btn-primary");
+        $(propListButton).addClass("compare-button");
+        $(propListButton).removeClass("compare-delete-button");
+
+        //update button text
+        $(propListButton).text("Add To Compare List");
+
     });
 
     $(".compare-properties").click(function () {
