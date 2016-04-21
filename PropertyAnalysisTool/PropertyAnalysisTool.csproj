@@ -231,6 +231,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom-font-icons-master\custom-font-icons-master\custom-font-icons-preview.html" />
+    <Content Include="Content\custom-font-icons-master\custom-font-icons-master\custom-font-icons.css" />
+    <Content Include="Content\custom-font-icons-master\custom-font-icons-master\custom-font-icons.svg" />
     <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
@@ -242,6 +245,11 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="bundleconfig.json" />
+    <Content Include="Content\custom-font-icons-master\custom-font-icons-master\bower.json" />
+    <Content Include="Content\custom-font-icons-master\custom-font-icons-master\custom-font-icons.eot" />
+    <Content Include="Content\custom-font-icons-master\custom-font-icons-master\custom-font-icons.ttf" />
+    <Content Include="Content\custom-font-icons-master\custom-font-icons-master\custom-font-icons.woff" />
+    <Content Include="Content\custom-font-icons-master\custom-font-icons-master\README.md" />
     <None Include="Properties\PublishProfiles\PropertyAnalysis.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Calculator\PropertyCalculator.js" />
