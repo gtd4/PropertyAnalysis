@@ -55,10 +55,8 @@ function AddToHistory(localityId, districtId, suburbId, minBath, maxBath, minBed
 
 }
 
-function CheckIfInCompareList()
-{
-    $(".compare-button").each(function ()
-    {
+function CheckIfInCompareList() {
+    $(".compare-button").each(function () {
         var propId = $(this).val();
 
         if (jQuery.inArray(propId, compareList) != -1) {
@@ -73,13 +71,12 @@ function CheckIfInCompareList()
             return true;
         }
 
-        
+
     })
-    
+
 }
 
-function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page)
-{
+function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page) {
     var url = "?";
     if (localityId != 0) {
         url += "region=" + localityId + "&";
@@ -108,7 +105,7 @@ function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, ma
     if (minBath != 0) {
         //sb.AppendFormat("&bathrooms_min={0}", minBath);
         url += "bathrooms_min=" + minBath + "&";
-    
+
     }
 
     if (maxBath != 0) {
@@ -128,7 +125,7 @@ function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, ma
 
     url += "page=" + page;
     return url;
-    
+
 }
 
 function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page) {
@@ -150,7 +147,7 @@ function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, mi
             rng: Math.random()
         }
     }).done(function (partialViewResult) {
-        
+
         window.scrollTo(0, 0);
         $("#property-list").html(partialViewResult);
         CheckIfInCompareList();
@@ -232,17 +229,7 @@ function ToggleComparePropertyButton() {
 
 function BuildCompareListItem(title, imgSrc, propId) {
 
-    if (compareList.length >= 3) {
-        alert("You can only compare a max of 3 properties at 1 time");
-        return true;
-    }
 
-
-
-    if (jQuery.inArray(propId, compareList) != -1) {
-        alert("You have already added this property to be compared");
-        return true;
-    }
 
     compareList.push(propId);
 
@@ -303,7 +290,7 @@ function PropertyUpdate(page) {
 
 $(function () {
 
-    
+
 
     $("#propertyfilter-container").on('change', '#SelectedLocationId', function () {
 
@@ -413,6 +400,21 @@ $(function () {
         var title = $(this).siblings().children("a").children(".prop-title").text();
         var image = $(this).siblings().children("a").children(".prop-img").prop("src");
 
+
+
+
+
+        if (jQuery.inArray(id, compareList) != -1) {
+            alert("You have already added this property to be compared");
+            return true;
+        }
+
+        if (compareList.length >= 3) {
+            alert("You can only compare a max of 3 properties at 1 time");
+            return true;
+        }
+
+
         BuildCompareListItem(title, image, id);
 
         //update button colour
@@ -425,6 +427,7 @@ $(function () {
         $(this).text("Remove From Compare List");
 
         return true;
+
 
     });
 
