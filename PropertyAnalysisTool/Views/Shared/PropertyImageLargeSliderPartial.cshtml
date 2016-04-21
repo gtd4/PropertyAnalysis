@@ -1,11 +1,16 @@
 ﻿@model List<PropertyAnalysisTool.Models.PhotoModel>
 
+
+
 <div id="@Model.First().PhotoId" class="carousel slide" data-ride="carousel" data-interval="false">
-    <!-- Indicators -->
+   
+    @if (Model.Count > 1)
+    {
+     <!-- Indicators -->
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-        @for(var i = 0; i < Model.Count; i++)
+        @for (var i = 0; i < Model.Count; i++)
         {
             var active = i == 0 ? "active" : "";
             <div class="item @active">
@@ -24,6 +29,10 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
+    }else
+    {
+        <img src="@Model.First().PhotoUrl.Large" />
+    }
 </div>
 
 @section scripts

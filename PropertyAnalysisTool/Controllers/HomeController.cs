@@ -32,7 +32,7 @@ namespace PropertyAnalysisTool.Controllers
         const string prodEnv = "https://api.trademe.co.nz/v1/";
         const string devEnv = "https://api.tmsandbox.co.nz/v1/";
 
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxbathroom = 0, int priceMin = 0, int priceMax = 0, int page = 1)
         {
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
 
@@ -42,7 +42,7 @@ namespace PropertyAnalysisTool.Controllers
             {
                 InitClient(authHeader, client);
 
-                var url = BuildApiUrl(page);
+                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, page);
 
                 var response = client.GetAsync(url).Result;
 
@@ -53,7 +53,7 @@ namespace PropertyAnalysisTool.Controllers
 
                     var totalCount = tpr.TotalCount;
 
-                    foreach(var property in tpr.Properties)
+                    foreach (var property in tpr.Properties)
                     {
                         var photo = property.Photos;
                     }
@@ -174,7 +174,7 @@ namespace PropertyAnalysisTool.Controllers
         private string BuildApiUrl(int localityId, int districtId, int suburbId, int minBed, int maxBed, int minBath, int maxBath, int priceMin, int priceMax, int page)
         {
             //replace environment in url to switch between sandbox and prod site requests
-            var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows=12", prodEnv);
+            var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows=12&sort_order=PriceAsc", prodEnv);
 
             var sb = new StringBuilder(url);
 
@@ -193,7 +193,7 @@ namespace PropertyAnalysisTool.Controllers
                 sb.AppendFormat("&suburb={0}", suburbId);
             }
 
-            if(minBed != 0)
+            if (minBed != 0)
             {
                 sb.AppendFormat("&bedrooms_min={0}", minBed);
             }
@@ -213,12 +213,12 @@ namespace PropertyAnalysisTool.Controllers
                 sb.AppendFormat("&bathrooms_max={0}", maxBath);
             }
 
-            if(priceMin != 0)
+            if (priceMin != 0)
             {
                 sb.AppendFormat("&price_min={0}", priceMin);
             }
 
-            if(priceMax != 0)
+            if (priceMax != 0)
             {
                 sb.AppendFormat("&price_max={0}", priceMax);
             }
@@ -256,6 +256,20 @@ namespace PropertyAnalysisTool.Controllers
 
                 model = JsonConvert.DeserializeObject<PropertyModel>(responseString);
 
+                foreach (var attr in model.Attributes)
+                {
+                    if (attr.Name.Equals("bedrooms"))
+                    {
+                        model.Bedrooms = attr.Value;
+                        continue;
+                    }
+
+                    if (attr.Name.Equals("bathrooms"))
+                    {
+                        model.Bathrooms = attr.Value;
+                    }
+                }
+
             }
 
             return model;
@@ -263,7 +277,7 @@ namespace PropertyAnalysisTool.Controllers
 
         public ActionResult Compare(int id1 = 0, int id2 = 0, int id3 = 0)
         {
-            var Ids = new int[] { id1, id2, id3};
+            var Ids = new int[] { id1, id2, id3 };
             //Get upto 3 properties and compare their values side by side
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
             var model = new ComparePropertyModel();

@@ -15,21 +15,23 @@
             var startDate = string.Format("{0:dd MMM yy}", property.StartDate);
             <div class="col-lg-4 col-sm-6">
                 <div class="zoom-container">
-                    <div class="thumbnail property-listing">
-                        <a href="@Url.Action("Details", "Home", new { id = property.ListingId }, null)">
-                            <img class="prop-img" src="@property.PictureHref" />
-                            <h4 class="prop-title">@property.Title</h4>
-                            
-                            <p>@property.FullAddress</p>
-                            <p>BedRooms: @property.Bedrooms</p>
-                            <p>Bathrooms: @property.Bathrooms</p>
-                            <p>@property.PriceDisplay</p>
-                            <p>R.V: $@property.RateableValue</p>
+                    <div class="thumbnail property-listing text-center">
+                        <div class="details-container">
+                            <a href="@Url.Action("Details", "Home", new { id = property.ListingId }, null)" class="prop-link" style="text-decoration: none;">
+                                <img class="prop-img" src="@property.PictureHref" />
+                                <h4 class="prop-title">@property.Title</h4>
 
-                            <button type="button" class="btn btn-primary compare-button" value="@property.ListingId">Add To Compare List</button>
+                                <p>@property.FullAddress</p>
+                                <p>BedRooms: @property.Bedrooms : Bathrooms: @property.Bathrooms</p>
+                                <p>@property.PriceDisplay</p>
+                                <p>R.V: $@property.RateableValue</p>
+                            </a>
+                        </div>
 
-                            <p>Listed: @property.ListedDate</p>
-                        </a>
+                        <button type="button" class="btn btn-primary compare-button" value="@property.ListingId">Add To Compare List</button>
+
+                        <p>Listed: @property.ListedDate</p>
+                        
 
 
 
@@ -74,12 +76,12 @@
                 }
                 @{var nextCls = Model.Page < Model.TotalPages ? "" : "disabled";}
                 <li class="@nextCls">
-                   
+
                     <a href="#" aria-label="Next" id="next" value="@Model.Page">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
             </ul>
-        }
+                    }
     </div>
 </div>

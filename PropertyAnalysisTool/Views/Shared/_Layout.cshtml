@@ -6,7 +6,8 @@
     @RenderSection("metatags", false)
     <title>@ViewBag.Title - Property Analysis</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    @Scripts.RenderFormat("<script async src='{0}'></script>", "~/ bundles / modernizr")
 
 </head>
 <body>

@@ -160,7 +160,7 @@ namespace PropertyAnalysisTool.Models
         {
             get
             {
-                return 5;
+                return 6.5M;
             }
 
         }

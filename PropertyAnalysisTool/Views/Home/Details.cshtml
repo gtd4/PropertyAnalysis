@@ -26,9 +26,13 @@
                 </div>
                 <h2>@Model.Title</h2>
                 <p>Listed: @Model.ListedDate</p>
-                <p>@Model.FullAddress</p>
+                <p>@Model.FullAddress</p>               
                 <p>@Model.PriceDisplay</p>
-                <p>R.V: $@Model.RateableValue</p>
+                @if(!string.IsNullOrEmpty(Model.Bedrooms) || !string.IsNullOrEmpty(Model.Bathrooms))
+                {
+                    <p>Rooms: @Model.Bedrooms : @Model.Bathrooms</p>
+                }
+                @*<p>R.V: $@Model.RateableValue</p>*@
                 <p></p>
                 <p>@Model.Description</p>
             </div>
