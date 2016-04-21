@@ -55,6 +55,27 @@ function AddToHistory(localityId, districtId, suburbId, minBath, maxBath, minBed
 
 }
 
+function CheckIfInCompareList()
+{
+    $(".compare-button").each(function ()
+    {
+        var propId = $(this).val();
+
+        if (jQuery.inArray(propId, compareList) != -1) {
+            //update button colour
+            $(this).removeClass("btn-primary");
+            $(this).addClass("btn-danger");
+            $(this).addClass("compare-delete-button");
+            $(this).removeClass("compare-button");
+
+            //update button text
+            $(this).text("Remove From Compare List");
+            return true;
+        }
+    })
+    
+}
+
 function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page)
 {
     var url = "?";
@@ -130,6 +151,7 @@ function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, mi
         
         window.scrollTo(0, 0);
         $("#property-list").html(partialViewResult);
+        CheckIfInCompareList();
 
     }).error(function (partialViewResult) {
         console.log(partialViewResult);
