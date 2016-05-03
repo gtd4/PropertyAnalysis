@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace PropertyAnalysisTool.Models
 {
@@ -28,12 +26,12 @@ namespace PropertyAnalysisTool.Models
         {
             get
             {
-                if(Page <= 5)
+                if (Page <= 5)
                 {
                     return 1;
                 }
 
-                if(TotalPages - 5 <= Page)
+                if (TotalPages - 5 <= Page)
                 {
                     return TotalPages - 9;
                 }

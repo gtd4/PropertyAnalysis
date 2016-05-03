@@ -1,9 +1,7 @@
 ﻿@model List<PropertyAnalysisTool.Models.PhotoModel>
 
-
-
 <div id="@Model.First().PhotoId" class="carousel slide" data-ride="carousel" data-interval="false">
-   
+
     @if (Model.Count > 1)
     {
      <!-- Indicators -->
@@ -17,7 +15,6 @@
                 <img src="@Model.ElementAt(i).PhotoUrl.Large" />
             </div>
         }
-
     </div>
 
     <!-- Controls -->
@@ -37,6 +34,5 @@
 
 @section scripts
 {
-    
 
 }

@@ -1,10 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PropertyAnalysisTool.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PropertyAnalysisTests.Models
 {
@@ -24,7 +20,6 @@ namespace PropertyAnalysisTests.Models
             var initRent = Math.Round(initialYieldPercentage / 100 * price / vacancyRate);
 
             Assert.AreEqual(initRent, prop.InitialRent);
-            
         }
 
         [TestMethod]
@@ -40,7 +35,6 @@ namespace PropertyAnalysisTests.Models
             var initRent = Math.Round(initialYieldPercentage / 100 * price / vacancyRate);
 
             Assert.AreNotEqual(initRent, prop.InitialRent);
-
         }
 
         [TestMethod]
@@ -68,7 +62,5 @@ namespace PropertyAnalysisTests.Models
 
             Assert.AreNotEqual(initAnnInterest, prop.AnnualInterestCost);
         }
-
-
     }
 }

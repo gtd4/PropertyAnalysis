@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace PropertyAnalysisTool.Models
 {
@@ -19,7 +16,6 @@ namespace PropertyAnalysisTool.Models
         public decimal PriceMax { get; set; }
         public decimal PriceMin { get; set; }
 
-
         /*
         Region
         District
@@ -31,6 +27,5 @@ namespace PropertyAnalysisTool.Models
         BathroomNum
         Price
         */
-
     }
 }

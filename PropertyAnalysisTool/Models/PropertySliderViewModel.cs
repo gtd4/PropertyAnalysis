@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace PropertyAnalysisTool.Models
 {
@@ -9,6 +6,5 @@ namespace PropertyAnalysisTool.Models
     {
         int PropertyId { get; set; }
         List<PhotoModel> Photos { get; set; }
-
     }
 }

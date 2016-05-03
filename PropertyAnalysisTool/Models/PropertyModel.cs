@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace PropertyAnalysisTool.Models
 {
     public class PropertyModel
     {
-
         [JsonProperty("ListingId")]
         public int ListingId { get; set; }
 
@@ -123,8 +121,6 @@ namespace PropertyAnalysisTool.Models
             {
                 return Math.Round(InitialYieldPercentage / 100 * Price / (VacancyRate));
             }
-
-            
         }
 
         public decimal Price
@@ -145,7 +141,6 @@ namespace PropertyAnalysisTool.Models
             {
                 return 10;
             }
-
         }
 
         public decimal InitialVacancyRate
@@ -162,7 +157,6 @@ namespace PropertyAnalysisTool.Models
             {
                 return 6.5M;
             }
-
         }
 
         public decimal AnnualInterestCost
@@ -171,8 +165,6 @@ namespace PropertyAnalysisTool.Models
             {
                 return Price * InitialInterestRate / 100;
             }
-
-
         }
 
         public decimal RentToCoverInterest
@@ -281,7 +273,8 @@ namespace PropertyAnalysisTool.Models
 
         public string ListedDate
         {
-            get{
+            get
+            {
                 return string.Format("{0:dd MMM yy}", StartDate);
             }
         }
@@ -290,7 +283,5 @@ namespace PropertyAnalysisTool.Models
         {
             Attributes = new List<Attribute>();
         }
-
-        
     }
 }

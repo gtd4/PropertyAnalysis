@@ -18,11 +18,14 @@
                     <div class="thumbnail property-listing text-center">
                         <div class="details-container">
                             <a href="@Url.Action("Details", "Home", new { id = property.ListingId }, null)" class="prop-link" style="text-decoration: none;">
-                                <img class="prop-img" src="@property.PictureHref" alt="@property.Title"/>
+                                <img class="prop-img" src="@property.PictureHref" alt="@property.Title" />
                                 <h4 class="prop-title">@property.Title</h4>
 
                                 <p>@property.FullAddress</p>
-                                <p><i class="fa fa-bed fa-lg"></i> @property.Bedrooms <i class="fa fa-shower fa-lg"></i> @property.Bathrooms</p>
+                                @if (!string.IsNullOrEmpty(property.Bedrooms) || !string.IsNullOrEmpty(property.Bathrooms))
+                                {
+                                    <p>@property.Bedrooms <i class="fa fa-bed fa-lg"></i>  @property.Bathrooms <i class="fa fa-shower fa-lg"></i> </p>
+                                }
                                 <p>@property.PriceDisplay</p>
                                 <p>R.V: $@property.RateableValue</p>
                             </a>
@@ -31,10 +34,6 @@
                         <button type="button" class="btn btn-primary compare-button" value="@property.ListingId" id="@property.ListingId">Add To Compare List</button>
 
                         <p>Listed: @property.ListedDate</p>
-                        
-
-
-
                     </div>
                 </div>
             </div>
@@ -47,7 +46,6 @@
             <h3>No Results Sorry</h3>
         </div>
     }
-
 </div>
 
 <div class="row">

@@ -7,11 +7,9 @@
     <div class="calculator-container">
         <div class="col-sm-12">
             <h1>Property Analysis</h1>
-
         </div>
         <div class="col-lg-6">
             <div class="thumbnail">
-
 
                 <div class="details-image-container">
 
@@ -21,12 +19,12 @@
                     }
                     else
                     {
-                        <img alt="No Image Present"/>
+                        <img alt="No Image Present" />
                     }
                 </div>
                 <h2>@Model.Title</h2>
                 <p>Listed: @Model.ListedDate</p>
-                <p>@Model.FullAddress</p>               
+                <p>@Model.FullAddress</p>
                 <p>@Model.PriceDisplay</p>
                 @if(!string.IsNullOrEmpty(Model.Bedrooms) || !string.IsNullOrEmpty(Model.Bathrooms))
                 {
@@ -52,8 +50,6 @@
 
                     <h3>Rent To Achieve @*(@Html.DisplayFor(property => property.ProposedAnnualRentalIncome))*@</h3>
                     @Html.EditorFor(property => property.InitialRent)
-
-
                 </div>
                 <br />
                 <div class="thumbnail">
@@ -92,7 +88,6 @@
 
                     <h3>Surplus After Expenses</h3>
                     @Html.EditorFor(property => property.SurplusAfterExpense)
-
                 </div>
             </div>
         </div>
@@ -133,5 +128,3 @@
     </script>
 
 }
-
-

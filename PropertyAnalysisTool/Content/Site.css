@@ -9,8 +9,8 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
 */
 .dl-horizontal dt {
     white-space: normal;
@@ -32,7 +32,6 @@ textarea {
     max-height: 150px;
 }
 
-
 /*section form zooming content hover*/
 /*-------------------------------------------------*/
 .zoom-container{
@@ -41,7 +40,6 @@ textarea {
     width: 100%;
     height: 470px;
     margin: 0 auto;
-    
 }
 
 .property-listing
@@ -60,7 +58,6 @@ textarea {
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
 }
-
 
 .zoom-container:hover .property-listing {
   -webkit-transform: scale(1.08);
@@ -119,7 +116,6 @@ textarea {
     width: 100%;
     height: 300px;
     max-height: 300px;
-
 }
 
 /*.to-compare
@@ -136,7 +132,6 @@ textarea {
     padding: 4px;
     border-radius: 4px;
     max-width:100%;
-
 }
 
 .compare-title-container
@@ -147,18 +142,17 @@ textarea {
     overflow: hidden;
     max-width:255px;
     width: 50%;
-    
 }
 
 .prop-details p{
     text-decoration: none;
 }
 
-/*#MinBedRoom, 
-#MaxBedRoom, 
-#MinBathRoom, 
-#MaxBathRoom, 
-#MinPrice, 
+/*#MinBedRoom,
+#MaxBedRoom,
+#MinBathRoom,
+#MaxBathRoom,
+#MinPrice,
 #MaxPrice{
     width:45%;
 }*/
@@ -171,7 +165,6 @@ textarea {
 #regions-container h4{
     margin-top: 0px;
     margin-bottom: 5px;
-
 }
 
 #bedrooms-container h4
@@ -224,16 +217,15 @@ h1{
     text-decoration: none;
 }
 
-
-/*.ajax-loader{ 
-   width:100%; 
-   height:100%; 
+/*.ajax-loader{
+   width:100%;
+   height:100%;
    background:url(Images/ajax-loader.gif) center center no-repeat;
 }*/
 /*.property-filter-container
 {
     border: 1px solid #dddddd;
-    
+
     padding: 4px;
     border-radius: 4px;
 }*/

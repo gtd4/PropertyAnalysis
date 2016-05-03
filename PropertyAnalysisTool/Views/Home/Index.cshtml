@@ -1,6 +1,5 @@
 ﻿@model PropertyAnalysisTool.Models.TradeMePropertyResultsViewModel
 
-
 @{
     ViewBag.Title = "Home Page";
 
@@ -12,11 +11,10 @@
 }
 
 <div class="row">
-    <div class="col-lg-12 text-center"><h1>Residential Property</h1></div>
-    <div class="ajax-loader col-xs-8 text-center"><img src="~/Content/Images/ajax-loader.gif" /></div>
+    <div class="col-lg-12 text-center"><h1>Residential</h1></div>
+    <div class="ajax-loader col-xs-8 text-center"><img src="~/Content/Images/ajax-loader.gif" alt="loader img" /></div>
     <div class="col-xs-8" id="property-list">
         @{Html.RenderPartial("PropertyListingPartial", Model);}
-
     </div>
 
     <div class="col-xs-4 fixed">
@@ -32,16 +30,10 @@
             <h4>To Compare</h4>
 
             <div class="compare-list">
-
             </div>
             <button type="button" class="btn btn-primary compare-properties">Compare Properties</button>
-
         </div>
-
-
-
     </div>
-
 </div>
 
 @section scripts

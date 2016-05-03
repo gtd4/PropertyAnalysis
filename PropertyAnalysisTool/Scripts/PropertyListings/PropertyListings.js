@@ -1,5 +1,4 @@
-﻿
-var compareList = [];
+﻿var compareList = [];
 var $loading = $('.ajax-loader').hide();
 var $propList = $('#property-list');
 $(document)
@@ -29,9 +28,7 @@ function UpdateFilter(localityId, districtId, SuburbId, minBath, maxBath, minBed
             rng: Math.random()
         }
     }).done(function (partialViewResult) {
-
         $("#propertyfilter-container").html(partialViewResult);
-
     });
 
     UpdateProperties(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, 1);
@@ -52,7 +49,6 @@ function AddToHistory(localityId, districtId, suburbId, minBath, maxBath, minBed
     }
     var url = BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page)
     history.replaceState(item, '', url);
-
 }
 
 function CheckIfInCompareList() {
@@ -70,10 +66,7 @@ function CheckIfInCompareList() {
             $(this).text("Remove From Compare List");
             return true;
         }
-
-
     })
-
 }
 
 function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page) {
@@ -105,7 +98,6 @@ function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, ma
     if (minBath != 0) {
         //sb.AppendFormat("&bathrooms_min={0}", minBath);
         url += "bathrooms_min=" + minBath + "&";
-
     }
 
     if (maxBath != 0) {
@@ -125,7 +117,6 @@ function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, ma
 
     url += "page=" + page;
     return url;
-
 }
 
 function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page) {
@@ -147,34 +138,28 @@ function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, mi
             rng: Math.random()
         }
     }).done(function (partialViewResult) {
-
         window.scrollTo(0, 0);
         $("#property-list").html(partialViewResult);
         CheckIfInCompareList();
-
     }).error(function (partialViewResult) {
         console.log(partialViewResult);
     });
 }
 
 function BuildItemContainer(propId) {
-
     var itemContainer = jQuery("<div/>",
     {
         class: 'compare-item-container col-sm-12',
         id: propId,
-
     });
 
     return itemContainer;
 }
 
 function BuildTitleContainer(title) {
-
     var titleContainer = jQuery("<div/>",
     {
         class: 'compare-title-container',
-
     });
 
     var title = jQuery("<p/>",
@@ -186,7 +171,6 @@ function BuildTitleContainer(title) {
 }
 
 function BuildImgContainer(imgSrc) {
-
     var imgContainer = jQuery("<div/>",
         {
             class: 'compare-img-container',
@@ -194,11 +178,9 @@ function BuildImgContainer(imgSrc) {
     var img = jQuery("<img/>",
         {
             src: imgSrc,
-
         }).appendTo(imgContainer);
 
     return imgContainer;
-
 }
 
 function BuildDeleteContainer(propId) {
@@ -218,7 +200,6 @@ function BuildDeleteContainer(propId) {
 }
 
 function ToggleComparePropertyButton() {
-
     if (compareList.length > 1) {
         $(".compare-properties").show();
     }
@@ -228,9 +209,6 @@ function ToggleComparePropertyButton() {
 }
 
 function BuildCompareListItem(title, imgSrc, propId) {
-
-
-
     compareList.push(propId);
 
     ToggleComparePropertyButton();
@@ -247,7 +225,6 @@ function BuildCompareListItem(title, imgSrc, propId) {
     $(deleteContainer).appendTo(itemContainer);
 
     $(itemContainer).appendTo(compareListContainer);
-
 }
 
 function RemoveFromCompareList(propId) {
@@ -260,7 +237,6 @@ function RemoveFromCompareList(propId) {
 }
 
 function FilterUpdate(location, district, suburb) {
-
     var minBed = $("#MinBedRoom").val();
     var maxBed = $("#MaxBedRoom").val();
     var minBath = $("#MinBathRoom").val();
@@ -270,7 +246,6 @@ function FilterUpdate(location, district, suburb) {
 
     UpdateFilter(location, district, suburb, minBath, maxBath, minBed, maxBed, minPrice, maxPrice)
 }
-
 
 function PropertyUpdate(page) {
     var location = $("#SelectedLocationId").val();
@@ -284,19 +259,12 @@ function PropertyUpdate(page) {
     var maxPrice = $("#MaxPrice").val();
 
     UpdateProperties(location, district, suburb, minBath, minBath, minBed, maxBed, minPrice, maxPrice, page);
-
 }
 
-
 $(function () {
-
-
-
     $("#propertyfilter-container").on('change', '#SelectedLocationId', function () {
-
         var location = $("#SelectedLocationId").val();
         FilterUpdate(location, 0, 0);
-
     });
 
     $("#propertyfilter-container").on('change', '#SelectedDistrictId', function () {
@@ -304,7 +272,6 @@ $(function () {
         var district = $("#SelectedDistrictId").val();
 
         FilterUpdate(location, district, 0);
-
     });
 
     $("#propertyfilter-container").on('change', '#SelectedSuburbId', function () {
@@ -316,45 +283,35 @@ $(function () {
     });
 
     $("#propertyfilter-container").on('change', '#MinBedRoom', function () {
-
         PropertyUpdate(1);
     });
 
-
-
     $("#propertyfilter-container").on('change', '#MaxBedRoom', function () {
-
         PropertyUpdate(1);
     });
 
     $("#propertyfilter-container").on('change', '#MinBathRoom', function () {
-
         PropertyUpdate(1);
     });
 
     $("#propertyfilter-container").on('change', '#MaxBathRoom', function () {
-
         PropertyUpdate(1);
     });
 
     $("#propertyfilter-container").on('change', '#MinPrice', function () {
-
         PropertyUpdate(1);
     });
 
     $("#propertyfilter-container").on('change', '#MaxPrice', function () {
-
         PropertyUpdate(1);
     });
 
     $("#property-list").on("click", ".page", function (e) {
-
         e.preventDefault();
 
         var page = $(this).val();
 
         PropertyUpdate(page);
-
     });
 
     $("#property-list").on("click", "#previous", function (e) {
@@ -364,10 +321,6 @@ $(function () {
 
         page--;
         PropertyUpdate(page);
-
-
-
-
     });
 
     $("#property-list").on("click", "#next", function (e) {
@@ -386,23 +339,14 @@ $(function () {
 
         page++;
         PropertyUpdate(page);
-
-
-
-
     });
 
     $("#property-list").on("click", ".compare-button", function (e) {
-
         e.preventDefault();
 
         var id = $(this).val();
         var title = $(this).siblings().children("a").children(".prop-title").text();
         var image = $(this).siblings().children("a").children(".prop-img").prop("src");
-
-
-
-
 
         if (jQuery.inArray(id, compareList) != -1) {
             alert("You have already added this property to be compared");
@@ -413,7 +357,6 @@ $(function () {
             alert("You can only compare a max of 3 properties at 1 time");
             return true;
         }
-
 
         BuildCompareListItem(title, image, id);
 
@@ -427,8 +370,6 @@ $(function () {
         $(this).text("Remove From Compare List");
 
         return true;
-
-
     });
 
     $("#property-list").on("click", ".compare-delete-button", function (e) {
@@ -455,7 +396,6 @@ $(function () {
     });
 
     $(".compare-list").on('click', '.compare-delete-button', function () {
-
         var propId = $(this).val();
         //remove entire container
         var selector = "#" + propId;
@@ -478,11 +418,9 @@ $(function () {
 
         //update button text
         $(propListButton).text("Add To Compare List");
-
     });
 
     $(".compare-properties").click(function () {
-
         var url = "/home/compare?";
 
         for (var i = 0; i < compareList.length; i++) {
@@ -491,5 +429,4 @@ $(function () {
 
         window.location = url;
     });
-
 });

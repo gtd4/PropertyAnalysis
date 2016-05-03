@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace PropertyAnalysisTool.Models
 {
@@ -16,10 +14,11 @@ namespace PropertyAnalysisTool.Models
 
         //this property will be used to set the size of divs used to hold each property being compared
         //
-        public int ContainerSize {
+        public int ContainerSize
+        {
             get
             {
-                if(!Properties.Any())
+                if (!Properties.Any())
                 {
                     return 12;
                 }

@@ -1,15 +1,11 @@
 ﻿using Newtonsoft.Json;
 using PropertyAnalysisTool.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Web;
-using System.Web.Mvc;
-using Newtonsoft.Json.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
+using System.Web.Mvc;
 
 namespace PropertyAnalysisTool.Controllers
 {
@@ -23,6 +19,7 @@ namespace PropertyAnalysisTool.Controllers
 
         //prod details
         string consumerKey = "48C11C46E3C1969737776DECD5F144B3";
+
         string consumerSecret = "C841EE5BE675F879097974C6BB163202";
         string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
         string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
@@ -57,9 +54,7 @@ namespace PropertyAnalysisTool.Controllers
                     {
                         var photo = property.Photos;
                     }
-
                 }
-
             }
             var totalPages = tpr.TotalCount / pageSize;
             if (tpr.TotalCount % pageSize != 0)
@@ -70,7 +65,6 @@ namespace PropertyAnalysisTool.Controllers
             var model = tpr;
             model.TotalPages = totalPages;
             model.Page = page;
-
 
             return View(model);
         }
@@ -118,8 +112,6 @@ namespace PropertyAnalysisTool.Controllers
                         }
                     }
                 }
-
-
             }
 
             var model = ctRVList.Where(prop => prop.Price > 0 && prop.Price < prop.RateableValue).Distinct().ToList();
@@ -142,13 +134,9 @@ namespace PropertyAnalysisTool.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-
                     string responseString = response.Content.ReadAsStringAsync().Result;
                     tpr = JsonConvert.DeserializeObject<TradeMePropertyResultsViewModel>(responseString);
-
-
                 }
-
             }
 
             var totalPages = tpr.TotalCount / pageSize;
@@ -269,7 +257,6 @@ namespace PropertyAnalysisTool.Controllers
                         model.Bathrooms = attr.Value;
                     }
                 }
-
             }
 
             return model;
@@ -284,7 +271,6 @@ namespace PropertyAnalysisTool.Controllers
 
             using (var client = new HttpClient())
             {
-
                 foreach (var id in Ids)
                 {
                     InitClient(authHeader, client);
@@ -298,10 +284,8 @@ namespace PropertyAnalysisTool.Controllers
                         var prop = JsonConvert.DeserializeObject<PropertyModel>(responseString);
 
                         model.Properties.Add(prop);
-
                     }
                 }
-
             }
             return View(model);
         }

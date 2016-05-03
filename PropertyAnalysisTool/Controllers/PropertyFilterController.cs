@@ -1,11 +1,9 @@
 ﻿using Newtonsoft.Json;
 using PropertyAnalysisTool.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PropertyAnalysisTool.Controllers
@@ -64,11 +62,9 @@ namespace PropertyAnalysisTool.Controllers
 
                     model.MinPrice = priceMin;
                     model.MaxPrice = priceMax;
-
                 }
                 return PartialView("PropertyFilter", model);
             }
-
         }
 
         private IEnumerable<SelectListItem> PopulatePriceLists(int num)
@@ -83,7 +79,7 @@ namespace PropertyAnalysisTool.Controllers
 
             numlist.Add(item);
 
-            for (var i = 10; i < 100; i+=5)
+            for (var i = 10; i < 100; i += 5)
             {
                 item = new SelectListItem
                 {
@@ -105,8 +101,6 @@ namespace PropertyAnalysisTool.Controllers
             numlist.Add(item);
 
             return numlist;
-
-
         }
 
         private IEnumerable<SelectListItem> PopulateMinMaxLists(int num)
@@ -142,7 +136,6 @@ namespace PropertyAnalysisTool.Controllers
             numlist.Add(item);
 
             return numlist;
-
         }
 
         private IEnumerable<SelectListItem> GetLocations(List<TradeMeLocationModel> loc, int id, string locationType)
@@ -151,7 +144,6 @@ namespace PropertyAnalysisTool.Controllers
             {
                 Id = 0,
                 Name = string.Format("All {0}", locationType),
-
             };
 
             loc.Add(emptyItem);
@@ -189,7 +181,6 @@ namespace PropertyAnalysisTool.Controllers
 
         //private IEnumerable<SelectListItem> GetDistricts(List<District> loc, int districtId)
         //{
-
         //    var emptyItem = new District
         //    {
         //        Id = 0,
@@ -198,7 +189,6 @@ namespace PropertyAnalysisTool.Controllers
         //    };
 
         //    loc.Add(emptyItem);
-
 
         //    var districts = loc.Select(x => new SelectListItem
         //    {
@@ -212,7 +202,6 @@ namespace PropertyAnalysisTool.Controllers
 
         //private IEnumerable<SelectListItem> GetSuburbs(List<Suburb> loc)
         //{
-
         //    var emptyItem = new Suburb
         //    {
         //        Id = 0,

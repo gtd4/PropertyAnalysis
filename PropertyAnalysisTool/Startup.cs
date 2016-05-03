@@ -2,6 +2,7 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(PropertyAnalysisTool.Startup))]
+
 namespace PropertyAnalysisTool
 {
     public partial class Startup
