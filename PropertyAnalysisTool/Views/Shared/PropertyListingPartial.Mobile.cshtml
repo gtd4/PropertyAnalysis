@@ -1,0 +1,85 @@
+﻿@model PropertyAnalysisTool.Models.TradeMePropertyResultsViewModel
+
+@{
+    var rowCount = 0;
+    var pageNum = 1;
+}
+<div class="row propertylist-container">
+
+    <input id="current-page" type="hidden" value="@Model.Page" />
+    @if (Model.Properties.Any())
+    {
+        foreach (var property in Model.Properties)
+        {
+
+            var startDate = string.Format("{0:dd MMM yy}", property.StartDate);
+            <div class="col-lg-4 col-sm-6">
+                <div class="zoom-container">
+                    <div class="thumbnail property-listing text-center">
+                        <div class="details-container">
+                            <a href="@Url.Action("Details", "Home", new { id = property.ListingId }, null)" class="prop-link" style="text-decoration: none;">
+                                <img class="prop-img" src="@property.PictureHref" alt="@property.Title" />
+                                <h4 class="prop-title">@property.Title</h4>
+
+                                <p>@property.FullAddress</p>
+                                @if (!string.IsNullOrEmpty(property.Bedrooms) || !string.IsNullOrEmpty(property.Bathrooms))
+                                {
+                                    <p>@property.Bedrooms <i class="fa fa-bed fa-lg"></i>  @property.Bathrooms <i class="fa fa-shower fa-lg"></i> </p>
+                                }
+                                <p>@property.PriceDisplay</p>
+                                <p>R.V: $@property.RateableValue</p>
+                            </a>
+                        </div>
+
+                        <button type="button" class="btn btn-primary compare-button" value="@property.ListingId" id="@property.ListingId">Add To Compare List</button>
+
+                        <p>Listed: @property.ListedDate</p>
+                    </div>
+                </div>
+            </div>
+            rowCount++;
+        }
+    }
+    else
+    {
+        <div class="col-lg-12">
+            <h3>No Results Sorry</h3>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <div class="col-sm-12 text-center">
+        @if (Model.MaxPagination > 1)
+        {
+            <ul class="pagination">
+                @{var prevCls = Model.Page > 1 ? "" : "disabled";}
+                <li class="@prevCls">
+                    <a href="#" aria-label="Previous" id="previous" value="@Model.Page">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                @for (var i = 0; i < 5; i++)
+                {
+                    pageNum = Model.PaginationStart + i;
+                    var active = pageNum == Model.Page ? "active" : "";
+                    <li class="page @active" value="@pageNum"><a href="#">@pageNum</a></li>
+                }
+
+                @if (pageNum < Model.TotalPages)
+                {
+                    <li class="disabled"><a href="#">...</a></li>
+                    <li class="page" value="@Model.TotalPages"><a href="#">@Model.TotalPages</a></li>
+                }
+                @{var nextCls = Model.Page < Model.TotalPages ? "" : "disabled";}
+                <li class="@nextCls">
+
+                    <a href="#" aria-label="Next" id="next" value="@Model.Page">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+                    }
+    </div>
+</div>

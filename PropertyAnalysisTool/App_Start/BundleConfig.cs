@@ -30,7 +30,7 @@ namespace PropertyAnalysisTool
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/site.min.css"));
+                      "~/Content/site.css"));
         }
     }
 }

@@ -316,7 +316,6 @@ $(function () {
 
     $("#property-list").on("click", "#previous", function (e) {
         e.preventDefault();
-
         var page = $(".active").val();
 
         page--;
@@ -325,16 +324,6 @@ $(function () {
 
     $("#property-list").on("click", "#next", function (e) {
         e.preventDefault();
-
-        var location = $("#SelectedLocationId").val();
-        var district = $("#SelectedDistrictId").val();
-        var suburb = $("#SelectedSuburbId").val();
-        var minBed = $("#MinBedRoom").val();
-        var maxBed = $("#MaxBedRoom").val();
-        var minBath = $("#MinBathRoom").val();
-        var maxBath = $("#MaxBathRoom").val();
-        var minPrice = $("#MinPrice").val();
-        var maxPrice = $("#MaxPrice").val();
         var page = $(".active").val();
 
         page++;
