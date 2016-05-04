@@ -40,11 +40,37 @@ namespace PropertyAnalysisTool.Models
             }
         }
 
+        public int MobilePaginationStart
+        {
+            get
+            {
+                if (Page <= 2)
+                {
+                    return 1;
+                }
+
+                if (TotalPages - 2 <= Page)
+                {
+                    return TotalPages - 1;
+                }
+
+                return Page - 1;
+            }
+        }
+
         public int MaxPagination
         {
             get
             {
                 return TotalPages > 10 ? 10 : TotalPages;
+            }
+        }
+
+        public int MaxMobilePagination
+        {
+            get
+            {
+                return TotalPages > 3 ? 3 : TotalPages;
             }
         }
 
