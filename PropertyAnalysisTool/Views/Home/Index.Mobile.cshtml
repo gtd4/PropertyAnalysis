@@ -34,9 +34,10 @@
         <br />
     </div>
     
-    <div class="ajax-loader col-xs-8 text-center"><img src="~/Content/Images/ajax-loader.gif" alt="loader img" /></div>
+    
     
     <div class="col-sm-8 col-sm-pull-4" id="property-list">
+        <div class="ajax-loader text-center"><img src="~/Content/Images/ajax-loader.gif" alt="loader img" /></div>
         @{Html.RenderPartial("PropertyListingPartial", Model);}
     </div>
     
