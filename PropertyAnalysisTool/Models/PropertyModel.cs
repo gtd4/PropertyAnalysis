@@ -107,6 +107,8 @@ namespace PropertyAnalysisTool.Models
         [JsonProperty("Attributes")]
         public List<Attribute> Attributes { get; set; }
 
+        
+
         public string Location
         {
             get

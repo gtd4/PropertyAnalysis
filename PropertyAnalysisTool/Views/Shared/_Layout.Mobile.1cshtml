@@ -25,7 +25,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Residential Property", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Residential", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Sections", "Index", "Home", new { propType = "Sections" }, null)</li>
                         @*<li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                         @*<li>@Html.ActionLink("CheaperThanRV", "CheaperThanRV", "Home")</li>*@

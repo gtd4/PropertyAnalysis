@@ -308,9 +308,8 @@
     <Content Include="Views\Shared\ComparePropertyPartial.cshtml" />
     <Content Include="Views\Shared\PropertyImageLargeSliderPartial.cshtml" />
     <Content Include="Views\Shared\PropertyImageListingSliderPartial.cshtml" />
-    <Content Include="Views\Home\Index.Mobile.cshtml" />
-    <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
-    <Content Include="Views\Shared\_Layout.iPhone.cshtml" />
+    <None Include="Views\Home\Index.Mobile.1cshtml" />
+    <None Include="Views\Shared\_Layout.Mobile.1cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>

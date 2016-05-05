@@ -31,6 +31,7 @@ function UpdateFilter(localityId, districtId, SuburbId, minBath, maxBath, minBed
         $("#propertyfilter-container").html(partialViewResult);
     });
 
+
     UpdateProperties(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, 1);
 }
 
@@ -121,6 +122,7 @@ function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, ma
 
 function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page) {
     AddToHistory(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page)
+    var propertyType = $("#property-type").val();
     $.ajax({
         url: "/Home/UpdatePropertyListings",
         type: "GET",
@@ -135,6 +137,7 @@ function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, mi
             PriceMin: minPrice,
             PriceMax: maxPrice,
             Page: page,
+            propType: propertyType,
             rng: Math.random()
         }
     }).done(function (partialViewResult) {

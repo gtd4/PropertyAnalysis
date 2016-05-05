@@ -21,6 +21,7 @@ namespace PropertyAnalysisTool.Models
         public int DistrictId { get; set; }
         public int SuburbId { get; set; }
         public int Page { get; set; }
+        public string PropertyType { get; set; }
 
         public int PaginationStart
         {
@@ -82,6 +83,7 @@ namespace PropertyAnalysisTool.Models
         public TradeMePropertyResultsViewModel()
         {
             Properties = new List<PropertyModel>();
+
         }
     }
 }
