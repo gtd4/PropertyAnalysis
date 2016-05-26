@@ -1,0 +1,132 @@
+﻿@model PropertyAnalysisTool.Models.PropertyModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <div class="calculator-container">
+        <div class="col-sm-12 text-center">
+            <h1>Property Analysis KnockOut</h1>
+        </div>
+        <div class="col-lg-6">
+            <div class="thumbnail">
+
+                <div class="details-image-container">
+
+                    @if (Model.HasGallery)
+                    {
+                        Html.RenderPartial("PropertyImageLargeSliderPartial", Model.Photos);
+                    }
+                    else
+                    {
+                        <img alt="No Image Present" />
+                    }
+                </div>
+                <h2>@Model.Title</h2>
+                <p>Listed: @Model.ListedDate</p>
+                <p>@Model.FullAddress</p>
+                <p>@Model.PriceDisplay</p>
+                @if(!string.IsNullOrEmpty(Model.Bedrooms) || !string.IsNullOrEmpty(Model.Bathrooms))
+                {
+                    <p>Rooms: @Model.Bedrooms : @Model.Bathrooms</p>
+                }
+                @*<p>R.V: $@Model.RateableValue</p>*@
+                <p></p>
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="col-lg-6">
+                <div class="thumbnail">
+
+                    <h3>Purchase Price</h3>
+                    @Html.EditorFor(property => property.Price)
+                    <input type="number" data-bind="value: Price" />
+
+                    <h3>Gross Yield</h3>
+                    @Html.EditorFor(property => property.InitialYieldPercentage)
+
+                    <h3>Vacancy Rate in Weeks</h3>
+                    @Html.EditorFor(property => property.InitialVacancyRate)
+
+                    <h3>Rent To Achieve @*(@Html.DisplayFor(property => property.ProposedAnnualRentalIncome))*@</h3>
+                    @Html.EditorFor(property => property.InitialRent)
+                </div>
+                <br />
+                <div class="thumbnail">
+                    <h3>Interest Rate</h3>
+                    @Html.EditorFor(property => property.InitialInterestRate)
+
+                    <h3>Yearly Interest</h3>
+                    @Html.EditorFor(property => property.AnnualInterestCost)
+                    <p>Purchase Price * Interest Rate</p>
+
+                    <h3>Rent to cover interest</h3>
+                    @Html.EditorFor(property => property.RentToCoverInterest)
+
+                    <h3>Surplus Per Week</h3>
+                    @Html.EditorFor(property => property.SurplusBeforeExpenses)
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="thumbnail">
+                    <h3>Expenses</h3>
+
+                    <h3>Rates Annual</h3>
+                    @Html.EditorFor(property => property.InitialRates)
+                    <h3>Maintenance</h3>
+                    @Html.EditorFor(property => property.InitialRepairs)
+                    <h3>Insurance</h3>
+                    @Html.EditorFor(property => property.InitialInsurance)
+                    <h3>Property Management (8%)</h3>
+                    @Html.EditorFor(property => property.PropertyManagementAmount)
+                    <h3>Total Expenses</h3>
+                    @Html.EditorFor(property => property.TotalInitalExpense)
+
+                    <h3>Rent To Cover Mortgage and Expenses</h3>
+                    @Html.EditorFor(property => property.RentToCoverMortgageExpenses)
+
+                    <h3>Surplus After Expenses</h3>
+                    @Html.EditorFor(property => property.SurplusAfterExpense)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+
+        <p>If Gross Yield is under interest rate, then loss</p>
+        <p>
+            5-6% low cashflow - need great growth
+        </p>
+        <p>
+            7-8% break even - still need good growth
+        </p><p>
+            9-10% or more - good cashflow
+        </p>
+        <p>
+            If you want to own a lot of properties, then need high yield (that pay for themselves)
+        </p>
+        <p>
+            It keeps banks happy with income
+        </p>
+        <p>
+            property portfolio will pay for itself
+        </p>
+        <p>
+            interest rates will rise at some point, so need a buffer
+        </p>
+    </div>
+</div>
+
+@section scripts
+{
+    @*@Scripts.Render("~/bundles/propertyCalculator")*@
+    @Scripts.Render("~/Scripts/ViewModel/PropertyDetailsViewModel.js");
+    <script>
+        $(".carousel").carousel('pause');
+    </script>
+
+}

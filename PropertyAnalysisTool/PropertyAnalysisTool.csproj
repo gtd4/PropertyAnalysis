@@ -260,10 +260,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\PropertyListings\PropertyListings.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ViewModel\PropertyDetailsViewModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -279,6 +282,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Details.Mobile.cshtml" />
+    <Content Include="Views\Home\DetailsKnockOut.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -308,7 +312,7 @@
     <Content Include="Views\Shared\ComparePropertyPartial.cshtml" />
     <Content Include="Views\Shared\PropertyImageLargeSliderPartial.cshtml" />
     <Content Include="Views\Shared\PropertyImageListingSliderPartial.cshtml" />
-    <None Include="Views\Home\Index.Mobile.1cshtml" />
+    <None Include="Views\Home\Index.Mobile.cshtml" />
     <None Include="Views\Shared\_Layout.Mobile.1cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.Mobile.cshtml" />
   </ItemGroup>

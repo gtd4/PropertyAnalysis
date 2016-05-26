@@ -243,7 +243,7 @@ namespace PropertyAnalysisTool.Controllers
                 InitClient(authHeader, client);
                 model = GetPropertyDetails(id, model, client);
             }
-            return View(model);
+            return View("DetailsKnockout", model);
         }
 
         private static PropertyModel GetPropertyDetails(int id, PropertyModel model, HttpClient client)

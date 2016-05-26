@@ -125,10 +125,7 @@ textarea {
     width:45%;
 }*/
 
-.fixed {
-    position: fixed;
-    left:66%;
-}
+
 
 #regions-container h4{
     margin-top: 0px;
@@ -241,5 +238,10 @@ h1{
         -webkit-transform: scale(1.08);
         transform: scale(1.08);
     }
+
+    .fixed {
+    position: fixed;
+    left:66%;
+}
 }
 /*-----------------------------------------------*/
