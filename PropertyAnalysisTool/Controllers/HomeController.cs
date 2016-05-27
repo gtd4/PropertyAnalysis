@@ -246,7 +246,7 @@ namespace PropertyAnalysisTool.Controllers
             return View("DetailsKnockout", model);
         }
 
-        private static PropertyModel GetPropertyDetails(int id, PropertyModel model, HttpClient client)
+        private PropertyModel GetPropertyDetails(int id, PropertyModel model, HttpClient client)
         {
             var response = client.GetAsync(string.Format("{0}Listings/{1}.json", prodEnv, id)).Result;
 
@@ -255,6 +255,7 @@ namespace PropertyAnalysisTool.Controllers
                 string responseString = response.Content.ReadAsStringAsync().Result;
 
                 model = JsonConvert.DeserializeObject<PropertyModel>(responseString);
+                model.DetailsJson = responseString;
 
                 foreach (var attr in model.Attributes)
                 {

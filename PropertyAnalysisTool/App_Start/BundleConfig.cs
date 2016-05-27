@@ -28,7 +28,10 @@ namespace PropertyAnalysisTool
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/knockout").Include("~/Scripts/knockout-3.4.0.js"));
+            bundles.Add(new ScriptBundle("~/bundles/knockout")
+                .Include(
+                "~/Scripts/knockout-3.4.0.js", 
+                "~/Scripts/knockout.mapping-latest.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
