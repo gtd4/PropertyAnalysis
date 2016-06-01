@@ -23,7 +23,7 @@
                     }
                 </div>
                 <h2>@Model.Title</h2>
-                <h2 data-bind="text: Title"></h2>
+                
                 <p>Listed: @Model.ListedDate</p>
                 <p>@Model.FullAddress</p>
                 <p>@Model.PriceDisplay</p>
@@ -31,7 +31,7 @@
                 {
                     <p>Rooms: @Model.Bedrooms : @Model.Bathrooms</p>
                 }
-                @*<p>R.V: $@Model.RateableValue</p>*@
+                
                 <p></p>
                 <p>@Model.Description</p>
             </div>
@@ -39,41 +39,45 @@
         <div class="col-lg-6">
             <div class="col-lg-6">
                 <div class="thumbnail">
-
+                    
                     <h3>Purchase Price</h3>
                     @*@Html.EditorFor(property => property.Price)*@
-                    <input type="number" data-bind="value: Price" />
+                    <input type="number" data-bind="value: calculatedPrice" />
+                    
 
                     <h3>Gross Yield %</h3>
-                    @Html.EditorFor(property => property.InitialYieldPercentage)
-                    <input type="number" data-bind="value: InitialYieldPercentage" />
+                    @*@Html.EditorFor(property => property.InitialYieldPercentage)*@
+                    <input type="number" data-bind="value: calculatedYield" />
 
                     <h3>Vacancy Rate in Weeks</h3>
-                    @Html.EditorFor(property => property.InitialVacancyRate)
-                    <input type="number" data-bind="value: InitialVacancyRate" />
+                    @*@Html.EditorFor(property => property.InitialVacancyRate)*@
+                    <input type="number" data-bind="value: calculatedVacancyRate" />
 
                     <h3>Rent To Achieve @*(@Html.DisplayFor(property => property.ProposedAnnualRentalIncome))*@</h3>
-                    @Html.EditorFor(property => property.InitialRent)
-                    <input type="number" data-bind="value: InitialRent" />
+                    @*@Html.EditorFor(property => property.InitialRent)*@
+                    <input type="number" data-bind="value: calculatedRent" />
+
+                    <h3>Yearly Rent</h3>
+                    @Html.EditorFor(property => property.ProposedAnnualRentalIncome);
                 </div>
                 <br />
                 <div class="thumbnail">
                     <h3>Interest Rate</h3>
-                    @Html.EditorFor(property => property.InitialInterestRate)
-                    <input type="number" data-bind="value: InitialInterestRate" />
+                    @*@Html.EditorFor(property => property.InitialInterestRate)*@
+                    <input type="number" data-bind="value: calculatedInterestRate" />
 
                     <h3>Yearly Interest</h3>
-                    @Html.EditorFor(property => property.AnnualInterestCost)
-                    <input type="number" data-bind="value: AnnualInterestCost" />
+                    @*@Html.EditorFor(property => property.AnnualInterestCost)*@
+                    <p data-bind="text: annualInterestCost">Interest</p>
                     <p>Purchase Price * Interest Rate</p>
 
                     <h3>Rent to cover interest</h3>
-                    @Html.EditorFor(property => property.RentToCoverInterest)
-                    <input type="number" data-bind="value: RentToCoverInterest" />
+                    @*@Html.EditorFor(property => property.RentToCoverInterest)*@
+                    <p  data-bind="text: calculatedRentToCoverInterest">Rent For Interest</p>
 
                     <h3>Surplus Per Week</h3>
-                    @Html.EditorFor(property => property.SurplusBeforeExpenses)
-                    <input type="number" data-bind="value: SurplusBeforeExpenses" />
+                    @*@Html.EditorFor(property => property.SurplusBeforeExpenses)*@
+                    <p data-bind="text: calculateSurplusBeforeExpenses">Surplus before Expenses</p>
                 </div>
             </div>
 
@@ -82,28 +86,28 @@
                     <h3>Expenses</h3>
 
                     <h3>Rates Annual</h3>
-                    @Html.EditorFor(property => property.InitialRates)
-                    <input type="number" data-bind="value: InitialRates" />
+                    @*@Html.EditorFor(property => property.InitialRates)*@
+                    <input type="number" data-bind="value: calculatedRates" />
                     <h3>Maintenance</h3>
-                    @Html.EditorFor(property => property.InitialRepairs)
-                    <input type="number" data-bind="value: InitialRepairs" />
+                    @*@Html.EditorFor(property => property.InitialRepairs)*@
+                    <input type="number" data-bind="value: calculatedMaintenance" />
                     <h3>Insurance</h3>
-                    @Html.EditorFor(property => property.InitialInsurance)
-                    <input type="number" data-bind="value: InitialInsurance" />
+                    @*@Html.EditorFor(property => property.InitialInsurance)*@
+                    <input type="number" data-bind="value: calculatedInsurance" />
                     <h3>Property Management (8%)</h3>
-                    @Html.EditorFor(property => property.PropertyManagementAmount)
-                    <input type="number" data-bind="value: PropertyManagementAmount" />
+                    @*@Html.EditorFor(property => property.PropertyManagementAmount)*@
+                    <input type="number" data-bind="value: calculatedPropertyManagement" />
                     <h3>Total Expenses</h3>
-                    @Html.EditorFor(property => property.TotalInitalExpense)
-                    <input type="number" data-bind="value: TotalInitalExpense" />
+                    @*@Html.EditorFor(property => property.TotalInitialExpense)*@
+                    <p data-bind="text: totalInitialExpense" />
 
                     <h3>Rent To Cover Mortgage and Expenses</h3>
-                    @Html.EditorFor(property => property.RentToCoverMortgageExpenses)
-                    <input type="number" data-bind="value: RentToCoverMortgageExpenses" />
+                   @* @Html.EditorFor(property => property.RentToCoverMortgageExpenses)*@
+                    <p data-bind="text: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</p>
 
                     <h3>Surplus After Expenses</h3>
-                    @Html.EditorFor(property => property.SurplusAfterExpense)
-                    <input type="number" data-bind="value: SurplusAfterExpense" />
+                    @*@Html.EditorFor(property => property.SurplusAfterExpense)*@
+                    <p data-bind="text: calculatedSurplusAfterExpenses">Surplus After Expenses</p>
                 </div>
             </div>
         </div>
@@ -136,6 +140,16 @@
     </div>
 </div>
 
+@functions {
+    string EncodeJSON(object value)
+    {
+        return Newtonsoft.Json.JsonConvert.SerializeObject(value, new Newtonsoft.Json.JsonSerializerSettings
+        {
+            ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+        });
+    }
+}
+
 @section scripts
 {
     @Scripts.Render("~/bundles/knockout");
@@ -143,26 +157,7 @@
     <script>
         $(".carousel").carousel('pause');
         $(function () {
-            var prop = PropertyDetailsViewModel;
-            prop.Title = "@Model.Title";
-            prop.Price = @Model.Price;
-            prop.InitialYield = @Model.InitialYieldPercentage;
-            prop.InitialVacancyRate = @Model.InitialVacancyRate;
-            prop.InitialRent = @Model.InitialRent;
-            prop.InitialInterestRate = @Model.InitialInterestRate;
-            prop.AnnualInterestCost = @Model.AnnualInterestCost;
-            prop.RentToCoverInterest = @Model.RentToCoverInterest;
-            prop.SurplusBeforeExpenses = @Model.SurplusBeforeExpenses;
-            prop.InitialRates = @Model.InitialRates;
-            prop.InitialRepairs = @Model.InitialRepairs;
-            prop.InitialInsurance = @Model.InitialInsurance;
-            prop.PropertyManagementAmount = @Model.PropertyManagementAmount;
-            prop.TotalInitalExpense = @Model.TotalInitalExpense;
-            prop.SurplusAfterExpense = @Model.SurplusAfterExpense;
-
-            ko.applyBindings(PropertyDetailsViewModel);
-            
-            
+            ko.applyBindings(new PropertyDetailsViewModel(@Html.Raw(EncodeJSON(Model))));
 
         });
 

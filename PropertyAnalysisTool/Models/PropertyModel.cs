@@ -226,7 +226,7 @@ namespace PropertyAnalysisTool.Models
             }
         }
 
-        public decimal TotalInitalExpense
+        public decimal TotalInitialExpense
         {
             get
             {
@@ -238,7 +238,7 @@ namespace PropertyAnalysisTool.Models
         {
             get
             {
-                return (TotalInitalExpense + AnnualInterestCost) / VacancyRate;
+                return (TotalInitialExpense + AnnualInterestCost) / VacancyRate;
             }
         }
 
