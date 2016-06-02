@@ -68,8 +68,7 @@
 
                     <h3>Yearly Interest</h3>
                     @*@Html.EditorFor(property => property.AnnualInterestCost)*@
-                    <p data-bind="text: annualInterestCost">Interest</p>
-                    <p>Purchase Price * Interest Rate</p>
+                    <p data-bind="text: calculatedAnnualInterestAmount">Interest</p>
 
                     <h3>Rent to cover interest</h3>
                     @*@Html.EditorFor(property => property.RentToCoverInterest)*@
@@ -99,7 +98,7 @@
                     <input type="number" data-bind="value: calculatedPropertyManagement" />
                     <h3>Total Expenses</h3>
                     @*@Html.EditorFor(property => property.TotalInitialExpense)*@
-                    <p data-bind="text: totalInitialExpense" />
+                    <p data-bind="text: calculatedTotalExpense" />
 
                     <h3>Rent To Cover Mortgage and Expenses</h3>
                    @* @Html.EditorFor(property => property.RentToCoverMortgageExpenses)*@

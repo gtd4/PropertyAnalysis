@@ -10,13 +10,10 @@
             },
             write: function (value) {
                 _vm.price(_vm.processWrittenValueInt(value));
-                var calcRent = _vm.UpdateRent();
-                _vm.initialRent(calcRent);
 
-                var calcPMCost = _vm.UpdatePropertyManagement();
-                _vm.propertyManagementAmount(calcPMCost);
+                _vm.UpdateRentAndPropertyManagementCosts();
 
-                _vm.proposedAnnualRentalIncome(_vm.CalculateAnnualRent());
+                
             },
 
         });
@@ -29,13 +26,8 @@
         write: function (value) {
             var type = true;
             _vm.initialYieldPercentage(_vm.processWrittenValueFloat(value), type);
-            var calcRent = _vm.UpdateRent(); 
-            _vm.initialRent(calcRent);
 
-            var calcPMCost = _vm.UpdatePropertyManagement();
-            _vm.propertyManagementAmount(calcPMCost);
-
-            _vm.proposedAnnualRentalIncome(_vm.CalculateAnnualRent());
+            _vm.UpdateRentAndPropertyManagementCosts();
         },
 
     });
@@ -67,12 +59,8 @@
                },
                write: function (value) {
                    _vm.initialVacancyRate(_vm.processWrittenValueInt(value));
-                   _vm.initialRent(_vm.UpdateRent());
 
-                   var calcPMCost = _vm.UpdatePropertyManagement();
-                   _vm.propertyManagementAmount(calcPMCost);
-
-                   _vm.proposedAnnualRentalIncome(_vm.CalculateAnnualRent());
+                   _vm.UpdateRentAndPropertyManagementCosts();
 
 
                },
@@ -92,6 +80,15 @@
             }
         });
 
+    _vm.calculatedAnnualInterestAmount = ko.computed(function () {
+
+        var annualInterest = Math.round(_vm.price() * _vm.initialInterestRate() / 100);
+        _vm.annualInterestCost(annualInterest);
+
+        return _vm.annualInterestCost();
+
+    });
+
     _vm.calculatedRentToCoverInterest = ko.computed(function () {
         return Math.round(_vm.annualInterestCost() / (52 - _vm.initialVacancyRate()));
     });
@@ -108,11 +105,9 @@
             write: function (value) {
 
                 _vm.initialRates(_vm.processWrittenValueInt(value));
-                debugger;
-                var totalExpense = _vm.UpdateTotalExpense();
-                _vm.totalInitialExpense(totalExpense);
 
-
+                //var totalExpense = _vm.UpdateTotalExpense();
+                //_vm.totalInitialExpense(totalExpense);
             }
         });
 
@@ -123,8 +118,9 @@
             },
             write: function (value) {
                 _vm.initialRepairs(_vm.processWrittenValueInt(value));
-                var totalExpense = _vm.UpdateTotalExpense();
-                _vm.totalInitialExpense(totalExpense);
+
+                //var totalExpense = _vm.UpdateTotalExpense();
+                //_vm.totalInitialExpense(totalExpense);
             },
         });
 
@@ -136,8 +132,8 @@
             write: function (value) {
                 _vm.initialInsurance(_vm.processWrittenValueInt(value));
 
-                var totalExpense = _vm.UpdateTotalExpense();
-                _vm.totalInitialExpense(totalExpense);
+                //var totalExpense = _vm.UpdateTotalExpense();
+                //_vm.totalInitialExpense(totalExpense);
 
             },
         });
@@ -151,10 +147,16 @@
             write: function (value) {
                 _vm.propertyManagementAmount(_vm.processWrittenValueInt(value));
 
-                var totalExpense = _vm.UpdateTotalExpense();
-                _vm.totalInitialExpense(totalExpense);
+                //var totalExpense = _vm.UpdateTotalExpense();
+                //_vm.totalInitialExpense(totalExpense);
             },
         });
+
+    _vm.calculatedTotalExpense = ko.computed(function () {
+
+        _vm.totalInitialExpense(_vm.initialRates() + _vm.initialRepairs() + _vm.initialInsurance() + _vm.propertyManagementAmount());
+        return _vm.totalInitialExpense();
+    });
 
     _vm.calculatedRentToCoverMortgageAndExpenses = ko.computed(function () {
         return Math.round((_vm.totalInitialExpense() + _vm.annualInterestCost()) / (52 - _vm.initialVacancyRate()));
@@ -196,6 +198,17 @@
     {
         var calcAR = _vm.initialRent() * (52 - _vm.initialVacancyRate());
         return calcAR;
+    }
+
+    _vm.UpdateRentAndPropertyManagementCosts = function()
+    {
+        var calcRent = _vm.UpdateRent();
+        _vm.initialRent(calcRent);
+
+        var calcPMCost = _vm.UpdatePropertyManagement();
+        _vm.propertyManagementAmount(calcPMCost);
+
+        _vm.proposedAnnualRentalIncome(_vm.CalculateAnnualRent());
     }
 
     return _vm;
