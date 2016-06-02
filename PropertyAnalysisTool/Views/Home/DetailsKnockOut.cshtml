@@ -41,20 +41,20 @@
                 <div class="thumbnail">
 
                     <h3>Purchase Price</h3>
-                    @*@Html.EditorFor(property => property.Price)*@
+
                     <input type="number" data-bind="value: calculatedPrice" />
 
 
                     <h3>Gross Yield %</h3>
-                    @*@Html.EditorFor(property => property.InitialYieldPercentage)*@
+
                     <input type="number" data-bind="value: calculatedYield" />
 
                     <h3>Vacancy Rate in Weeks</h3>
-                    @*@Html.EditorFor(property => property.InitialVacancyRate)*@
+
                     <input type="number" data-bind="value: calculatedVacancyRate" />
 
-                    <h3>Rent To Achieve @*(@Html.DisplayFor(property => property.ProposedAnnualRentalIncome))*@</h3>
-                    @*@Html.EditorFor(property => property.InitialRent)*@
+                    <h3>Rent To Achieve </h3>
+
                     <input type="number" data-bind="value: calculatedRent" />
 
                     <h3>Yearly Rent</h3>
@@ -65,23 +65,23 @@
                 <br />
                 <div class="thumbnail">
                     <h3>Interest Rate</h3>
-                    @*@Html.EditorFor(property => property.InitialInterestRate)*@
+
                     <input type="number" data-bind="value: calculatedInterestRate" />
 
                     <h3>Yearly Interest</h3>
-                    @*@Html.EditorFor(property => property.AnnualInterestCost)*@
+
                     <p>
                         <strong data-bind="text: calculatedAnnualInterestAmount">Interest</strong>
                     </p>
 
                     <h3>Rent to cover interest</h3>
-                    @*@Html.EditorFor(property => property.RentToCoverInterest)*@
+
                     <p>
                         <strong data-bind="text: calculatedRentToCoverInterest">Rent For Interest</strong>
                     </p>
 
                     <h3>Surplus Per Week</h3>
-                    @*@Html.EditorFor(property => property.SurplusBeforeExpenses)*@
+
                     <p>
                         <strong data-bind="text: calculateSurplusBeforeExpenses">Surplus before Expenses</strong>
                     </p>
@@ -93,31 +93,31 @@
                     <h3>Expenses</h3>
 
                     <h3>Rates Annual</h3>
-                    @*@Html.EditorFor(property => property.InitialRates)*@
+
                     <input type="number" data-bind="value: calculatedRates" />
                     <h3>Maintenance</h3>
-                    @*@Html.EditorFor(property => property.InitialRepairs)*@
+
                     <input type="number" data-bind="value: calculatedMaintenance" />
                     <h3>Insurance</h3>
-                    @*@Html.EditorFor(property => property.InitialInsurance)*@
+
                     <input type="number" data-bind="value: calculatedInsurance" />
                     <h3>Property Management (8%)</h3>
-                    @*@Html.EditorFor(property => property.PropertyManagementAmount)*@
+
                     <input type="number" data-bind="value: calculatedPropertyManagement" />
                     <h3>Total Expenses</h3>
-                    @*@Html.EditorFor(property => property.TotalInitialExpense)*@
+
                     <p>
                         <strong data-bind="text: calculatedTotalExpense"></strong>
                     </p>
 
                     <h3>Rent To Cover Mortgage and Expenses</h3>
-                    @* @Html.EditorFor(property => property.RentToCoverMortgageExpenses)*@
+
                     <p>
                         <strong data-bind="text: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</strong>
                     </p>
 
                     <h3>Surplus After Expenses</h3>
-                    @*@Html.EditorFor(property => property.SurplusAfterExpense)*@
+
                     <p>
                         <strong data-bind="text: calculatedSurplusAfterExpenses">Surplus After Expenses</strong>
                     </p>
