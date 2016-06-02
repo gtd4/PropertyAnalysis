@@ -12,8 +12,6 @@
                 _vm.price(_vm.processWrittenValueInt(value));
 
                 _vm.UpdateRentAndPropertyManagementCosts();
-
-                
             },
 
         });
@@ -48,8 +46,6 @@
 
             _vm.proposedAnnualRentalIncome(_vm.CalculateAnnualRent());
         }
-
-
     });
 
     _vm.calculatedVacancyRate = ko.pureComputed(
@@ -61,8 +57,6 @@
                    _vm.initialVacancyRate(_vm.processWrittenValueInt(value));
 
                    _vm.UpdateRentAndPropertyManagementCosts();
-
-
                },
            });
 
@@ -106,8 +100,6 @@
 
                 _vm.initialRates(_vm.processWrittenValueInt(value));
 
-                //var totalExpense = _vm.UpdateTotalExpense();
-                //_vm.totalInitialExpense(totalExpense);
             }
         });
 
@@ -119,8 +111,6 @@
             write: function (value) {
                 _vm.initialRepairs(_vm.processWrittenValueInt(value));
 
-                //var totalExpense = _vm.UpdateTotalExpense();
-                //_vm.totalInitialExpense(totalExpense);
             },
         });
 
@@ -131,10 +121,6 @@
             },
             write: function (value) {
                 _vm.initialInsurance(_vm.processWrittenValueInt(value));
-
-                //var totalExpense = _vm.UpdateTotalExpense();
-                //_vm.totalInitialExpense(totalExpense);
-
             },
         });
 
@@ -146,9 +132,6 @@
             },
             write: function (value) {
                 _vm.propertyManagementAmount(_vm.processWrittenValueInt(value));
-
-                //var totalExpense = _vm.UpdateTotalExpense();
-                //_vm.totalInitialExpense(totalExpense);
             },
         });
 
