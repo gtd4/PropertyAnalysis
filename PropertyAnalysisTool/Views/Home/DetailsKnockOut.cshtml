@@ -23,7 +23,7 @@
                     }
                 </div>
                 <h2>@Model.Title</h2>
-                
+
                 <p>Listed: @Model.ListedDate</p>
                 <p>@Model.FullAddress</p>
                 <p>@Model.PriceDisplay</p>
@@ -31,7 +31,7 @@
                 {
                     <p>Rooms: @Model.Bedrooms : @Model.Bathrooms</p>
                 }
-                
+
                 <p></p>
                 <p>@Model.Description</p>
             </div>
@@ -39,11 +39,11 @@
         <div class="col-lg-6">
             <div class="col-lg-6">
                 <div class="thumbnail">
-                    
+
                     <h3>Purchase Price</h3>
                     @*@Html.EditorFor(property => property.Price)*@
                     <input type="number" data-bind="value: calculatedPrice" />
-                    
+
 
                     <h3>Gross Yield %</h3>
                     @*@Html.EditorFor(property => property.InitialYieldPercentage)*@
@@ -58,7 +58,9 @@
                     <input type="number" data-bind="value: calculatedRent" />
 
                     <h3>Yearly Rent</h3>
-                    <p data-bind="text: proposedAnnualRentalIncome">Annual Rent</p>
+                    <p>
+                        <strong data-bind="text: proposedAnnualRentalIncome">Annual Rent</strong>
+                    </p>
                 </div>
                 <br />
                 <div class="thumbnail">
@@ -68,15 +70,21 @@
 
                     <h3>Yearly Interest</h3>
                     @*@Html.EditorFor(property => property.AnnualInterestCost)*@
-                    <p data-bind="text: calculatedAnnualInterestAmount">Interest</p>
+                    <p>
+                        <strong data-bind="text: calculatedAnnualInterestAmount">Interest</strong>
+                    </p>
 
                     <h3>Rent to cover interest</h3>
                     @*@Html.EditorFor(property => property.RentToCoverInterest)*@
-                    <p  data-bind="text: calculatedRentToCoverInterest">Rent For Interest</p>
+                    <p>
+                        <strong data-bind="text: calculatedRentToCoverInterest">Rent For Interest</strong>
+                    </p>
 
                     <h3>Surplus Per Week</h3>
                     @*@Html.EditorFor(property => property.SurplusBeforeExpenses)*@
-                    <p data-bind="text: calculateSurplusBeforeExpenses">Surplus before Expenses</p>
+                    <p>
+                        <strong data-bind="text: calculateSurplusBeforeExpenses">Surplus before Expenses</strong>
+                    </p>
                 </div>
             </div>
 
@@ -98,15 +106,21 @@
                     <input type="number" data-bind="value: calculatedPropertyManagement" />
                     <h3>Total Expenses</h3>
                     @*@Html.EditorFor(property => property.TotalInitialExpense)*@
-                    <p data-bind="text: calculatedTotalExpense" />
+                    <p>
+                        <strong data-bind="text: calculatedTotalExpense"></strong>
+                    </p>
 
                     <h3>Rent To Cover Mortgage and Expenses</h3>
-                   @* @Html.EditorFor(property => property.RentToCoverMortgageExpenses)*@
-                    <p data-bind="text: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</p>
+                    @* @Html.EditorFor(property => property.RentToCoverMortgageExpenses)*@
+                    <p>
+                        <strong data-bind="text: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</strong>
+                    </p>
 
                     <h3>Surplus After Expenses</h3>
                     @*@Html.EditorFor(property => property.SurplusAfterExpense)*@
-                    <p data-bind="text: calculatedSurplusAfterExpenses">Surplus After Expenses</p>
+                    <p>
+                        <strong data-bind="text: calculatedSurplusAfterExpenses">Surplus After Expenses</strong>
+                    </p>
                 </div>
             </div>
         </div>
