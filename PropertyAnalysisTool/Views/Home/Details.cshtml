@@ -23,14 +23,15 @@
                     }
                 </div>
                 <h2>@Model.Title</h2>
+
                 <p>Listed: @Model.ListedDate</p>
                 <p>@Model.FullAddress</p>
                 <p>@Model.PriceDisplay</p>
-                @if(!string.IsNullOrEmpty(Model.Bedrooms) || !string.IsNullOrEmpty(Model.Bathrooms))
+                @if (!string.IsNullOrEmpty(Model.Bedrooms) || !string.IsNullOrEmpty(Model.Bathrooms))
                 {
                     <p>Rooms: @Model.Bedrooms : @Model.Bathrooms</p>
                 }
-                @*<p>R.V: $@Model.RateableValue</p>*@
+
                 <p></p>
                 <p>@Model.Description</p>
             </div>
@@ -40,31 +41,51 @@
                 <div class="thumbnail">
 
                     <h3>Purchase Price</h3>
-                    @Html.EditorFor(property => property.Price)
 
-                    <h3>Gross Yield</h3>
-                    @Html.EditorFor(property => property.InitialYieldPercentage)
+                    <input type="number" data-bind="value: calculatedPrice, valueUpdate:'keyup'" />
+
+
+
+                    <h3>Gross Yield %</h3>
+
+                    <input type="number" data-bind="value: calculatedYield, valueUpdate:'keyup'" />
 
                     <h3>Vacancy Rate in Weeks</h3>
-                    @Html.EditorFor(property => property.InitialVacancyRate)
 
-                    <h3>Rent To Achieve @*(@Html.DisplayFor(property => property.ProposedAnnualRentalIncome))*@</h3>
-                    @Html.EditorFor(property => property.InitialRent)
+                    <input type="number" data-bind="value: calculatedVacancyRate, valueUpdate:'keyup'" />
+
+                    <h3>Rent To Achieve </h3>
+
+                    <input type="number" data-bind="value: calculatedRent, valueUpdate:'keyup'" />
+
+                    <h3>Yearly Rent</h3>
+                    <h4>
+                        <strong data-bind="text: proposedAnnualRentalIncome">Annual Rent</strong>
+                    </h4>
                 </div>
                 <br />
                 <div class="thumbnail">
                     <h3>Interest Rate</h3>
-                    @Html.EditorFor(property => property.InitialInterestRate)
+
+                    <input type="number" data-bind="value: calculatedInterestRate, valueUpdate:'keyup'" />
 
                     <h3>Yearly Interest</h3>
-                    @Html.EditorFor(property => property.AnnualInterestCost)
-                    <p>Purchase Price * Interest Rate</p>
+
+                    <h4>
+                        <strong data-bind="text: calculatedAnnualInterestAmount">Interest</strong>
+                    </h4>
 
                     <h3>Rent to cover interest</h3>
-                    @Html.EditorFor(property => property.RentToCoverInterest)
+
+                    <h4>
+                        <strong data-bind="text: calculatedRentToCoverInterest">Rent For Interest</strong>
+                    </h4>
 
                     <h3>Surplus Per Week</h3>
-                    @Html.EditorFor(property => property.SurplusBeforeExpenses)
+
+                    <h4>
+                        <strong data-bind="text: calculateSurplusBeforeExpenses">Surplus before Expenses</strong>
+                    </h4>
                 </div>
             </div>
 
@@ -73,21 +94,34 @@
                     <h3>Expenses</h3>
 
                     <h3>Rates Annual</h3>
-                    @Html.EditorFor(property => property.InitialRates)
+
+                    <input type="number" data-bind="value: calculatedRates, valueUpdate:'keyup'" />
                     <h3>Maintenance</h3>
-                    @Html.EditorFor(property => property.InitialRepairs)
+
+                    <input type="number" data-bind="value: calculatedMaintenance, valueUpdate:'keyup'" />
                     <h3>Insurance</h3>
-                    @Html.EditorFor(property => property.InitialInsurance)
+
+                    <input type="number" data-bind="value: calculatedInsurance, valueUpdate:'keyup'" />
                     <h3>Property Management (8%)</h3>
-                    @Html.EditorFor(property => property.PropertyManagementAmount)
+
+                    <input type="number" data-bind="value: calculatedPropertyManagement, valueUpdate:'keyup'" />
                     <h3>Total Expenses</h3>
-                    @Html.EditorFor(property => property.TotalInitalExpense)
+
+                    <h4>
+                        <strong data-bind="text: calculatedTotalExpense"></strong>
+                    </h4>
 
                     <h3>Rent To Cover Mortgage and Expenses</h3>
-                    @Html.EditorFor(property => property.RentToCoverMortgageExpenses)
+
+                    <h4>
+                        <strong data-bind="text: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</strong>
+                    </h4>
 
                     <h3>Surplus After Expenses</h3>
-                    @Html.EditorFor(property => property.SurplusAfterExpense)
+
+                    <h4>
+                        <strong data-bind="text: calculatedSurplusAfterExpenses">Surplus After Expenses</strong>
+                    </h4>
                 </div>
             </div>
         </div>
@@ -120,11 +154,27 @@
     </div>
 </div>
 
+@functions {
+    string EncodeJSON(object value)
+    {
+        return Newtonsoft.Json.JsonConvert.SerializeObject(value, new Newtonsoft.Json.JsonSerializerSettings
+        {
+            ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+        });
+    }
+}
+
 @section scripts
 {
-    @Scripts.Render("~/bundles/propertyCalculator")
+    @Scripts.Render("~/bundles/knockout");
+    @Scripts.Render("~/Scripts/ViewModel/PropertyDetailsViewModel.js");
     <script>
         $(".carousel").carousel('pause');
+        $(function () {
+            ko.applyBindings(new PropertyDetailsViewModel(@Html.Raw(EncodeJSON(Model))));
+
+        });
+
     </script>
 
 }

@@ -244,13 +244,7 @@ namespace PropertyAnalysisTool.Controllers
                 model = GetPropertyDetails(id, model, client);
             }
 
-            //var detailsVM = new DetailsViewModel();
-
-            //detailsVM.Title = model.Title;
-            //detailsVM.Price = model.Price;
-            //detailsVM.InitialYield = model.InitialYieldPercentage;
-
-            return View("DetailsKnockout", model);
+            return View(model);
         }
 
         private PropertyModel GetPropertyDetails(int id, PropertyModel model, HttpClient client)

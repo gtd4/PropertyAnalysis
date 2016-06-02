@@ -285,7 +285,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Details.Mobile.cshtml" />
-    <Content Include="Views\Home\DetailsKnockOut.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -307,7 +307,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\DetailsOld.cshtml" />
     <Content Include="Views\Shared\PropertyFilter.cshtml" />
     <Content Include="Views\Shared\PropertyFilterPartial.cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.cshtml" />
