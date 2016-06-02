@@ -58,7 +58,7 @@
                     <input type="number" data-bind="value: calculatedRent" />
 
                     <h3>Yearly Rent</h3>
-                    @Html.EditorFor(property => property.ProposedAnnualRentalIncome);
+                    <p data-bind="text: proposedAnnualRentalIncome">Annual Rent</p>
                 </div>
                 <br />
                 <div class="thumbnail">

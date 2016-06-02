@@ -12,6 +12,11 @@
                 _vm.price(_vm.processWrittenValueInt(value));
                 var calcRent = _vm.UpdateRent();
                 _vm.initialRent(calcRent);
+
+                var calcPMCost = _vm.UpdatePropertyManagement();
+                _vm.propertyManagementAmount(calcPMCost);
+
+                _vm.proposedAnnualRentalIncome(_vm.CalculateAnnualRent());
             },
 
         });
@@ -24,8 +29,13 @@
         write: function (value) {
             var type = true;
             _vm.initialYieldPercentage(_vm.processWrittenValueFloat(value), type);
-            var calcRent = _vm.UpdateRent(); //Math.round(_vm.initialYieldPercentage() / 100 * _vm.price() / (52 - _vm.initialVacancyRate()));
+            var calcRent = _vm.UpdateRent(); 
             _vm.initialRent(calcRent);
+
+            var calcPMCost = _vm.UpdatePropertyManagement();
+            _vm.propertyManagementAmount(calcPMCost);
+
+            _vm.proposedAnnualRentalIncome(_vm.CalculateAnnualRent());
         },
 
     });
@@ -41,6 +51,10 @@
             var calcYield = Math.round(_vm.initialRent() * (52 - _vm.initialVacancyRate()) / _vm.price() * 100);
             _vm.initialYieldPercentage(calcYield);
 
+            var calcPMCost = _vm.UpdatePropertyManagement();
+            _vm.propertyManagementAmount(calcPMCost);
+
+            _vm.proposedAnnualRentalIncome(_vm.CalculateAnnualRent());
         }
 
 
@@ -54,6 +68,11 @@
                write: function (value) {
                    _vm.initialVacancyRate(_vm.processWrittenValueInt(value));
                    _vm.initialRent(_vm.UpdateRent());
+
+                   var calcPMCost = _vm.UpdatePropertyManagement();
+                   _vm.propertyManagementAmount(calcPMCost);
+
+                   _vm.proposedAnnualRentalIncome(_vm.CalculateAnnualRent());
 
 
                },
@@ -168,7 +187,16 @@
         return Math.round(_vm.initialYieldPercentage() / 100 * _vm.price() / (52 - _vm.initialVacancyRate()));
     }
 
+    _vm.UpdatePropertyManagement = function()
+    {
+        return Math.round(_vm.CalculateAnnualRent() * 8 / 100);
+    }
 
+    _vm.CalculateAnnualRent = function()
+    {
+        var calcAR = _vm.initialRent() * (52 - _vm.initialVacancyRate());
+        return calcAR;
+    }
 
     return _vm;
 };
