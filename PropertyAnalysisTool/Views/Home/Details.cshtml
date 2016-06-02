@@ -123,6 +123,15 @@
                         <strong data-bind="text: calculatedSurplusAfterExpenses">Surplus After Expenses</strong>
                     </h4>
                 </div>
+
+                <div class="thumbnail">
+                    <h3>Annual Earnings</h3>
+
+                    <h4>
+                        <span data-bind="text: calculatedSurplusAfterExpenses() > 0 ? 'Profit' : 'Loss'"></span> of
+                        <strong data-bind="text: calculateAnnualEarnings">Annual Earnings</strong>
+                    </h4>
+                </div>
             </div>
         </div>
     </div>

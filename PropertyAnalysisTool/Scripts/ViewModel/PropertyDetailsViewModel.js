@@ -194,6 +194,11 @@
         return Math.round(_vm.initialRent() - _vm.calculatedRentToCoverMortgageAndExpenses());
     });
 
+    _vm.calculateAnnualEarnings = ko.computed(function () {
+
+        return _vm.proposedAnnualRentalIncome() - _vm.calculatedAnnualInterestAmount() - _vm.calculatedTotalExpense();
+    });
+
     /*
     Helper Method that Writes values as an int
     */
