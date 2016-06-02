@@ -42,49 +42,50 @@
 
                     <h3>Purchase Price</h3>
 
-                    <input type="number" data-bind="value: calculatedPrice" />
+                    <input type="number" data-bind="value: calculatedPrice, valueUpdate:'keyup'" />
+
 
 
                     <h3>Gross Yield %</h3>
 
-                    <input type="number" data-bind="value: calculatedYield" />
+                    <input type="number" data-bind="value: calculatedYield, valueUpdate:'keyup'" />
 
                     <h3>Vacancy Rate in Weeks</h3>
 
-                    <input type="number" data-bind="value: calculatedVacancyRate" />
+                    <input type="number" data-bind="value: calculatedVacancyRate, valueUpdate:'keyup'" />
 
                     <h3>Rent To Achieve </h3>
 
-                    <input type="number" data-bind="value: calculatedRent" />
+                    <input type="number" data-bind="value: calculatedRent, valueUpdate:'keyup'" />
 
                     <h3>Yearly Rent</h3>
-                    <p>
+                    <h4>
                         <strong data-bind="text: proposedAnnualRentalIncome">Annual Rent</strong>
-                    </p>
+                    </h4>
                 </div>
                 <br />
                 <div class="thumbnail">
                     <h3>Interest Rate</h3>
 
-                    <input type="number" data-bind="value: calculatedInterestRate" />
+                    <input type="number" data-bind="value: calculatedInterestRate, valueUpdate:'keyup'" />
 
                     <h3>Yearly Interest</h3>
 
-                    <p>
+                    <h4>
                         <strong data-bind="text: calculatedAnnualInterestAmount">Interest</strong>
-                    </p>
+                    </h4>
 
                     <h3>Rent to cover interest</h3>
 
-                    <p>
+                    <h4>
                         <strong data-bind="text: calculatedRentToCoverInterest">Rent For Interest</strong>
-                    </p>
+                    </h4>
 
                     <h3>Surplus Per Week</h3>
 
-                    <p>
+                    <h4>
                         <strong data-bind="text: calculateSurplusBeforeExpenses">Surplus before Expenses</strong>
-                    </p>
+                    </h4>
                 </div>
             </div>
 
@@ -94,33 +95,33 @@
 
                     <h3>Rates Annual</h3>
 
-                    <input type="number" data-bind="value: calculatedRates" />
+                    <input type="number" data-bind="value: calculatedRates, valueUpdate:'keyup'" />
                     <h3>Maintenance</h3>
 
-                    <input type="number" data-bind="value: calculatedMaintenance" />
+                    <input type="number" data-bind="value: calculatedMaintenance, valueUpdate:'keyup'" />
                     <h3>Insurance</h3>
 
-                    <input type="number" data-bind="value: calculatedInsurance" />
+                    <input type="number" data-bind="value: calculatedInsurance, valueUpdate:'keyup'" />
                     <h3>Property Management (8%)</h3>
 
-                    <input type="number" data-bind="value: calculatedPropertyManagement" />
+                    <input type="number" data-bind="value: calculatedPropertyManagement, valueUpdate:'keyup'" />
                     <h3>Total Expenses</h3>
 
-                    <p>
+                    <h4>
                         <strong data-bind="text: calculatedTotalExpense"></strong>
-                    </p>
+                    </h4>
 
                     <h3>Rent To Cover Mortgage and Expenses</h3>
 
-                    <p>
+                    <h4>
                         <strong data-bind="text: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</strong>
-                    </p>
+                    </h4>
 
                     <h3>Surplus After Expenses</h3>
 
-                    <p>
+                    <h4>
                         <strong data-bind="text: calculatedSurplusAfterExpenses">Surplus After Expenses</strong>
-                    </p>
+                    </h4>
                 </div>
             </div>
         </div>
