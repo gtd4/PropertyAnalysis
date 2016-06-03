@@ -156,3 +156,4 @@ C:\Users\gavin.downes\Source\Repos\PropertyAnalysis\PropertyAnalysisTool\bin\Mic
 C:\Users\gavin.downes\Source\Repos\PropertyAnalysis\PropertyAnalysisTool\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\gavin.downes\Source\Repos\PropertyAnalysis\PropertyAnalysisTool\obj\Debug\PropertyAnalysisTool.dll
 C:\Users\gavin.downes\Source\Repos\PropertyAnalysis\PropertyAnalysisTool\obj\Debug\PropertyAnalysisTool.pdb
+C:\Users\gavin.downes\Source\Repos\PropertyAnalysis\PropertyAnalysisTool\obj\Debug\PropertyAnalysisTool.csprojResolveAssemblyReference.cache

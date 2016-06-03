@@ -47,7 +47,7 @@
         },
         write: function (value) {
             _vm.initialRent(_vm.processWrittenValueInt(value));
-            var calcYield = Math.round(_vm.initialRent() * (52 - _vm.initialVacancyRate()) / _vm.price() * 100);
+            var calcYield = (_vm.initialRent() * (52 - _vm.initialVacancyRate()) / _vm.price() * 100).toFixed(2);
             _vm.initialYieldPercentage(calcYield);
 
             var calcPMCost = _vm.UpdatePropertyManagement();
