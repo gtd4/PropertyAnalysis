@@ -72,19 +72,19 @@
                     <h3>Yearly Interest</h3>
 
                     <h4>
-                        <strong data-bind="text: calculatedAnnualInterestAmount">Interest</strong>
+                        <strong data-bind="propertyCalculatorText: calculatedAnnualInterestAmount">Interest</strong>
                     </h4>
 
                     <h3>Rent to Cover Interest</h3>
 
                     <h4>
-                        <strong data-bind="text: calculatedRentToCoverInterest">Rent For Interest</strong>
+                        <strong data-bind="propertyCalculatorText: calculatedRentToCoverInterest">Rent For Interest</strong>
                     </h4>
 
                     <h3>Surplus Per Week</h3>
 
                     <h4>
-                        <strong data-bind="text: calculateSurplusBeforeExpenses">Surplus before Expenses</strong>
+                        <strong data-bind="propertyCalculatorText: calculateSurplusBeforeExpenses">Surplus before Expenses</strong>
                     </h4>
                 </div>
             </div>
@@ -108,13 +108,13 @@
                     <h3>Total Expenses</h3>
 
                     <h4>
-                        <strong data-bind="text: calculatedTotalExpense"></strong>
+                        <strong data-bind="propertyCalculatorText: calculatedTotalExpense"></strong>
                     </h4>
 
                     <h3>Rent To Cover Mortgage and Expenses</h3>
 
                     <h4>
-                        <strong data-bind="text: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</strong>
+                        <strong data-bind="propertyCalculatorText: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</strong>
                     </h4>
 
                     <h3>Weekly Earnings</h3>
@@ -125,7 +125,7 @@
                 </div>
                 <br />
                 <div class="thumbnail">
-                    <h3>Annual <span data-bind="text: calculatedSurplusAfterExpenses() > 0 ? 'Profit' : 'Loss'"></span> of</h3>
+                    <h3>Annual <span data-bind="text: calculatedSurplusAfterExpenses() >= 0 ? 'Profit' : 'Loss'"></span> of</h3>
 
                     <h4>
                         

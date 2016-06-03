@@ -196,7 +196,7 @@
 
     _vm.calculateAnnualEarnings = ko.computed(function () {
 
-        return _vm.proposedAnnualRentalIncome() - _vm.calculatedAnnualInterestAmount() - _vm.calculatedTotalExpense();
+        return _vm.calculatedSurplusAfterExpenses() * (52 - _vm.initialVacancyRate());
     });
 
     /*
