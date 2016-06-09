@@ -42,21 +42,21 @@
 
                     <h3>Purchase Price</h3>
 
-                    <input type="number" data-bind="value: calculatedPrice, valueUpdate:'keyup'" />
+                    <input type="text" data-bind="propertyCalculatorText: calculatedPrice" />
 
 
 
                     <h3>Gross Yield %</h3>
 
-                    <input type="number" data-bind="value: calculatedYield, valueUpdate:'keyup'" />
+                    <input type="number" data-bind="textInput: calculatedYield" />
 
                     <h3>Vacancy Rate in Weeks</h3>
 
-                    <input type="number" data-bind="value: calculatedVacancyRate, valueUpdate:'keyup'" />
+                    <input type="number" data-bind="textInput: calculatedVacancyRate" />
 
                     <h3>Rent To Achieve </h3>
 
-                    <input type="number" data-bind="value: calculatedRent, valueUpdate:'keyup'" />
+                    <input type="text" data-bind="propertyCalculatorText: calculatedRent" />
 
                     <h3>Yearly Rent</h3>
                     <h4>
@@ -67,7 +67,7 @@
                 <div class="thumbnail">
                     <h3>Interest Rate</h3>
 
-                    <input type="number" data-bind="value: calculatedInterestRate, valueUpdate:'keyup'" />
+                    <input type="number" data-bind="textInput: calculatedInterestRate" />
 
                     <h3>Yearly Interest</h3>
 
@@ -95,16 +95,16 @@
 
                     <h3>Rates Annual</h3>
 
-                    <input type="number" data-bind="value: calculatedRates, valueUpdate:'keyup'" />
+                    <input type="text" data-bind="propertyCalculatorText: calculatedRates" />
                     <h3>Maintenance</h3>
 
-                    <input type="number" data-bind="value: calculatedMaintenance, valueUpdate:'keyup'" />
+                    <input type="text" data-bind="propertyCalculatorText: calculatedMaintenance" />
                     <h3>Insurance</h3>
 
-                    <input type="number" data-bind="value: calculatedInsurance, valueUpdate:'keyup'" />
+                    <input type="text" data-bind="propertyCalculatorText: calculatedInsurance" />
                     <h3>Property Management (8%)</h3>
 
-                    <input type="number" data-bind="value: calculatedPropertyManagement, valueUpdate:'keyup'" />
+                    <input type="text" data-bind="propertyCalculatorText: calculatedPropertyManagement" />
                     <h3>Total Expenses</h3>
 
                     <h4>
