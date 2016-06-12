@@ -9,7 +9,7 @@
             var val = this.value.replace(/\D/g, '');
             //$(element).val("$" + );
             value(val);
-            debugger;
+
         })
     },
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
@@ -37,8 +37,3 @@
 
     }
 };
-
-//ko.bindingHandlers.valueUpdate.preprocess = function(value)
-//{
-//    return value;
-//}
