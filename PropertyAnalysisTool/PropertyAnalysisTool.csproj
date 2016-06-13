@@ -287,7 +287,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Details.Mobile.cshtml" />
+    <Content Include="Views\Home\Details.Mo1bile.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -319,6 +319,8 @@
     <Content Include="Views\Shared\PropertyImageLargeSliderPartial.cshtml" />
     <Content Include="Views\Shared\PropertyImageListingSliderPartial.cshtml" />
     <None Include="Views\Home\Index.Mobile.cshtml" />
+    <Content Include="Views\Shared\CalculatorPartial.cshtml" />
+    <Content Include="Views\Shared\PropertyDetailsInfoPartial.cshtml" />
     <None Include="Views\Shared\_Layout.Mobile.1cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.Mobile.cshtml" />
   </ItemGroup>

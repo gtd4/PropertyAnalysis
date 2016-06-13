@@ -5,36 +5,7 @@
 
 <div class="row">
     <div class="calculator-container">
-        <div class="col-sm-12 text-center">
-            <h1>Property Analysis M</h1>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="thumbnail details-mobile-container">
-
-                <div class="details-image-container">
-
-                    @if (Model.HasGallery)
-                    {
-                        Html.RenderPartial("PropertyImageLargeSliderPartial", Model.Photos);
-                    }
-                    else
-                    {
-                        <img alt="No Image Present" />
-                    }
-                </div>
-                <h2>@Model.Title</h2>
-                <p>Listed: @Model.ListedDate</p>
-                <p>@Model.FullAddress</p>
-                <p>@Model.PriceDisplay</p>
-                @if (!string.IsNullOrEmpty(Model.Bedrooms) || !string.IsNullOrEmpty(Model.Bathrooms))
-                {
-                    <p>Rooms: @Model.Bedrooms : @Model.Bathrooms</p>
-                }
-                @*<p>R.V: $@Model.RateableValue</p>*@
-                <p></p>
-                <p>@Model.Description</p>
-            </div>
-        </div>
+        @{ Html.RenderPartial("PropertyDetailsInfoPartial", Model);}
 
         <div class="col-sm-12 col-md-3">
 
@@ -123,7 +94,7 @@
                 </h4>
             </div>
         </div>
-</div>
+    </div>
 </div>
 
 <div class="row">
