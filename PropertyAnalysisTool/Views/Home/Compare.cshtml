@@ -11,13 +11,17 @@
     @foreach (var property in Model.Properties)
     {
         <div class="@containerSize">
-            @{Html.RenderPartial("ComparePropertyPartial", property);}
+            @{Html.RenderPartial("ComparePartial", property);}
+            @*<div class="col-lg-12">
+                @{Html.RenderPartial("PropertyDetailsInfoPartial", property);}
+            </div>
+            @{Html.RenderPartial("CompareCalculatorPartial", property);}*@
         </div>
                 }
 </div>
 
 @section scripts
 {
-@Scripts.Render("~/bundles/propertyCalculator")
+    @Scripts.Render("~/bundles/propertyCalculator")
 
 }

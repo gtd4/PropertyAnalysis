@@ -243,6 +243,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Js\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="bundleconfig.json" />
@@ -254,6 +255,8 @@
     <None Include="Properties\PublishProfiles\PropertyAnalysis.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Calculator\PropertyCalculator.js" />
+    <Content Include="Scripts\Components\PropertyCalculator\propertyCalculator.html" />
+    <Content Include="Scripts\Components\PropertyCalculator\propertyCalculator.js" />
     <Content Include="Scripts\CustomKOBindings\PropertyCalculatorBinding.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

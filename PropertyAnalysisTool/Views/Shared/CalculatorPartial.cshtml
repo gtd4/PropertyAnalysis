@@ -1,6 +1,4 @@
-﻿@model PropertyAnalysisTool.Models.PropertyModel
-
-<div class="row">
+﻿<div class="row">
 
     <div class="col-lg-6">
         <div class="thumbnail details-mobile-container">
@@ -8,8 +6,6 @@
             <h3>Purchase Price</h3>
 
             <input type="text" data-bind="propertyCalculatorText: calculatedPrice" />
-
-
 
             <h3>Gross Yield %</h3>
 
@@ -99,3 +95,29 @@
         </div>
     </div>
 </div>
+
+@functions {
+    string EncodeJSON(object value)
+    {
+        return Newtonsoft.Json.JsonConvert.SerializeObject(value, new Newtonsoft.Json.JsonSerializerSettings
+        {
+            ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+        });
+    }
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/knockout");
+    @Scripts.Render("~/Scripts/CustomKOBindings/PropertyCalculatorBinding.js");
+    @Scripts.Render("~/Scripts/ViewModel/PropertyDetailsViewModel.js");
+    <script>
+        $(".carousel").carousel('pause');
+        $(function () {
+            ko.applyBindings(new PropertyDetailsViewModel(@Html.Raw(EncodeJSON(Model))));
+
+        });
+
+    </script>
+
+}

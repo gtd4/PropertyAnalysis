@@ -4,13 +4,18 @@
 }
 
 <div class="row">
-    <div class="calculator-container">
-        @{Html.RenderPartial("PropertyDetailsInfoPartial", Model);}
 
+    <div class="calculator-container">
+        <div class="col-sm-12 text-center">
+            <h1>Property Analysis</h1>
+        </div>
         <div class="col-lg-6">
-            
-                @{Html.RenderPartial("CalculatorPartial", Model);}
-            
+            @{Html.RenderPartial("PropertyDetailsInfoPartial", Model);}
+        </div>
+        <div class="col-lg-6">
+
+            @{Html.RenderPartial("CalculatorPartial");}
+            <div data-bind="component: property-calculator"></div>
         </div>
     </div>
 </div>
@@ -53,9 +58,12 @@
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/knockout");
-    @Scripts.Render("~/Scripts/CustomKOBindings/PropertyCalculatorBinding.js");
-    @Scripts.Render("~/Scripts/ViewModel/PropertyDetailsViewModel.js");
+
+
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/Scripts/CustomKOBindings/PropertyCalculatorBinding.js")
+    @Scripts.Render("~/Scripts/ViewModel/PropertyDetailsViewModel.js")
+
     <script>
         $(".carousel").carousel('pause');
         $(function () {

@@ -33,6 +33,11 @@ namespace PropertyAnalysisTool
                 "~/Scripts/knockout-3.4.0.js", 
                 "~/Scripts/knockout.mapping-latest.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/require")
+               .Include(
+               "~/Scripts/require.js",
+               "~/Js/app.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/site.css"));
