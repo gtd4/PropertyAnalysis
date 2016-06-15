@@ -15,7 +15,7 @@
         <div class="col-lg-6">
 
             @{Html.RenderPartial("CalculatorPartial");}
-            <div data-bind="component: property-calculator"></div>
+            @*<div data-bind="component: property-calculator"></div>*@
         </div>
     </div>
 </div>
@@ -60,16 +60,30 @@
 {
 
 
-    @Scripts.Render("~/bundles/knockout")
-    @Scripts.Render("~/Scripts/CustomKOBindings/PropertyCalculatorBinding.js")
-    @Scripts.Render("~/Scripts/ViewModel/PropertyDetailsViewModel.js")
+    @*@Scripts.Render("~/bundles/knockout")
+        @Scripts.Render("~/Scripts/CustomKOBindings/PropertyCalculatorBinding.js")
+        @Scripts.Render("~/Scripts/ViewModel/PropertyDetailsViewModel.js")*@
 
     <script>
-        $(".carousel").carousel('pause');
-        $(function () {
-            ko.applyBindings(new PropertyDetailsViewModel(@Html.Raw(EncodeJSON(Model))));
+       
 
-        });
+
+        require([],
+            function () {
+                require(['/Scripts/CustomKOBindings/PropertyCalculatorBinding.js', '/Scripts/ViewModel/PropertyDetailsViewModel.js'],
+                    function (ko) {
+                        ko.applyBindings(new PropertyDetailsViewModel(@Html.Raw(EncodeJSON(Model))));
+                    }
+                );
+            }
+        );
+
+        //$(".carousel").carousel('pause');
+        //$(function () {
+
+
+        //});
+
 
     </script>
 
