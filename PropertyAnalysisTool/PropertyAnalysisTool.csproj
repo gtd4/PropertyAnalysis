@@ -273,6 +273,7 @@
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ViewModel\appViewModel.js" />
     <Content Include="Scripts\ViewModel\PropertyDetailsViewModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />

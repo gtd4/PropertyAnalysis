@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Home Page";
-var PageHeading = string.IsNullOrEmpty(Model.PropertyType) ? "Residential" : Model.PropertyType;
+    var PageHeading = string.IsNullOrEmpty(Model.PropertyType) ? "Residential" : Model.PropertyType;
 
 }
 
@@ -14,8 +14,8 @@ var PageHeading = string.IsNullOrEmpty(Model.PropertyType) ? "Residential" : Mod
 <div class="row">
     <input type="hidden" value="@Model.PropertyType" id="property-type" />
     <div class="col-lg-12 text-center"><h1>@PageHeading M</h1></div>
-    
-    
+
+
     <div class="col-sm-4 col-sm-push-8">
 
         <div class="row propertylist-container">
@@ -31,24 +31,25 @@ var PageHeading = string.IsNullOrEmpty(Model.PropertyType) ? "Residential" : Mod
             <div class="compare-list">
             </div>
             <button type="button" class="btn btn-primary compare-properties">Compare Properties</button>
-           
+
         </div>
         <br />
     </div>
-    
-    
-    
+
+
+
     <div class="col-sm-8 col-sm-pull-4" id="property-list">
         <div class="ajax-loader text-center"><img src="~/Content/Images/ajax-loader.gif" alt="loader img" /></div>
         @{Html.RenderPartial("PropertyListingPartial", Model);}
     </div>
-    
 
-    
+
+
 </div>
 
 @section scripts
 {
-   @Scripts.Render("~/bundles/propertyListings")
+
+    @Scripts.Render("~/bundles/propertyListings")
 
 }

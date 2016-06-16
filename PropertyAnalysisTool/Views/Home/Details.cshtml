@@ -65,25 +65,17 @@
         @Scripts.Render("~/Scripts/ViewModel/PropertyDetailsViewModel.js")*@
 
     <script>
-       
 
-
-        require([],
+        require(["app"],
             function () {
-                require(['/Scripts/CustomKOBindings/PropertyCalculatorBinding.js', '/Scripts/ViewModel/PropertyDetailsViewModel.js'],
-                    function (ko) {
+                requirejs(["jquery", "knockout", "viewModel/PropertyDetailsViewModel", "koBindings/PropertyCalculatorBinding"],
+                    function ($, ko, PropertyDetailsViewModel) {
+
                         ko.applyBindings(new PropertyDetailsViewModel(@Html.Raw(EncodeJSON(Model))));
                     }
                 );
             }
         );
-
-        //$(".carousel").carousel('pause');
-        //$(function () {
-
-
-        //});
-
 
     </script>
 
