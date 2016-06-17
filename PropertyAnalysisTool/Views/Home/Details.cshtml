@@ -1,6 +1,7 @@
 ﻿@model PropertyAnalysisTool.Models.PropertyModel
 @{
     ViewBag.Title = Model.Title;
+    //var modelJS = Html.Raw(EncodeJSON(Model);
 }
 
 <div class="row">
@@ -14,8 +15,15 @@
         </div>
         <div class="col-lg-6">
 
-            @{Html.RenderPartial("CalculatorPartial");}
+            @*@{Html.RenderPartial("CalculatorPartial");}*@
+            <property-calculator params="data: @Html.Raw(EncodeJSON(Model)).ToString()"></property-calculator>
             @*<div data-bind="component: property-calculator"></div>*@
+            @*<h4>First instance, without parameters</h4>
+            <message-editor></message-editor>
+
+            <h4>Second instance, passing parameters</h4>
+            <message-editor params='initialText: "Hello, world!"'></message-editor>*@
+
         </div>
     </div>
 </div>
@@ -58,25 +66,16 @@
 
 @section scripts
 {
-
-
-    @*@Scripts.Render("~/bundles/knockout")
-        @Scripts.Render("~/Scripts/CustomKOBindings/PropertyCalculatorBinding.js")
-        @Scripts.Render("~/Scripts/ViewModel/PropertyDetailsViewModel.js")*@
-
     <script>
-
         require(["app"],
-            function () {
-                requirejs(["jquery", "knockout", "viewModel/PropertyDetailsViewModel", "koBindings/PropertyCalculatorBinding"],
-                    function ($, ko, PropertyDetailsViewModel) {
-
-                        ko.applyBindings(new PropertyDetailsViewModel(@Html.Raw(EncodeJSON(Model))));
+                    function () {
+                        requirejs(["knockout", "components/PracticeComponent/practiceComponent", "components/PropertyCalculator/propertyCalculatorComponent", "koBindings/PropertyCalculatorBinding"],
+                            function (ko) {
+                                ko.applyBindings();
+                            })
+                        
                     }
                 );
-            }
-        );
-
     </script>
 
 }

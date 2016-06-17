@@ -12,17 +12,23 @@
     {
         <div class="@containerSize">
             @{Html.RenderPartial("ComparePropertyPartial", property);}
-            @*<div class="col-lg-12">
-                @{Html.RenderPartial("PropertyDetailsInfoPartial", property);}
-            </div>
-            @{Html.RenderPartial("CompareCalculatorPartial", property);}*@
+            
         </div>
                 }
 </div>
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/propertyCalculator")
+<script>
+        require(["app"],
+                    function () {
+                        requirejs(["knockout","components/PropertyCalculator/comparePropertyCalculatorComponent", "koBindings/PropertyCalculatorBinding"],
+                            function (ko) {
+                                ko.applyBindings();
+                            })
+
+                    }
+                );
+</script>
 
 }

@@ -4,11 +4,11 @@
 'koMapping'
 ],
 function (ko, koMap) {
-    var PropertyDetailsViewModel = function (data) {
+    var PropertyDetailsViewModel = function (params) {
         var _vm = {};
 
         //ko.mapping = koMapping;
-        koMap.fromJS(data, null, _vm);
+        koMap.fromJS(params.data, null, _vm);
 
         /*
         Price of Property. Editable

@@ -1,0 +1,98 @@
+﻿<h1>Component</h1>
+<div class="row">
+
+    <div class="col-lg-6">
+        <div class="thumbnail details-mobile-container">
+
+            <h3>Purchase Price</h3>
+
+            <input type="text" data-bind="propertyCalculatorText: calculatedPrice" />
+
+            <h3>Gross Yield %</h3>
+
+            <input type="number" data-bind="textInput: calculatedYield" />
+
+            <h3>Vacancy Rate in Weeks</h3>
+
+            <input type="number" data-bind="textInput: calculatedVacancyRate" />
+
+            <h3>Rent To Achieve </h3>
+
+            <input type="text" data-bind="propertyCalculatorText: calculatedRent" />
+
+            <h3>Yearly Rent</h3>
+            <h4>
+                <strong data-bind="propertyCalculatorText: proposedAnnualRentalIncome">Annual Rent</strong>
+            </h4>
+        </div>
+
+        <div class="thumbnail details-mobile-container">
+            <h3>Interest Rate</h3>
+
+            <input type="number" data-bind="textInput: calculatedInterestRate" />
+
+            <h3>Yearly Interest</h3>
+
+            <h4>
+                <strong data-bind="propertyCalculatorText: calculatedAnnualInterestAmount">Interest</strong>
+            </h4>
+
+            <h3>Rent to Cover Interest</h3>
+
+            <h4>
+                <strong data-bind="propertyCalculatorText: calculatedRentToCoverInterest">Rent For Interest</strong>
+            </h4>
+
+            <h3>Surplus Per Week</h3>
+
+            <h4>
+                <strong data-bind="propertyCalculatorText: calculateSurplusBeforeExpenses">Surplus before Expenses</strong>
+            </h4>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="thumbnail details-mobile-container">
+            <h3>Expenses</h3>
+
+            <h3>Rates Annual</h3>
+
+            <input type="text" data-bind="propertyCalculatorText: calculatedRates" />
+            <h3>Maintenance</h3>
+
+            <input type="text" data-bind="propertyCalculatorText: calculatedMaintenance" />
+            <h3>Insurance</h3>
+
+            <input type="text" data-bind="propertyCalculatorText: calculatedInsurance" />
+            <h3>Property Management (8%)</h3>
+
+            <input type="text" data-bind="propertyCalculatorText: calculatedPropertyManagement" />
+            <h3>Total Expenses</h3>
+
+            <h4>
+                <strong data-bind="propertyCalculatorText: calculatedTotalExpense"></strong>
+            </h4>
+
+            <h3>Rent To Cover Mortgage and Expenses</h3>
+
+            <h4>
+                <strong data-bind="propertyCalculatorText: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</strong>
+            </h4>
+
+            <h3>Weekly Earnings</h3>
+
+            <h4>
+                <strong data-bind="propertyCalculatorText: calculatedSurplusAfterExpenses">Surplus After Expenses</strong>
+            </h4>
+        </div>
+
+        <div class="thumbnail details-mobile-container">
+            <h3>Annual <span data-bind="text: calculatedSurplusAfterExpenses() >= 0 ? 'Profit' : 'Loss'"></span> of</h3>
+
+            <h4>
+
+                <strong data-bind="propertyCalculatorText: calculateAnnualEarnings">Annual Earnings</strong>
+            </h4>
+        </div>
+    </div>
+</div>

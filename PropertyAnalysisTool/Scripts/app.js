@@ -18,8 +18,8 @@
             bootstrap: '/scripts/bootstrap',
             viewModel: '/scripts/ViewModel',
             koBindings: '/scripts/CustomKOBindings',
-
-
+            text: '/scripts/text',
+            components: '/scripts/Components'
         },
     });
 
