@@ -23,8 +23,8 @@
         },
     });
 
-requirejs(['jquery'],
+requirejs(['jquery', 'bootstrap'],
     function ($) {
 
-        var hello = "";
+       
     });

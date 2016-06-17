@@ -25,10 +25,21 @@
                         requirejs(["knockout","components/PropertyCalculator/comparePropertyCalculatorComponent", "koBindings/PropertyCalculatorBinding"],
                             function (ko) {
                                 ko.applyBindings();
+
+                                //Dynamically set the height of the property info blocks to be the same.
+                                var max = -1;
+                                $(".details-info").each(function () {
+                                    var h = $(this).height();
+                                    max = h > max ? h : max;
+                                });
+
+                                $(".details-info").height(max);
                             })
 
                     }
                 );
+
+        
 </script>
 
 }
