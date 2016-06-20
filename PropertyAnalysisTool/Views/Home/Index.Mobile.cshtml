@@ -50,6 +50,18 @@
 @section scripts
 {
 
-    @Scripts.Render("~/bundles/propertyListings")
+    <script>
+
+        require(["app"],
+       function () {
+           requirejs(["jquery", '/scripts/PropertyListings/PropertyListings.js'],
+           function ($) {
+
+           }
+           );
+       }
+       );
+
+    </script>
 
 }

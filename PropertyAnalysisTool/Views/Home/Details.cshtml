@@ -10,21 +10,15 @@
         <div class="col-sm-12 text-center">
             <h1>Property Analysis</h1>
         </div>
+        
         <div class="col-lg-6">
             @{Html.RenderPartial("PropertyDetailsInfoPartial", Model);}
         </div>
+        
         <div class="col-lg-6">
-
-            @*@{Html.RenderPartial("CalculatorPartial");}*@
             <property-calculator params="data: @Html.Raw(EncodeJSON(Model)).ToString()"></property-calculator>
-            @*<div data-bind="component: property-calculator"></div>*@
-            @*<h4>First instance, without parameters</h4>
-            <message-editor></message-editor>
-
-            <h4>Second instance, passing parameters</h4>
-            <message-editor params='initialText: "Hello, world!"'></message-editor>*@
-
         </div>
+
     </div>
 </div>
 <div class="row">
@@ -73,7 +67,7 @@
                             function (ko) {
                                 ko.applyBindings();
                             })
-                        
+
                     }
                 );
     </script>
