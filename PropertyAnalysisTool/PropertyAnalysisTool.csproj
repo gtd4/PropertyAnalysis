@@ -297,7 +297,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Details.Mo1bile.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -320,7 +319,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\DetailsOld.cshtml" />
     <Content Include="Views\Shared\PropertyFilter.cshtml" />
     <Content Include="Views\Shared\PropertyFilterPartial.cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.cshtml" />
@@ -328,10 +326,9 @@
     <Content Include="Views\Shared\ComparePropertyPartial.cshtml" />
     <Content Include="Views\Shared\PropertyImageLargeSliderPartial.cshtml" />
     <Content Include="Views\Shared\PropertyImageListingSliderPartial.cshtml" />
-    <None Include="Views\Home\Index.Mobile.cshtml" />
+    <Content Include="Views\Home\Index.Mobile.cshtml" />
     <Content Include="Views\Shared\CalculatorPartial.cshtml" />
     <Content Include="Views\Shared\PropertyDetailsInfoPartial.cshtml" />
-    <None Include="Views\Shared\_Layout.Mobile.1cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
