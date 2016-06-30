@@ -232,6 +232,7 @@ function (ko, koMap) {
 
             var splitVal = value.split('.');
 
+            //make sure there is only 1 decimal point
             if (splitVal.length > 2)
             {
                 value = splitVal[0] + "." + splitVal[1];
