@@ -185,12 +185,24 @@ function (ko, koMap) {
                 },
             });
 
+        _vm.calculatedBodyCorpFee = ko.pureComputed(
+            {
+                read: function () {
+
+                    return _vm.bodyCorpFee();
+                },
+                write: function (value) {
+                    _vm.bodyCorpFee(value);
+                    _vm.bodyCorpFee(_vm.processWrittenValueInt(value));
+                },
+            });
+
         /*
         Total of all expenses (Rates, Maintenance, Insurance, Property Management)
         */
         _vm.calculatedTotalExpense = ko.computed(function () {
 
-            _vm.totalInitialExpense(_vm.initialRates() + _vm.initialRepairs() + _vm.initialInsurance() + _vm.propertyManagementAmount());
+            _vm.totalInitialExpense(_vm.initialRates() + _vm.initialRepairs() + _vm.initialInsurance() + _vm.propertyManagementAmount() + _vm.bodyCorpFee());
             return _vm.totalInitialExpense();
         });
 

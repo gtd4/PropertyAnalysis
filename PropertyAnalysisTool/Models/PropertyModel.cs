@@ -226,6 +226,14 @@ namespace PropertyAnalysisTool.Models
             }
         }
 
+        public decimal BodyCorpFee
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
         public decimal TotalInitialExpense
         {
             get
