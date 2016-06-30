@@ -230,6 +230,13 @@ function (ko, koMap) {
 
             value = value.replace(/[^0-9.]/g, "");
 
+            var splitVal = value.split('.');
+
+            if (splitVal.length > 2)
+            {
+                value = splitVal[0] + "." + splitVal[1];
+            }
+
             return isNaN(value) ? 0 : value;
         }
 
