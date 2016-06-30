@@ -20,7 +20,7 @@
 
                 var value = ko.unwrap(valueAccessor());
 
-                value = parseInt(value);
+                value = parseInt(value, 10);
 
                 value = isNaN(value) ? 0 : value;
 

@@ -218,7 +218,7 @@ function (ko, koMap) {
         */
         _vm.processWrittenValueInt = function (value) {
 
-            value = parseInt(value);
+            value = parseInt(value, 10);
 
             return isNaN(value) ? 0 : value;
         };
@@ -228,7 +228,7 @@ function (ko, koMap) {
         */
         _vm.processWrittenValueFloat = function (value) {
 
-            value = parseFloat(value);
+            value = value.replace(/[^0-9.]/g, "");
 
             return isNaN(value) ? 0 : value;
         }
