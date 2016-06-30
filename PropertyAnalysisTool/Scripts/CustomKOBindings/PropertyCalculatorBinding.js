@@ -1,40 +1,33 @@
 ﻿define(['knockout', 'jquery'],
-    function (ko) {
+    function (ko) {// Look into making it more generic,
         ko.bindingHandlers.propertyCalculatorText = {
             init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-                // This will be called when the binding is first applied to an element
-                // Set up any initial state, event handlers, etc. here
+                var wrapper = ko.computed({
+                    read: function () {
+                        return "$" + ko.unwrap(valueAccessor());
+                    },
+                    write: function (value) {
+                        var numeric = parseInt(value.replace(/\$/g, ""));
 
-                $(element).keyup(function (e) {
-                    var value = valueAccessor();
-                    var val = this.value.replace(/\D/g, '');
-                    //$(element).val("$" + );
-                    value(val);
+                        valueAccessor()(isNaN(numeric) ? 0 : numeric);
+                        valueAccessor().valueHasMutated();
+                    }
+                }).extend({ notify: 'always' });
 
-                })
-            },
-            update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-                // This will be called once when the binding is first applied to an element,
-                // and again whenever any observables/computeds that are accessed change
-                // Update the DOM element based on the supplied values here.
-
-                var value = ko.unwrap(valueAccessor());
-
-                value = parseInt(value, 10);
-
-                value = isNaN(value) ? 0 : value;
+                var colourComputed = ko.computed(function () {
+                    return ko.unwrap(valueAccessor()) < 0 ? 'red' : 'black';
+                });
 
                 if (element.localName === "input") {
-                    $(element).val('$' + value.toString());
-                }
-                else {
-                    $(element).text('$' + value.toString()).css('color', 'black');
-                }
-
-                if (value < 0) {
-                    $(element).css('color', 'red');
+                    ko.applyBindingsToNode(element, { value: wrapper, valueUpdate: 'keyup' });
+                } else {
+                    ko.applyBindingsToNode(element, { text: wrapper, style: { color: colourComputed } });
                 }
 
+                
+            },
+            update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+               
             }
         };
 
