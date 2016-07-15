@@ -26,17 +26,21 @@
         </div>
 
         <div class="thumbnail details-mobile-container">
+            <h3>Loan Type</h3>
+            <select data-bind="options: loanType, value: selectedLoanType">
+               
+            </select>
             <h3>Interest Rate</h3>
 
             <input type="text" data-bind="textInput: calculatedInterestRate" />
 
-            <h3>Yearly Interest</h3>
+            <h3>Yearly Loan Payment</h3>
 
             <h4>
-                <strong data-bind="propertyCalculatorText: calculatedAnnualInterestAmount">Interest</strong>
+                <strong data-bind="propertyCalculatorText: calculatedAnnualLoanPayment">Interest</strong>
             </h4>
 
-            <h3>Rent to Cover Interest</h3>
+            <h3>Loan Payment</h3>
 
             <h4>
                 <strong data-bind="propertyCalculatorText: calculatedRentToCoverInterest">Rent For Interest</strong>

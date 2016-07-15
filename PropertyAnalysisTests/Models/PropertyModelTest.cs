@@ -38,7 +38,7 @@ namespace PropertyAnalysisTests.Models
         }
 
         [TestMethod]
-        public void TestAnnualInterestCostEqual()
+        public void TestAnnualLoanCostEqual()
         {
             var prop = new PropertyModel();
             var initialInterestRate = prop.InitialInterestRate;
@@ -47,11 +47,11 @@ namespace PropertyAnalysisTests.Models
 
             var initAnnInterest = price * initialInterestRate / 100;
 
-            Assert.AreEqual(initAnnInterest, prop.AnnualInterestCost);
+            Assert.AreEqual(initAnnInterest, prop.AnnualLoanCost);
         }
 
         [TestMethod]
-        public void TestAnnualInterestCostNotEqual()
+        public void TestAnnualLoanCostNotEqual()
         {
             var prop = new PropertyModel();
             var initialInterestRate = prop.InitialInterestRate;
@@ -60,7 +60,7 @@ namespace PropertyAnalysisTests.Models
 
             var initAnnInterest = price * initialInterestRate / 100;
 
-            Assert.AreNotEqual(initAnnInterest, prop.AnnualInterestCost);
+            Assert.AreNotEqual(initAnnInterest, prop.AnnualLoanCost);
         }
     }
 }

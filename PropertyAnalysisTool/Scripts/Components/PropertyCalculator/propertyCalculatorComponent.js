@@ -7,6 +7,5 @@
             template: template,
         });
 
-        //ko.applyBindings();
     })
 

@@ -162,11 +162,11 @@ namespace PropertyAnalysisTool.Models
             }
         }
 
-        public decimal AnnualInterestCost
+        public decimal AnnualLoanCost
         {
             get
             {
-                return Price * InitialInterestRate / 100;
+                return 0;
             }
         }
 
@@ -174,7 +174,7 @@ namespace PropertyAnalysisTool.Models
         {
             get
             {
-                return AnnualInterestCost / (VacancyRate);
+                return AnnualLoanCost / (VacancyRate);
             }
         }
 
@@ -246,7 +246,7 @@ namespace PropertyAnalysisTool.Models
         {
             get
             {
-                return (TotalInitialExpense + AnnualInterestCost) / VacancyRate;
+                return (TotalInitialExpense + AnnualLoanCost) / VacancyRate;
             }
         }
 

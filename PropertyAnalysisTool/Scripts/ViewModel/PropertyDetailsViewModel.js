@@ -10,6 +10,10 @@ function (ko, koMap) {
         //ko.mapping = koMapping;
         koMap.fromJS(params.data, null, _vm);
 
+        _vm.loanType = ko.observableArray(["Principal and Interest", "Interest Only"]);
+        _vm.selectedLoanType = ko.observable();
+
+
         /*
         Price of Property. Editable
         */
@@ -95,20 +99,30 @@ function (ko, koMap) {
                     _vm.initialInterestRate(value);
                     _vm.initialInterestRate(_vm.processWrittenValueFloat(value), true);
                     var annualInterest = Math.round(_vm.price() * _vm.initialInterestRate() / 100);
-                    _vm.annualInterestCost(annualInterest);
+                    _vm.annualLoanCost(annualInterest);
 
                 }
             });
 
-        /*
-        The annual cost of interest on loan.
-        */
-        _vm.calculatedAnnualInterestAmount = ko.computed(function () {
 
-            var annualInterest = Math.round(_vm.price() * _vm.initialInterestRate() / 100);
-            _vm.annualInterestCost(annualInterest);
+        _vm.calculatedAnnualLoanPayment = ko.computed(function () {
+            var loanType = _vm.selectedLoanType();
+            var annualLoanPayment;
+            var loanTerm = 30;
+            var interestRate = _vm.initialInterestRate() / 100;
+            var topline = interestRate * Math.pow((1 + interestRate), loanTerm);
+            var bottomline = Math.pow((1 + interestRate), loanTerm) - 1;
 
-            return _vm.annualInterestCost();
+            if (loanType == "Interest Only") {
+                annualLoanPayment = Math.round(_vm.price() * interestRate);
+
+            }
+            else {
+                annualLoanPayment = _vm.price() * (topline / bottomline);
+            }
+
+            _vm.annualLoanCost(Math.round(annualLoanPayment));
+            return _vm.annualLoanCost();
 
         });
 
@@ -116,7 +130,9 @@ function (ko, koMap) {
         How much rent needed to cover interest.
         */
         _vm.calculatedRentToCoverInterest = ko.computed(function () {
-            return Math.round(_vm.annualInterestCost() / (52 - _vm.initialVacancyRate()));
+
+            return Math.round(_vm.annualLoanCost() / (52 - _vm.initialVacancyRate()));
+
         });
 
         /*
@@ -210,7 +226,7 @@ function (ko, koMap) {
         Amount of rent needed to cover both the interest of the loan and the expenses
         */
         _vm.calculatedRentToCoverMortgageAndExpenses = ko.computed(function () {
-            return Math.round((_vm.totalInitialExpense() + _vm.annualInterestCost()) / (52 - _vm.initialVacancyRate()));
+            return Math.round((_vm.totalInitialExpense() + _vm.annualLoanCost()) / (52 - _vm.initialVacancyRate()));
         });
 
         /*
@@ -245,8 +261,7 @@ function (ko, koMap) {
             var splitVal = value.split('.');
 
             //make sure there is only 1 decimal point
-            if (splitVal.length > 2)
-            {
+            if (splitVal.length > 2) {
                 value = splitVal[0] + "." + splitVal[1];
             }
 
@@ -289,6 +304,7 @@ function (ko, koMap) {
         }
 
         return _vm;
+        debugger;
     };
 
     return PropertyDetailsViewModel;
