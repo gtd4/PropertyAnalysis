@@ -27,14 +27,14 @@
 
         <div class="thumbnail details-mobile-container">
             <h3>Loan Type</h3>
-            <select data-bind="options: loanType, value: selectedLoanType">
-               
-            </select>
+            <select data-bind="options: loanType, value: selectedLoanType"></select>
 
-            <h3>Loan Term</h3>
-            <select data-bind="options: loanTerm, value: selectedLoanTerm"></select>
+            <div data-bind="fadeVisible: showTermDropDown">
+                <h3>Loan Term</h3>
+                <select data-bind="options: loanTerm, value: selectedLoanTerm"></select>
+            </div>
+
             <h3>Interest Rate</h3>
-
             <input type="text" data-bind="textInput: calculatedInterestRate" />
 
             <h3>Yearly Loan Payment</h3>

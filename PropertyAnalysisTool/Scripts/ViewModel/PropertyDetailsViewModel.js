@@ -16,6 +16,10 @@ function (ko, koMap) {
         _vm.loanTerm = ko.observableArray(SetLoanTerm());
         _vm.selectedLoanTerm = ko.observable(30);
 
+        _vm.showTermDropDown = ko.computed(function()
+        {
+            return _vm.selectedLoanType() == "Principal and Interest";
+        })
 
         /*
         Price of Property. Editable
