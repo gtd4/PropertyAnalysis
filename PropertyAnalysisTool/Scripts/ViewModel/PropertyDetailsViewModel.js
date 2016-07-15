@@ -13,6 +13,9 @@ function (ko, koMap) {
         _vm.loanType = ko.observableArray(["Principal and Interest", "Interest Only"]);
         _vm.selectedLoanType = ko.observable();
 
+        _vm.loanTerm = ko.observableArray(SetLoanTerm());
+        _vm.selectedLoanTerm = ko.observable(30);
+
 
         /*
         Price of Property. Editable
@@ -108,7 +111,7 @@ function (ko, koMap) {
         _vm.calculatedAnnualLoanPayment = ko.computed(function () {
             var loanType = _vm.selectedLoanType();
             var annualLoanPayment;
-            var loanTerm = 30;
+            var loanTerm = _vm.selectedLoanTerm();
             var interestRate = _vm.initialInterestRate() / 100;
             var topline = interestRate * Math.pow((1 + interestRate), loanTerm);
             var bottomline = Math.pow((1 + interestRate), loanTerm) - 1;
@@ -309,6 +312,17 @@ function (ko, koMap) {
 
     return PropertyDetailsViewModel;
 });
+
+function SetLoanTerm()
+{
+    var termArray = [];
+    for(var i = 1; i <= 30; i++)
+    {
+        termArray[i - 1] = i
+    }
+
+    return termArray;
+}
 
 
 

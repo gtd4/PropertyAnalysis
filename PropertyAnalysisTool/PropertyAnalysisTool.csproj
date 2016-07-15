@@ -254,7 +254,6 @@
     <Content Include="Content\custom-font-icons-master\custom-font-icons-master\README.md" />
     <None Include="Properties\PublishProfiles\PropertyAnalysis.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Calculator\PropertyCalculator.js" />
     <Content Include="Scripts\Components\PropertyCalculator\ComparePropertyCalculatorTemplate.html" />
     <Content Include="Scripts\Components\PropertyCalculator\comparePropertyCalculatorComponent.js" />
     <Content Include="Scripts\Components\PropertyCalculator\propertyCalculatorComponent.js" />
