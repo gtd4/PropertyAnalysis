@@ -224,6 +224,7 @@
     <Compile Include="Models\PropertyModel.cs" />
     <Compile Include="Models\PropertySliderViewModel.cs" />
     <Compile Include="Models\Suburb.cs" />
+    <Compile Include="Models\TradeMeDTO.cs" />
     <Compile Include="Models\TradeMeLocationModel.cs" />
     <Compile Include="Models\TradeMePropertyResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

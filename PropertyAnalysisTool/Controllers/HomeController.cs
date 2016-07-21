@@ -255,8 +255,9 @@ namespace PropertyAnalysisTool.Controllers
             {
                 string responseString = response.Content.ReadAsStringAsync().Result;
 
-                model = JsonConvert.DeserializeObject<PropertyModel>(responseString);
-                model.DetailsJson = responseString;
+                var tradeMeDto = JsonConvert.DeserializeObject<TradeMeDTO>(responseString);
+
+                model = tradeMeDto.ToPropertyModel(model);
 
                 foreach (var attr in model.Attributes)
                 {
@@ -282,6 +283,7 @@ namespace PropertyAnalysisTool.Controllers
             //Get upto 3 properties and compare their values side by side
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
             var model = new ComparePropertyModel();
+            var prop = new PropertyModel();
 
             using (var client = new HttpClient())
             {
@@ -295,7 +297,8 @@ namespace PropertyAnalysisTool.Controllers
                     {
                         string responseString = response.Content.ReadAsStringAsync().Result;
 
-                        var prop = JsonConvert.DeserializeObject<PropertyModel>(responseString);
+                        var tradeMeDTO = JsonConvert.DeserializeObject<TradeMeDTO>(responseString);
+                        prop = tradeMeDTO.ToPropertyModel(prop);
 
                         model.Properties.Add(prop);
                     }

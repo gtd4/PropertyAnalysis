@@ -5,19 +5,19 @@
 
             <h3>Purchase Price</h3>
 
-            <input type="text" data-bind="propertyCalculatorText: calculatedPrice" />
+            <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedPrice" />
 
             <h3>Gross Yield %</h3>
 
-            <input type="text" data-bind="textInput: calculatedYield" />
+            <input class="form-control" type="text" data-bind="textInput: calculatedYield" />
 
             <h3>Vacancy Rate in Weeks</h3>
 
-            <input type="number" data-bind="textInput: calculatedVacancyRate" />
+            <input class="form-control" type="number" data-bind="textInput: calculatedVacancyRate" />
 
             <h3>Rent To Achieve </h3>
 
-            <input type="text" data-bind="propertyCalculatorText: calculatedRent" />
+            <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedRent" />
 
             <h3>Yearly Rent</h3>
             <h4>
@@ -27,15 +27,15 @@
 
         <div class="thumbnail details-mobile-container">
             <h3>Loan Type</h3>
-            <select data-bind="options: loanType, value: selectedLoanType"></select>
+            <select class="form-control" data-bind="options: loanType, value: selectedLoanType"></select>
 
             <div data-bind="fadeVisible: showTermDropDown">
                 <h3>Loan Term</h3>
-                <select data-bind="options: loanTerm, value: selectedLoanTerm"></select>
+                <select class="form-control" data-bind="options: loanTerm, value: selectedLoanTerm"></select>
             </div>
 
             <h3>Interest Rate</h3>
-            <input type="text" data-bind="textInput: calculatedInterestRate" />
+            <input class="form-control" type="text" data-bind="textInput: calculatedInterestRate" />
 
             <h3>Yearly Loan Payment</h3>
 
@@ -59,24 +59,23 @@
 
     <div class="col-lg-6">
         <div class="thumbnail details-mobile-container">
-            <h3>Expenses</h3>
 
             <h3>Rates Annual</h3>
 
-            <input type="text" data-bind="propertyCalculatorText: calculatedRates" />
+            <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedRates" />
             <h3>Maintenance</h3>
 
-            <input type="text" data-bind="propertyCalculatorText: calculatedMaintenance" />
+            <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedMaintenance" />
             <h3>Insurance</h3>
 
-            <input type="text" data-bind="propertyCalculatorText: calculatedInsurance" />
+            <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedInsurance" />
             <h3>Property Management (8%)</h3>
 
-            <input type="text" data-bind="propertyCalculatorText: calculatedPropertyManagement" />
+            <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedPropertyManagement" />
 
             <h3>Body Corp Fees</h3>
 
-            <input type="text" data-bind="propertyCalculatorText: calculatedBodyCorpFee" />
+            <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedBodyCorpFee" />
 
             <h3>Total Expenses</h3>
 
