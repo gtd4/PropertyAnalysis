@@ -92,7 +92,7 @@ namespace PropertyAnalysisTool.DTOs
         public string Description { get; set; }
 
         [JsonProperty("Photos")]
-        public List<PhotoModel> Photos { get; set; }
+        public List<PhotoDTO> Photos { get; set; }
 
         [JsonProperty("WasPrice")]
         public decimal WasPrice { get; set; }
@@ -146,7 +146,11 @@ namespace PropertyAnalysisTool.DTOs
             propModel.RentPerWeek = RentPerWeek;
             propModel.SubTitle = SubTitle;
             propModel.Description = Description;
-            propModel.Photos = Photos;
+            propModel.Photos = Photos.Select(x => new PhotoModel
+            {
+                PhotoId = x.PhotoId,
+                PhotoUrl = x.PhotoUrl,
+            }).ToList();
             propModel.WasPrice = WasPrice;
             propModel.Bedrooms = Bedrooms;
             propModel.Bathrooms = Bathrooms;
