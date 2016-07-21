@@ -6,13 +6,12 @@ namespace PropertyAnalysisTool.Models
 {
     public class TradeMePropertyResultsViewModel
     {
-        [JsonProperty("List")]
+
         public List<PropertyModel> Properties { get; set; }
 
-        [JsonProperty("TotalCount")]
+
         public int TotalCount { get; set; }
 
-        [JsonProperty("PageSize")]
         public int PageSize { get; set; }
 
         public int TotalPages { get; set; }

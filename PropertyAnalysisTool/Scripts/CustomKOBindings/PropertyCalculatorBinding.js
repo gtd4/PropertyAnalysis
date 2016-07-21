@@ -10,7 +10,7 @@
                         var numeric = parseInt(value.replace(/\$/g, ""));
 
                         valueAccessor()(isNaN(numeric) ? 0 : numeric);
-                        valueAccessor().valueHasMutated();
+                        //valueAccessor().valueHasMutated();
                     }
                 }).extend({ notify: 'always' });
 

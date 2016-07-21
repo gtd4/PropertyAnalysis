@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
+using PropertyAnalysisTool.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PropertyAnalysisTool.Models
+namespace PropertyAnalysisTool.DTOs
 {
-    public class TradeMeDTO
+    public class TradeMePropertyDTO
     {
         [JsonProperty("ListingId")]
         public int ListingId { get; set; }
@@ -106,13 +107,13 @@ namespace PropertyAnalysisTool.Models
         public string Address { get; set; }
 
         [JsonProperty("Attributes")]
-        public List<Attribute> Attributes { get; set; }
+        public List<Models.Attribute> Attributes { get; set; }
 
 
 
-        public TradeMeDTO()
+        public TradeMePropertyDTO()
         {
-            Attributes = new List<Attribute>();
+            Attributes = new List<Models.Attribute>();
         }
 
         public PropertyModel ToPropertyModel(PropertyModel propModel)
