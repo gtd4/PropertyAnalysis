@@ -205,7 +205,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PropertyFilterController.cs" />
-    <Compile Include="DTOs\PhotoDTO.cs" />
+    <Compile Include="DTOs\TradeMePhotoDTO.cs" />
+    <Compile Include="DTOs\TradeMePhotoUrlDTO.cs" />
     <Compile Include="DTOs\TradeMePropertyListDTO.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">

@@ -92,7 +92,7 @@ namespace PropertyAnalysisTool.DTOs
         public string Description { get; set; }
 
         [JsonProperty("Photos")]
-        public List<PhotoDTO> Photos { get; set; }
+        public List<TradeMePhotoDTO> Photos { get; set; }
 
         [JsonProperty("WasPrice")]
         public decimal WasPrice { get; set; }

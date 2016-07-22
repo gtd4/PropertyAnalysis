@@ -7,7 +7,7 @@ using System.Web;
 
 namespace PropertyAnalysisTool.DTOs
 {
-    public class PhotoDTO
+    public class TradeMePhotoDTO
     {
         [JsonProperty("Key")]
         public int PhotoId { get; set; }
