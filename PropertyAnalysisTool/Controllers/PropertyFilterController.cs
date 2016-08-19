@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PropertyAnalysisTool.DTOs;
 using PropertyAnalysisTool.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,9 @@ namespace PropertyAnalysisTool.Controllers
                     //this may use more memory as a 2nd list of the parent object has to be created.
 
                     //ToDo: Look into how to improve this.
-                    var loc = JsonConvert.DeserializeObject<List<Region>>(responseString);
+                    var tradeMeRegion = JsonConvert.DeserializeObject<List<TradeMeRegionDTO>>(responseString);
+                    var loc = tradeMeRegion.Select(tmRegion => tmRegion.ToRegion(new Region()));
+
 
                     model.Locations = GetLocations(loc.ToList<TradeMeLocationModel>(), localityId, "Regions");
 
@@ -158,65 +161,5 @@ namespace PropertyAnalysisTool.Controllers
             return locations;
         }
 
-        //private IEnumerable<SelectListItem> GetLocations(List<Region> loc, int localityId)
-        //{
-        //    var emptyItem = new Region
-        //    {
-        //        Id = 0,
-        //        Name = "All Regions",
-
-        //    };
-
-        //    loc.Add(emptyItem);
-
-        //    var locations = loc.Select(x => new SelectListItem
-        //    {
-        //        Value = x.Id.ToString(),
-        //        Text = x.Name,
-        //        Selected = x.Id == localityId,
-        //    });
-
-        //    return locations;
-        //}
-
-        //private IEnumerable<SelectListItem> GetDistricts(List<District> loc, int districtId)
-        //{
-        //    var emptyItem = new District
-        //    {
-        //        Id = 0,
-        //        Name = "All Districts",
-
-        //    };
-
-        //    loc.Add(emptyItem);
-
-        //    var districts = loc.Select(x => new SelectListItem
-        //    {
-        //        Value = x.Id.ToString(),
-        //        Text = x.Name,
-        //        Selected = x.Id == districtId,
-        //    });
-
-        //    return districts;
-        //}
-
-        //private IEnumerable<SelectListItem> GetSuburbs(List<Suburb> loc)
-        //{
-        //    var emptyItem = new Suburb
-        //    {
-        //        Id = 0,
-        //        Name = "All Suburb"
-        //    };
-
-        //    loc.Add(emptyItem);
-
-        //    var suburbs = loc.Select(x => new SelectListItem
-        //    {
-        //        Value = x.Id.ToString(),
-        //        Text = x.Name,
-        //    });
-
-        //    return suburbs;
-        //}
     }
 }

@@ -16,16 +16,5 @@ namespace PropertyAnalysisTool.Models
         public decimal PriceMax { get; set; }
         public decimal PriceMin { get; set; }
 
-        /*
-        Region
-        District
-        Suburb
-        Search Nearby Suburb
-        Keywords
-        Property Type
-        BedroomNum
-        BathroomNum
-        Price
-        */
     }
 }

@@ -5,16 +5,16 @@ namespace PropertyAnalysisTool.Models
 {
     public class Region : TradeMeLocationModel
     {
-        [JsonProperty("LocalityId")]
+        //[JsonProperty("LocalityId")]
         public override int Id { get; set; }
 
-        [JsonProperty("Name")]
+        //[JsonProperty("Name")]
         public override string Name { get; set; }
 
-        [JsonProperty("Districts")]
+        //[JsonProperty("Districts")]
         public List<District> Districts { get; set; }
 
-        [JsonProperty("Count")]
+        //[JsonProperty("Count")]
         public int Count { get; set; }
     }
 }

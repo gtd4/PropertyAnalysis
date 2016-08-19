@@ -208,6 +208,7 @@
     <Compile Include="DTOs\TradeMePhotoDTO.cs" />
     <Compile Include="DTOs\TradeMePhotoUrlDTO.cs" />
     <Compile Include="DTOs\TradeMePropertyListDTO.cs" />
+    <Compile Include="DTOs\TradeMeRegionDTO.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
