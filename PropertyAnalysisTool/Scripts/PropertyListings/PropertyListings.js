@@ -77,47 +77,47 @@
         function BuildUrl(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page) {
             var url = "?";
             if (localityId != 0) {
-                url += "region=" + localityId + "&";
+                url += "localityId=" + localityId + "&";
             }
 
             if (districtId != 0) {
                 //sb.AppendFormat("&district={0}", districtId);
-                url += "district=" + districtId + "&";
+                url += "districtId=" + districtId + "&";
             }
 
             if (suburbId != 0) {
                 //sb.AppendFormat("&suburb={0}", suburbId);
-                url += "suburb=" + suburbId + "&";
+                url += "suburbId=" + suburbId + "&";
             }
 
             if (minBed != 0) {
                 //sb.AppendFormat("&bedrooms_min={0}", minBed);
-                url += "bedrooms_min=" + minBed + "&";
+                url += "minBedroom=" + minBed + "&";
             }
 
             if (maxBed != 0) {
                 //sb.AppendFormat("&bedrooms_max={0}", maxBed);
-                url += "bedrooms_max=" + maxBed + "&";
+                url += "maxBedroom=" + maxBed + "&";
             }
-
+            
             if (minBath != 0) {
                 //sb.AppendFormat("&bathrooms_min={0}", minBath);
-                url += "bathrooms_min=" + minBath + "&";
+                url += "minBathroom=" + minBath + "&";
             }
 
             if (maxBath != 0) {
                 //sb.AppendFormat("&bathrooms_max={0}", maxBath);
-                url += "bathrooms_max=" + maxBath + "&";
+                url += "maxBathroom=" + maxBath + "&";
             }
-
+            
             if (minPrice != 0) {
                 //sb.AppendFormat("&price_min={0}", priceMin);
-                url += "price_min=" + minPrice + "&";
+                url += "priceMin=" + minPrice + "&";
             }
 
             if (maxPrice != 0) {
                 //sb.AppendFormat("&price_max={0}", priceMax);
-                url += "price_max=" + maxPrice + "&";
+                url += "priceMax=" + maxPrice + "&";
             }
 
             url += "page=" + page;
