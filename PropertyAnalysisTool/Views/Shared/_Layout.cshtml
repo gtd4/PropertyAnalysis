@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="~/Content/custom-font-icons-master/custom-font-icons-master/custom-font-icons.css">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div class="navbar navbar-fixed-top" style="border-bottom: solid 1px black">
+        @*<div class="container">*@
             <div>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,7 +21,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Property Analysis", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <a href="@Url.Action("Index", "Home", null)">
+                        <img src="~/Content/Images/Logo.PNG" class="navbar-brand" style="height: 100px" />
+                    </a>
+                    @*@Html.ActionLink("Property Analysis", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -34,7 +37,7 @@
                     @*@Html.Partial("_LoginPartial")*@
                 </div>
             </div>
-        </div>
+        @*</div>*@
     </div>
     <div class="body-content">
         <div class="body-content">
