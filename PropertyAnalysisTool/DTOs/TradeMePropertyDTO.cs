@@ -109,6 +109,9 @@ namespace PropertyAnalysisTool.DTOs
         [JsonProperty("Attributes")]
         public List<Models.Attribute> Attributes { get; set; }
 
+        [JsonProperty("GeographicLocation")]
+        public GeographicLocation GeoLocation { get; set; }
+
 
 
         public TradeMePropertyDTO()
@@ -156,6 +159,8 @@ namespace PropertyAnalysisTool.DTOs
             propModel.Bathrooms = Bathrooms;
             propModel.Address = Address;
             propModel.Attributes = Attributes;
+            propModel.GeoLocation = GeoLocation;
+            
             return propModel;
         }
 

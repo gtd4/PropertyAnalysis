@@ -246,3 +246,15 @@ h1{
 }
 /*-----------------------------------------------*/
 
+.navbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: #000;
+}
+
+#map{
+    width:100%;
+    height: 500px;
+}

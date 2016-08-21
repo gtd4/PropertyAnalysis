@@ -105,6 +105,8 @@ namespace PropertyAnalysisTool.Models
 
         public List<Attribute> Attributes { get; set; }
 
+        public GeographicLocation GeoLocation { get; set; }
+
         public string Location
         {
             get

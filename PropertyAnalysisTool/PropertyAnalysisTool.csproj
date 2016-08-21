@@ -218,6 +218,7 @@
     <Compile Include="Models\ComparePropertyModel.cs" />
     <Compile Include="Models\DetailsViewModel.cs" />
     <Compile Include="Models\District.cs" />
+    <Compile Include="Models\GeographicLocation.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
