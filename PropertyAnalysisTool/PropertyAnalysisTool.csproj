@@ -244,6 +244,8 @@
     <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\Images\Logo.PNG" />
     <Content Include="Content\Images\TWM Property Analysis 2.svg" />
+    <Content Include="Content\Images\LogoBlack.svg" />
+    <Content Include="Content\Images\LogoWhite.svg" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>

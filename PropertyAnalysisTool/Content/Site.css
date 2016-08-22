@@ -258,3 +258,19 @@ h1{
     width:100%;
     height: 500px;
 }
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #8DC63F;
+    font-size: 24px;
+    padding-top: 45px;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #82C886;
+  background-color: transparent;
+}
+
+.navbar-brand{
+    padding-right: 150px;
+}
