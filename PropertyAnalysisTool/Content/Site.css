@@ -263,14 +263,17 @@ h1{
     color: #8DC63F;
     font-size: 24px;
     padding-top: 45px;
+    opacity: 0.9;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #82C886;
+  color: #8DC63F;
   background-color: transparent;
+  opacity:1;
 }
 
 .navbar-brand{
-    padding-right: 150px;
+    height: 100%;
+    width: 100%;
 }
