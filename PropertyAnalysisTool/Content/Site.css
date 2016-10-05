@@ -22,65 +22,59 @@ textarea {
     /*max-width: 280px;*/
 }
 
-.row{
+.row {
     padding-top: 20px;
 }
 
-.property-listing img{
+.property-listing img {
     width: 100%;
     height: 150px;
     max-height: 150px;
 }
 
 
-.compare{
+.compare {
     padding-bottom: 20px;
 }
-.compare-property-details
-{
+
+.compare-property-details {
     height: 390px;
     overflow: hidden;
 }
 
-.compare-img-container
-{
-    float:left;
+.compare-img-container {
+    float: left;
     margin-right: 10px;
 }
 
-.compare-title-container
-{
-    float:left;
+.compare-title-container {
+    float: left;
 }
 
-.compare-delete-container
-{
+.compare-delete-container {
     float: right;
 }
 
-.compare-img-container img{
-    height:40px;
-    width:40px;
+.compare-img-container img {
+    height: 40px;
+    width: 40px;
 }
 
-.compare-item-container
-{
+.compare-item-container {
     width: 100%;
     height: 50px;
 }
 
-.compare-properties
-{
+.compare-properties {
     display: none;
 }
 
-.compare-property-details
-{
+.compare-property-details {
     height: 400px;
-    overflow-y:auto;
+    overflow-y: auto;
 }
 
-.details-image-container img{
+.details-image-container img {
     width: 100%;
     height: 300px;
     max-height: 300px;
@@ -93,26 +87,24 @@ textarea {
     max-width: 450px;
 }*/
 
-.compare-item-container
-{
+.compare-item-container {
     border: 1px solid #dddddd;
     margin-bottom: 5px;
     padding: 4px;
     border-radius: 4px;
-    max-width:100%;
+    max-width: 100%;
 }
 
-.compare-title-container
-{
+.compare-title-container {
     white-space: nowrap;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     display: block;
     overflow: hidden;
-    max-width:255px;
+    max-width: 255px;
     width: 50%;
 }
 
-.prop-details p{
+.prop-details p {
     text-decoration: none;
 }
 
@@ -127,58 +119,51 @@ textarea {
 
 
 
-#regions-container h4{
+#regions-container h4 {
     margin-top: 0px;
     margin-bottom: 5px;
 }
 
-#bedrooms-container h4
-{
+#bedrooms-container h4 {
     margin-top: 0px;
     margin-bottom: 5px;
 }
 
-#price-container h4
-{
+#price-container h4 {
     padding-top: 5px;
     margin-bottom: 5px;
 }
 
-#bathrooms-container h4
-{
-padding-top: 5px;
-margin-bottom: 5px;
+#bathrooms-container h4 {
+    padding-top: 5px;
+    margin-bottom: 5px;
 }
 
-.ajax-loader
-{
-    display:none;
+.ajax-loader {
+    display: none;
 }
 
-.propertylist-container
-{
-    padding:0px;
+.propertylist-container {
+    padding: 0px;
 }
 
-h1{
+h1 {
     margin-top: 5px;
 }
 
-.compare-button
-{
+.compare-button {
     width: 100%;
 }
 
-#property-list .compare-delete-button
-{
+#property-list .compare-delete-button {
     width: 100%;
 }
 
-.details-container{
+.details-container {
     min-height: 320px;
 }
 
-.prop-link{
+a.prop-link {
     text-decoration: none;
 }
 
@@ -195,15 +180,14 @@ h1{
     border-radius: 4px;
 }*/
 
-.details-mobile-container{
-    margin-bottom:10px;
+.details-mobile-container {
+    margin-bottom: 10px;
 }
 
-.property-listing 
-{
+.property-listing {
     margin-bottom: 20px;
     width: 100%;
-        height: 450px;
+    height: 450px;
 }
 /*section form zooming content hover Desktop/Laptop only do not apply to mobile*/
 /*-------------------------------------------------*/
@@ -240,22 +224,23 @@ h1{
     }
 
     .fixed {
-    position: fixed;
-    left:66%;
-}
+        position: fixed;
+        left: 66%;
+    }
+
 }
 /*-----------------------------------------------*/
 
 .navbar-toggle .icon-bar {
-  display: block;
-  width: 22px;
-  height: 2px;
-  border-radius: 1px;
-  background-color: #000;
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: #000;
 }
 
-#map{
-    width:100%;
+#map {
+    width: 100%;
     height: 500px;
 }
 
@@ -266,14 +251,14 @@ h1{
     opacity: 0.9;
 }
 
-.navbar-inverse .navbar-nav > li > a:hover,
-.navbar-inverse .navbar-nav > li > a:focus {
-  color: #8DC63F;
-  background-color: transparent;
-  opacity:1;
-}
+    .navbar-inverse .navbar-nav > li > a:hover,
+    .navbar-inverse .navbar-nav > li > a:focus {
+        color: #8DC63F;
+        background-color: transparent;
+        opacity: 1;
+    }
 
-.navbar-brand{
+.navbar-brand {
     height: 100%;
     max-width: 300px;
 }
