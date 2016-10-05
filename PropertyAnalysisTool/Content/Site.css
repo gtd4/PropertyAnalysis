@@ -275,5 +275,5 @@ h1{
 
 .navbar-brand{
     height: 100%;
-    width: 100%;
+    max-width: 300px;
 }

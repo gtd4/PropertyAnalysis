@@ -229,12 +229,14 @@ namespace PropertyAnalysisTool.Controllers
             //Get upto 3 properties and compare their values side by side
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
             var model = new ComparePropertyModel();
-            var prop = new PropertyModel();
+            
 
             using (var client = new HttpClient())
             {
                 foreach (var id in Ids)
                 {
+                    var prop = new PropertyModel();
+
                     InitClient(authHeader, client);
 
                     var response = client.GetAsync(string.Format("{0}/Listings/{1}.json", prodEnv, id)).Result;
