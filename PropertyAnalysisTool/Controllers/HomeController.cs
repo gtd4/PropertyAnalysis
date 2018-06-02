@@ -19,7 +19,7 @@ namespace PropertyAnalysisTool.Controllers
         private string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
         private string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
 
-        private const int pageSize = 12;
+        private const int pageSize = 45;
 
         private const string prodEnv = "https://api.trademe.co.nz/v1/";
 
@@ -110,7 +110,7 @@ namespace PropertyAnalysisTool.Controllers
         private string BuildApiUrl(int localityId, int districtId, int suburbId, int minBed, int maxBed, int minBath, int maxBath, int priceMin, int priceMax, int page, string propType = "Residential")
         {
             //replace environment in url to switch between sandbox and prod site requests
-            var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows=12&sort_order=PriceAsc", prodEnv);
+            var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows={1}&sort_order=PriceAsc", prodEnv, pageSize);
 
             var sb = new StringBuilder(url);
 
