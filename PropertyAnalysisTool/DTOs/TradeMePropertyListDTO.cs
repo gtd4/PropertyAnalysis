@@ -25,7 +25,15 @@ namespace PropertyAnalysisTool.DTOs
             tpr.PageSize = PageSize;
 
             return tpr;
+        }
 
+        public TradeMePropertyResultsViewModel ToTradeMeDealsPropertyResultsViewModel(TradeMePropertyResultsViewModel tpr)
+        {
+            tpr.Properties = Properties.Where(x => x.RateableValue > 0 && x.Price < x.RateableValue).ToList();
+            tpr.TotalCount = TotalCount;
+            tpr.PageSize = PageSize;
+
+            return tpr;
         }
     }
 }

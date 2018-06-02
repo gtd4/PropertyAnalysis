@@ -33,7 +33,7 @@ namespace PropertyAnalysisTool.Controllers
             {
                 InitClient(authHeader, client);
 
-                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, page, propType);
+                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, page, pageSize, propType);
 
                 var response = client.GetAsync(url).Result;
 
@@ -75,7 +75,7 @@ namespace PropertyAnalysisTool.Controllers
             {
                 InitClient(authHeader, client);
 
-                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, page, propType);
+                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, page, pageSize, propType);
 
                 var response = client.GetAsync(url).Result;
 
@@ -107,10 +107,10 @@ namespace PropertyAnalysisTool.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
         }
 
-        private string BuildApiUrl(int localityId, int districtId, int suburbId, int minBed, int maxBed, int minBath, int maxBath, int priceMin, int priceMax, int page, string propType = "Residential")
+        private string BuildApiUrl(int localityId, int districtId, int suburbId, int minBed, int maxBed, int minBath, int maxBath, int priceMin, int priceMax, int page, int rows, string propType = "Residential")
         {
             //replace environment in url to switch between sandbox and prod site requests
-            var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows={1}&sort_order=PriceAsc", prodEnv, pageSize);
+            var url = string.Format("{0}Search/Property/Residential.json?photo_size=Gallery&rows={1}&sort_order=PriceAsc", prodEnv, rows);
 
             var sb = new StringBuilder(url);
 
@@ -174,10 +174,10 @@ namespace PropertyAnalysisTool.Controllers
             return "Apartment,House,Townhouse,Unit";
         }
 
-        private string BuildApiUrl(int page)
-        {
-            return BuildApiUrl(0, 0, 0, 0, 0, 0, 0, 0, 0, page);
-        }
+        //private string BuildApiUrl(int page)
+        //{
+        //    return BuildApiUrl(0, 0, 0, 0, 0, 0, 0, 0, 0, page);
+        //}
 
         public ActionResult Details(int id)
         {
@@ -259,6 +259,48 @@ namespace PropertyAnalysisTool.Controllers
         {
             var vm = new PropertyModel();
             return View(vm);
+        }
+
+        public ActionResult FindDeals(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxbathroom = 0, int priceMin = 0, int priceMax = 0, int page = 1, string propType = "")
+        {
+            var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
+
+            TradeMePropertyResultsViewModel tpr = new TradeMePropertyResultsViewModel();
+
+            using (var client = new HttpClient())
+            {
+                InitClient(authHeader, client);
+
+                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, page, 1000, propType);
+
+                var response = client.GetAsync(url).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseString = response.Content.ReadAsStringAsync().Result;
+                    var propListDTO = JsonConvert.DeserializeObject<TradeMePropertyListDTO>(responseString);
+                    tpr = propListDTO.ToTradeMeDealsPropertyResultsViewModel(tpr);
+
+                    var totalCount = tpr.TotalCount;
+
+                    foreach (var property in tpr.Properties)
+                    {
+                        var photo = property.Photos;
+                    }
+                }
+            }
+            var totalPages = tpr.TotalCount / pageSize;
+            if (tpr.TotalCount % pageSize != 0)
+            {
+                totalPages++;
+            }
+
+            var model = tpr;
+            model.PropertyType = propType;
+            model.TotalPages = totalPages;
+            model.Page = page;
+
+            return View("Index", model);
         }
 
         public ActionResult About()
