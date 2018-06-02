@@ -6,9 +6,7 @@ namespace PropertyAnalysisTool.Models
 {
     public class TradeMePropertyResultsViewModel
     {
-
         public List<PropertyModel> Properties { get; set; }
-
 
         public int TotalCount { get; set; }
 
@@ -21,6 +19,16 @@ namespace PropertyAnalysisTool.Models
         public int SuburbId { get; set; }
         public int Page { get; set; }
         public string PropertyType { get; set; }
+
+        public bool GetDeals { get; set; }
+
+        public string DealsString
+        {
+            get
+            {
+                return GetDeals.ToString();
+            }
+        }
 
         public int PaginationStart
         {
@@ -76,13 +84,12 @@ namespace PropertyAnalysisTool.Models
 
         public List<PropertyModel> GetPropertiesCheaperThanRV()
         {
-            return Properties.Where(prop => prop.RateableValue != 0 && prop.StartPrice < prop.RateableValue).ToList();
+            return Properties.Where(prop => prop.RateableValue != 0 && prop.Price > 0 && prop.Price < prop.RateableValue).ToList();
         }
 
         public TradeMePropertyResultsViewModel()
         {
             Properties = new List<PropertyModel>();
-
         }
     }
 }

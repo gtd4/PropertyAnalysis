@@ -57,6 +57,8 @@ namespace PropertyAnalysisTool.Controllers
                 totalPages++;
             }
 
+            tpr.GetDeals = false;
+
             var model = tpr;
             model.PropertyType = propType;
             model.TotalPages = totalPages;
@@ -65,7 +67,7 @@ namespace PropertyAnalysisTool.Controllers
             return View(model);
         }
 
-        public ActionResult UpdatePropertyListings(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxbathroom = 0, int priceMin = 0, int priceMax = 0, int page = 1, string propType = "residential")
+        public ActionResult UpdatePropertyListings(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxbathroom = 0, int priceMin = 0, int priceMax = 0, int page = 1, string propType = "residential", bool getDeals = false)
         {
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
 
@@ -83,7 +85,15 @@ namespace PropertyAnalysisTool.Controllers
                 {
                     string responseString = response.Content.ReadAsStringAsync().Result;
                     var propListDTO = JsonConvert.DeserializeObject<TradeMePropertyListDTO>(responseString);
-                    tpr = propListDTO.ToTradeMePropertyResultsViewModel(tpr);
+
+                    if (getDeals)
+                    {
+                        tpr = propListDTO.ToTradeMeDealsPropertyResultsViewModel(tpr);
+                    }
+                    else
+                    {
+                        tpr = propListDTO.ToTradeMePropertyResultsViewModel(tpr);
+                    }
                 }
             }
 
@@ -179,7 +189,7 @@ namespace PropertyAnalysisTool.Controllers
         //    return BuildApiUrl(0, 0, 0, 0, 0, 0, 0, 0, 0, page);
         //}
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, decimal rateableValue)
         {
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
 
@@ -191,6 +201,7 @@ namespace PropertyAnalysisTool.Controllers
                 model = GetPropertyDetails(id, model, client);
             }
 
+            model.RateableValue = rateableValue;
             return View(model);
         }
 
@@ -295,10 +306,41 @@ namespace PropertyAnalysisTool.Controllers
                 totalPages++;
             }
 
+            var propertyList = new List<PropertyModel>();
+
+            propertyList.AddRange(tpr.Properties);
+
+            using (var client = new HttpClient())
+            {
+                for (var i = 0; i < totalPages; i++)
+                {
+                    var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, i, 1000, propType);
+
+                    var response = client.GetAsync(url).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseString = response.Content.ReadAsStringAsync().Result;
+                        var propListDTO = JsonConvert.DeserializeObject<TradeMePropertyListDTO>(responseString);
+                        tpr = propListDTO.ToTradeMeDealsPropertyResultsViewModel(tpr);
+
+                        //var totalCount = tpr.TotalCount;
+                        propertyList.AddRange(tpr.Properties);
+
+                        foreach (var property in tpr.Properties)
+                        {
+                            var photo = property.Photos;
+                        }
+                    }
+                }
+            }
+
+            tpr.GetDeals = true;
+            tpr.Properties = propertyList;
             var model = tpr;
             model.PropertyType = propType;
-            model.TotalPages = totalPages;
-            model.Page = page;
+            model.TotalPages = 1;
+            model.Page = 1;
 
             return View("Index", model);
         }

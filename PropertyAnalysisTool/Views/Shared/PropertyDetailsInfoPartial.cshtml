@@ -1,37 +1,43 @@
 ﻿@model PropertyAnalysisTool.Models.PropertyModel
 
+<div class="row">
+    <div class="col-lg-12">
+        <div class="thumbnail details-info">
 
+            <div class="details-image-container">
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="thumbnail details-info">
-
-                <div class="details-image-container">
-
-                    @if (Model.HasGallery)
-            {
-                Html.RenderPartial("PropertyImageLargeSliderPartial", Model.Photos);
-            }
-            else
-            {
-                        <img alt="No Image Present" />
-                    }
-                </div>
-                <h2>@Model.Title</h2>
-
-                <p>Listed: @Model.ListedDate</p>
-                <p>@Model.FullAddress</p>
-                <p>@Model.PriceDisplay</p>
-                @if (!string.IsNullOrEmpty(Model.Bedrooms) || !string.IsNullOrEmpty(Model.Bathrooms))
-            {
-                    <p>Rooms: @Model.Bedrooms : @Model.Bathrooms</p>
+                @if (Model.HasGallery)
+                {
+                    Html.RenderPartial("PropertyImageLargeSliderPartial", Model.Photos);
                 }
-
-                <p></p>
-                <p>@Model.Description</p>
+                else
+                {
+                    <img alt="No Image Present" />
+                }
             </div>
+            <h2>@Model.Title</h2>
+
+            <p>Listed: @Model.ListedDate</p>
+            <p>@Model.FullAddress</p>
+            <p>@Model.PriceDisplay</p>
+            @if(Model.RateableValue > 0)
+            {
+                <p>R.V: @Model.RateableValue</p>
+            }
+            @if (Model.WasPrice > 0)
+            {
+                <p>Was: @Model.WasPrice</p>
+            }
+            @if (!string.IsNullOrEmpty(Model.Bedrooms) || !string.IsNullOrEmpty(Model.Bathrooms))
+            {
+                <p>Rooms: @Model.Bedrooms : @Model.Bathrooms</p>
+            }
+
+            <p></p>
+            <p>@Model.Description</p>
         </div>
     </div>
+</div>
 
 <div class="row">
     <div id="map-container"></div>
