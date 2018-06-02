@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -263,6 +264,7 @@
     <Content Include="Content\custom-font-icons-master\custom-font-icons-master\custom-font-icons.woff" />
     <Content Include="Content\custom-font-icons-master\custom-font-icons-master\README.md" />
     <None Include="Properties\PublishProfiles\PropertyAnalysis.pubxml" />
+    <None Include="Properties\PublishProfiles\propertyAnalysis2 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Components\PropertyCalculator\ComparePropertyCalculatorTemplate.html" />
     <Content Include="Scripts\Components\PropertyCalculator\comparePropertyCalculatorComponent.js" />
@@ -337,6 +339,7 @@
     <Content Include="Views\Shared\CalculatorPartial.cshtml" />
     <Content Include="Views\Shared\PropertyDetailsInfoPartial.cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.Mobile.cshtml" />
+    <Content Include="Views\Home\Calculator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

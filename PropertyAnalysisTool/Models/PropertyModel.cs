@@ -7,61 +7,42 @@ namespace PropertyAnalysisTool.Models
 {
     public class PropertyModel
     {
-
         public int ListingId { get; set; }
-
 
         public string Title { get; set; }
 
-
         public string Category { get; set; }
-
 
         public decimal StartPrice { get; set; }
 
-
         public decimal BuyNowPrice { get; set; }
-
 
         public DateTime StartDate
         { get; set; }
 
-
         public DateTime EndDate { get; set; }
-
 
         public bool IsFeatured { get; set; }
 
-
         public bool HasGallery { get; set; }
-
 
         public bool IsBold { get; set; }
 
-
         public bool IsHighlighted { get; set; }
-
 
         public bool HasHomePageFeature { get; set; }
 
-
         public decimal MaxBidAmount { get; set; }
-
 
         public DateTime AsAt { get; set; }
 
-
         public string CategroyPath { get; set; }
-
 
         public string PictureHref { get; set; }
 
-
         public bool HasPayNow { get; set; }
 
-
         public bool IsNew { get; set; }
-
 
         public int RegionId { get; set; }
 
@@ -69,39 +50,27 @@ namespace PropertyAnalysisTool.Models
 
         public string Suburb { get; set; }
 
-
         public string District { get; set; }
-
 
         public string PriceDisplay { get; set; }
 
-
         public decimal RateableValue { get; set; }
-
 
         public decimal RentPerWeek { get; set; }
 
-
         public string SubTitle { get; set; }
-
 
         public string Description { get; set; }
 
-
         public List<PhotoModel> Photos { get; set; }
-
 
         public decimal WasPrice { get; set; }
 
-
         public string Bedrooms { get; set; }
-
 
         public string Bathrooms { get; set; }
 
-
         public string Address { get; set; }
-
 
         public List<Attribute> Attributes { get; set; }
 
@@ -290,6 +259,7 @@ namespace PropertyAnalysisTool.Models
         public PropertyModel()
         {
             Attributes = new List<Attribute>();
+            PriceDisplay = "0";
         }
     }
 }

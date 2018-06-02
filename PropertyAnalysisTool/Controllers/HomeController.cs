@@ -13,14 +13,15 @@ namespace PropertyAnalysisTool.Controllers
     public class HomeController : Controller
     {
         //prod details
-        string consumerKey = "48C11C46E3C1969737776DECD5F144B3";
-        string consumerSecret = "C841EE5BE675F879097974C6BB163202";
-        string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
-        string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
+        private string consumerKey = "48C11C46E3C1969737776DECD5F144B3";
 
-        const int pageSize = 12;
+        private string consumerSecret = "C841EE5BE675F879097974C6BB163202";
+        private string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
+        private string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
 
-        const string prodEnv = "https://api.trademe.co.nz/v1/";
+        private const int pageSize = 12;
+
+        private const string prodEnv = "https://api.trademe.co.nz/v1/";
 
         public ActionResult Index(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxbathroom = 0, int priceMin = 0, int priceMax = 0, int page = 1, string propType = "")
         {
@@ -166,7 +167,7 @@ namespace PropertyAnalysisTool.Controllers
 
         private string SetPropertyType(string propType)
         {
-            if(propType.ToLower().Equals("sections"))
+            if (propType.ToLower().Equals("sections"))
             {
                 return "Section,Dwelling,BareLand";
             }
@@ -229,7 +230,6 @@ namespace PropertyAnalysisTool.Controllers
             //Get upto 3 properties and compare their values side by side
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
             var model = new ComparePropertyModel();
-            
 
             using (var client = new HttpClient())
             {
@@ -253,6 +253,12 @@ namespace PropertyAnalysisTool.Controllers
                 }
             }
             return View(model);
+        }
+
+        public ActionResult Calculator()
+        {
+            var vm = new PropertyModel();
+            return View(vm);
         }
 
         public ActionResult About()
