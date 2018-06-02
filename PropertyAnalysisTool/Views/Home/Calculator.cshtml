@@ -1,0 +1,105 @@
+﻿@model PropertyAnalysisTool.Models.PropertyModel
+@*{
+        ViewBag.Title = "Compare";
+        var containerSize = "col-sm-" + Model.ContainerSize;
+    }*@
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="col-sm-6">
+            <h1>Compare</h1>
+        </div>
+        <div class="col-sm-6">
+            <a href="#" class="remove-scenario btn btn-danger pull-right" >Remove Scenario</a>
+            <a href="#" class="add-scenario btn btn-primary pull-right" style="margin-right:10px;">Add Scenario</a>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    @for (var i = 0; i < 3; i++)
+    {
+
+        <div class="col-sm-4 calculator-@i">
+            <property-calculator params="data: @Html.Raw(EncodeJSON(Model)).ToString()"></property-calculator>
+        </div>
+    }
+</div>
+
+@functions {
+    string EncodeJSON(object value)
+    {
+        return Newtonsoft.Json.JsonConvert.SerializeObject(value, new Newtonsoft.Json.JsonSerializerSettings
+        {
+            ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+        });
+    }
+}
+
+@section scripts
+{
+    <script>
+        require(["app"],
+            function () {
+                requirejs(["knockout", "components/PropertyCalculator/comparePropertyCalculatorComponent", "koBindings/PropertyCalculatorBinding"],
+                    function (ko) {
+                        ko.applyBindings();
+
+                        $().ready(function () {
+                            $(".calculator-1").hide();
+                            $(".calculator-2").hide();
+                            $(".remove-scenario").hide();
+
+                            var visible = 1;
+
+                            $(".add-scenario").click(function () {
+                                if (visible == 3) {
+                                    return;
+                                }
+                                var className = ".calculator-" + (visible);
+                                visible++;
+
+                                
+
+                                $(className).show();
+
+                                if (visible > 1) {
+                                    $(".remove-scenario").show();
+                                }
+
+                                if (visible == 3) {
+                                    $(this).hide();
+                                }
+
+                                
+
+                            });
+
+                            $(".remove-scenario").click(function () {
+                                if (visible == 1) {
+                                    return;
+                                }
+
+                                visible--;
+
+                                var className = ".calculator-" + (visible);
+
+                                $(className).hide();
+
+                                if (visible < 3) {
+                                    $(".add-scenario").show();
+                                }
+
+                                if (visible == 1) {
+                                    $(this).hide();
+                                }
+                            })
+                        });
+
+                    });
+
+            }
+        );
+    </script>
+
+}
