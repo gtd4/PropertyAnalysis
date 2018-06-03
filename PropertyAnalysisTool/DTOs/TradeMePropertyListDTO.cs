@@ -29,7 +29,12 @@ namespace PropertyAnalysisTool.DTOs
 
         public TradeMePropertyResultsViewModel ToTradeMeDealsPropertyResultsViewModel(TradeMePropertyResultsViewModel tpr)
         {
-            tpr.Properties = Properties.Where(x => x.RateableValue > 0 && x.Price > 0 && x.Price < x.RateableValue).ToList();
+            // tpr.Properties = Properties.Where(x => x.Title.ToLower().Contains("mortgagee")
+            //|| x.Title.ToLower().Contains("deceased"))
+            //.ToList();
+            tpr.Properties = Properties.Where(x => ((x.RateableValue > 0 && x.Price > 0)
+            && (x.Price <= x.RateableValue || (x.Price - x.RateableValue > 0 && x.Price - x.RateableValue <= 10000))))
+            .ToList();
             tpr.TotalCount = TotalCount;
             tpr.PageSize = PageSize;
 

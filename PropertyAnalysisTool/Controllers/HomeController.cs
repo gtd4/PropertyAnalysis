@@ -274,6 +274,7 @@ namespace PropertyAnalysisTool.Controllers
 
         public ActionResult FindDeals(int localityId = 0, int districtId = 0, int suburbId = 0, int minBedroom = 0, int maxBedroom = 0, int minBathroom = 0, int maxbathroom = 0, int priceMin = 0, int priceMax = 0, int page = 1, string propType = "")
         {
+            var maxResults = 500;
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
 
             TradeMePropertyResultsViewModel tpr = new TradeMePropertyResultsViewModel();
@@ -282,7 +283,7 @@ namespace PropertyAnalysisTool.Controllers
             {
                 InitClient(authHeader, client);
 
-                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, page, 1000, propType);
+                var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, page, maxResults, propType);
 
                 var response = client.GetAsync(url).Result;
 
@@ -300,7 +301,7 @@ namespace PropertyAnalysisTool.Controllers
                     }
                 }
             }
-            var totalPages = tpr.TotalCount / pageSize;
+            var totalPages = tpr.TotalCount / maxResults;
             if (tpr.TotalCount % pageSize != 0)
             {
                 totalPages++;
@@ -314,7 +315,7 @@ namespace PropertyAnalysisTool.Controllers
             {
                 for (var i = 0; i < totalPages; i++)
                 {
-                    var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, i, 1000, propType);
+                    var url = BuildApiUrl(localityId, districtId, suburbId, minBedroom, maxBedroom, minBathroom, maxbathroom, priceMin, priceMax, i, maxResults, propType);
 
                     var response = client.GetAsync(url).Result;
 
