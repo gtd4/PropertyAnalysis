@@ -1,19 +1,17 @@
 ﻿require(['jquery'],
     function ($) {
-
-
         var compareList = [];
         var $loading = $('.ajax-loader').hide();
         var $propList = $('#property-list');
         $(document)
-          .ajaxStart(function () {
-              $loading.show();
-              $propList.hide();
-          })
-          .ajaxStop(function () {
-              $loading.hide();
-              $propList.show();
-          });
+            .ajaxStart(function () {
+                $loading.show();
+                $propList.hide();
+            })
+            .ajaxStop(function () {
+                $loading.hide();
+                $propList.show();
+            });
 
         function UpdateFilter(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice) {
             $.ajax({
@@ -34,7 +32,6 @@
             }).done(function (partialViewResult) {
                 $("#propertyfilter-container").html(partialViewResult);
             });
-
 
             UpdateProperties(localityId, districtId, SuburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, 1);
         }
@@ -99,7 +96,7 @@
                 //sb.AppendFormat("&bedrooms_max={0}", maxBed);
                 url += "maxBedroom=" + maxBed + "&";
             }
-            
+
             if (minBath != 0) {
                 //sb.AppendFormat("&bathrooms_min={0}", minBath);
                 url += "minBathroom=" + minBath + "&";
@@ -109,7 +106,7 @@
                 //sb.AppendFormat("&bathrooms_max={0}", maxBath);
                 url += "maxBathroom=" + maxBath + "&";
             }
-            
+
             if (minPrice != 0) {
                 //sb.AppendFormat("&price_min={0}", priceMin);
                 url += "priceMin=" + minPrice + "&";
@@ -127,6 +124,8 @@
         function UpdateProperties(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page) {
             AddToHistory(localityId, districtId, suburbId, minBath, maxBath, minBed, maxBed, minPrice, maxPrice, page)
             var propertyType = $("#property-type").val();
+            var deals = $("#deals").val() == 'True';
+
             $.ajax({
                 url: "/Home/UpdatePropertyListings",
                 type: "GET",
@@ -142,6 +141,7 @@
                     PriceMax: maxPrice,
                     Page: page,
                     propType: propertyType,
+                    getDeals: deals,
                     rng: Math.random()
                 }
             }).done(function (partialViewResult) {
@@ -155,19 +155,19 @@
 
         function BuildItemContainer(propId) {
             var itemContainer = jQuery("<div/>",
-            {
-                class: 'compare-item-container col-sm-12',
-                id: propId,
-            });
+                {
+                    class: 'compare-item-container col-sm-12',
+                    id: propId,
+                });
 
             return itemContainer;
         }
 
         function BuildTitleContainer(title) {
             var titleContainer = jQuery("<div/>",
-            {
-                class: 'compare-title-container',
-            });
+                {
+                    class: 'compare-title-container',
+                });
 
             var title = jQuery("<p/>",
                 {
@@ -197,11 +197,11 @@
                 });
 
             var deleteButton = jQuery("<button/>",
-            {
-                class: "btn btn-danger compare-delete-button",
-                text: "Remove",
-                value: propId,
-            }).appendTo(deleteContainer);
+                {
+                    class: "btn btn-danger compare-delete-button",
+                    text: "Remove",
+                    value: propId,
+                }).appendTo(deleteContainer);
 
             return deleteContainer;
         }

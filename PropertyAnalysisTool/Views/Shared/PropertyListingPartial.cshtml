@@ -17,7 +17,7 @@
                 <div class="zoom-container">
                     <div class="thumbnail property-listing text-center">
                         <div class="details-container">
-                            <a href="@Url.Action("Details", "Home", new { id = property.ListingId }, null)" class="prop-link">
+                            <a href="@Url.Action("Details", "Home", new { id = property.ListingId, rateableValue = property.RateableValue }, null)" class="prop-link">
                                 <img class="prop-img" src="@property.PictureHref" alt="@property.Title" />
                                 <h4 class="prop-title">@property.Title</h4>
 
@@ -27,7 +27,7 @@
                                     <p>@property.Bedrooms <i class="fa fa-bed fa-lg"></i>  @property.Bathrooms <i class="fa fa-shower fa-lg"></i> </p>
                                 }
                                 <p>@property.PriceDisplay</p>
-                                <p>R.V: $@property.RateableValue</p>
+                                <p>R.V: $@property.RateableValue || Land: @property.LandArea </p>
                             </a>
                         </div>
 
@@ -80,6 +80,6 @@
                     </a>
                 </li>
             </ul>
-                    }
+        }
     </div>
 </div>

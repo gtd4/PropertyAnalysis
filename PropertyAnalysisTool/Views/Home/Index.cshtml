@@ -13,6 +13,7 @@
 
 <div class="row">
     <input type="hidden" value="@Model.PropertyType" id="property-type" />
+    <input type="hidden" value="@Model.DealsString" id="deals" />
     <div class="col-lg-12 text-center"><h1>@PageHeading</h1></div>
     <div class="ajax-loader col-xs-8 text-center"><img src="~/Content/Images/ajax-loader.gif" alt="loader img" /></div>
     <div class="col-xs-8" id="property-list">
@@ -43,18 +44,16 @@
     @*@Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/propertyListings")*@
     <script>
-        
+
         require(["app"],
-        function () {
-            requirejs(["jquery", '/scripts/PropertyListings/PropertyListings.js'],
-            function ($) {
+            function () {
+                requirejs(["jquery", '/scripts/PropertyListings/PropertyListings.js'],
+                    function ($) {
 
+                    }
+                );
             }
-            );
-        }
         );
-
     </script>
-
 
 }
