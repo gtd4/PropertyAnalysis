@@ -20,7 +20,7 @@
         @{Html.RenderPartial("PropertyListingPartial", Model);}
     </div>
 
-    <div class="col-xs-4 fixed">
+    <div class="col-xs-4" id="property-filter">
 
         <div class="row propertylist-container">
             <div class="col-sm-12 property-filter-container">
@@ -50,6 +50,39 @@
                 requirejs(["jquery", '/scripts/PropertyListings/PropertyListings.js'],
                     function ($) {
 
+                        
+                        var propertyFilter = $("#property-filter")[0];
+                        var filterposition = $(propertyFilter).position().top;
+
+                        $(document).scroll(function (e) {
+                            
+                            //alert(scrollPosition);
+
+                            var top = $(this).scrollTop();
+
+                            if (top - filterposition > -10) {
+                                //$(propertyFilter).addClass("fixed");
+                                $(propertyFilter).css('position', 'fixed').css('top', '20px').css('left', '66%');
+                            }
+                            else {
+                                //$(propertyFilter).removeClass("fixed");
+                                $(propertyFilter).css('position', 'static');
+                            }
+
+                            var newtop = $(propertyFilter).position().top;
+
+                            
+                        });
+
+                        //$(".property-filter").on("scroll", function (e) {
+
+                        //    if (this.scrollTop() > 147) {
+                        //        wrap.addClass("fixed");
+                        //    } else {
+                        //        wrap.removeClass("fixed");
+                        //    }
+
+                        //});
                     }
                 );
             }
