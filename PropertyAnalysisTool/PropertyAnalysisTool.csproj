@@ -247,9 +247,6 @@
     <Content Include="Content\Images\TWM Property Analysis 2.svg" />
     <Content Include="Content\Images\LogoBlack.svg" />
     <Content Include="Content\Images\LogoWhite.svg" />
-    <Content Include="Content\Site.min.css">
-      <DependentUpon>Site.css</DependentUpon>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
