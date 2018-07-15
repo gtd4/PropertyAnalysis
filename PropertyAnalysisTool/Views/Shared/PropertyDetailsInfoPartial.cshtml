@@ -18,9 +18,9 @@
             <h2>@Model.Title</h2>
 
             <p>Listed: @Model.ListedDate</p>
-            <p>@Model.FullAddress</p>
-            <p>@Model.PriceDisplay</p>
-            @if(Model.RateableValue > 0)
+            <p>Location: @Model.FullAddress</p>
+            <p>Price: @Model.PriceDisplay</p>
+            @if (Model.RateableValue > 0)
             {
                 <p>R.V: @Model.RateableValue</p>
             }
@@ -33,7 +33,7 @@
                 <p>Rooms: @Model.Bedrooms : @Model.Bathrooms</p>
             }
 
-            <p></p>
+            <hr />
             <p>@Model.Description</p>
         </div>
     </div>

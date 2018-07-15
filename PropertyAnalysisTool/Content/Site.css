@@ -75,8 +75,14 @@ textarea {
 }
 
 .details-image-container img {
-    max-height: 465px;
-    max-width: 620px;
+    /*max-height: 465px;
+    max-width: 620px;*/
+    width: 100%;
+}
+
+.carousel-inner{
+    max-height:550px;
+    height:550px;
 }
 
 /*.to-compare

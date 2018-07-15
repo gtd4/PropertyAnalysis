@@ -12,19 +12,17 @@
             <h1>Property Analysis</h1>
             <a href="@tradeMeUrl">See in Trademe</a>
         </div>
-        
+
         <div class="col-lg-6">
             @{Html.RenderPartial("PropertyDetailsInfoPartial", Model);}
 
             <div id="map"></div>
         </div>
-        
+
         <div class="col-lg-6">
             <property-calculator params="data: @Html.Raw(EncodeJSON(Model)).ToString()"></property-calculator>
         </div>
-
     </div>
-    
 </div>
 <div class="row">
     <div class="col-sm-12">
@@ -65,7 +63,7 @@
 
 @section scripts
 {
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtZa2t_xAZjM5R3eDzB7YsBKOWhqg3Ck0&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtZa2t_xAZjM5R3eDzB7YsBKOWhqg3Ck0&callback=initMap"></script>
     <script>
         require(["app"],
                     function () {
@@ -91,10 +89,7 @@
                 title: "@Model.FullAddress",
             });
 
-            
         }
     </script>
-
-
 
 }
