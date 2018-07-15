@@ -263,5 +263,25 @@ namespace PropertyAnalysisTool.Models
             Attributes = new List<Attribute>();
             PriceDisplay = "0";
         }
+
+        public string TradeMeAddress
+        {
+            get
+            {
+                return string.Format("https://www.trademe.co.nz/property/residential-property-for-sale/auction-{0}.htm", this.ListingId);
+            }
+        }
+
+        //public string QVAddress
+        //{
+        //    get
+        //    {
+        //        var address = Location.Split(',');
+        //        var street = address[0];
+
+        //        var qvurl = string.Format("https://www.qv.co.nz/search-results/all/{0},{1},{2}", street, Suburb, Region);
+        //        return qvurl;
+        //    }
+        //}
     }
 }

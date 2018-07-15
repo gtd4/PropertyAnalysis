@@ -53,36 +53,31 @@
                         
                         var propertyFilter = $("#property-filter")[0];
                         var filterposition = $(propertyFilter).position().top;
+                        var top = $(document).scrollTop();
+
+                        setPropertyFilterPosition(top, filterposition, propertyFilter);
 
                         $(document).scroll(function (e) {
-                            
-                            //alert(scrollPosition);
 
                             var top = $(this).scrollTop();
 
-                            if (top - filterposition > -10) {
-                                //$(propertyFilter).addClass("fixed");
-                                $(propertyFilter).css('position', 'fixed').css('top', '20px').css('left', '66%');
-                            }
-                            else {
-                                //$(propertyFilter).removeClass("fixed");
-                                $(propertyFilter).css('position', 'static');
-                            }
-
-                            var newtop = $(propertyFilter).position().top;
-
-                            
+                            setPropertyFilterPosition(top, filterposition, propertyFilter)
+ 
                         });
 
-                        //$(".property-filter").on("scroll", function (e) {
+                        function setPropertyFilterPosition(top, filterposition, element) {
 
-                        //    if (this.scrollTop() > 147) {
-                        //        wrap.addClass("fixed");
-                        //    } else {
-                        //        wrap.removeClass("fixed");
-                        //    }
+                            if (top - filterposition > -10) {
+                                $(propertyFilter).addClass("fixed");
+                                //$(element).css('position', 'fixed').css('top', '20px').css('left', '66%');
+                            }
+                            else {
+                                $(propertyFilter).removeClass("fixed");
+                                //$(element).css('position', 'static');
+                            }
 
-                        //});
+                        }
+
                     }
                 );
             }

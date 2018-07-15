@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = Model.Title;
     //var modelJS = Html.Raw(EncodeJSON(Model);
-    var tradeMeUrl = "https://www.trademe.co.nz/property/residential-property-for-sale/auction-" + Model.ListingId + ".htm";
+    //var tradeMeUrl = "https://www.trademe.co.nz/property/residential-property-for-sale/auction-" + Model.ListingId + ".htm";
 }
 
 <div class="row">
@@ -10,7 +10,8 @@
     <div class="calculator-container">
         <div class="col-sm-12 text-center">
             <h1>@Model.Title</h1>
-            <a href="@tradeMeUrl">See in Trademe</a>
+            <a href="@Model.TradeMeAddress">See in Trademe</a>
+            @*<a href="@Model.QVAddress">See in QV</a>*@
         </div>
 
         <div class="col-lg-6">
