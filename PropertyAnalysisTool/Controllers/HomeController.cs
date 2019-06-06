@@ -179,7 +179,7 @@ namespace PropertyAnalysisTool.Controllers
             return BuildApiUrl(0, 0, 0, 0, 0, 0, 0, 0, 0, page);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(long id)
         {
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
 
@@ -194,7 +194,7 @@ namespace PropertyAnalysisTool.Controllers
             return View(model);
         }
 
-        private PropertyModel GetPropertyDetails(int id, PropertyModel model, HttpClient client)
+        private PropertyModel GetPropertyDetails(long id, PropertyModel model, HttpClient client)
         {
             var response = client.GetAsync(string.Format("{0}Listings/{1}.json", prodEnv, id)).Result;
 

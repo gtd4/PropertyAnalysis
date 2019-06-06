@@ -10,7 +10,7 @@ namespace PropertyAnalysisTool.DTOs
     public class TradeMePropertyDTO
     {
         [JsonProperty("ListingId")]
-        public int ListingId { get; set; }
+        public long ListingId { get; set; }
 
         [JsonProperty("Title")]
         public string Title { get; set; }
@@ -112,8 +112,6 @@ namespace PropertyAnalysisTool.DTOs
         [JsonProperty("GeographicLocation")]
         public GeographicLocation GeoLocation { get; set; }
 
-
-
         public TradeMePropertyDTO()
         {
             Attributes = new List<Models.Attribute>();
@@ -160,10 +158,8 @@ namespace PropertyAnalysisTool.DTOs
             propModel.Address = Address;
             propModel.Attributes = Attributes;
             propModel.GeoLocation = GeoLocation;
-            
+
             return propModel;
         }
-
-        
     }
 }

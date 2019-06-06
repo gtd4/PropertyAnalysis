@@ -7,7 +7,7 @@ namespace PropertyAnalysisTool.Models
 {
     public class PropertyModel
     {
-        public int ListingId { get; set; }
+        public long ListingId { get; set; }
 
         public string Title { get; set; }
 
