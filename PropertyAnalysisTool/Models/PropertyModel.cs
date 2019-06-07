@@ -256,6 +256,14 @@ namespace PropertyAnalysisTool.Models
             }
         }
 
+        public int DepositAmount
+        {
+            get
+            {
+                return (int)(Price * 30 / 100);
+            }
+        }
+
         public PropertyModel()
         {
             Attributes = new List<Attribute>();
