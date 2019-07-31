@@ -12,89 +12,165 @@
             <h1>Property Analysis</h1>
             <a href="@tradeMeUrl">See in Trademe</a>
         </div>
-        
-        <div class="col-lg-6">
+
+        <div class="col-lg-4">
             @{Html.RenderPartial("PropertyDetailsInfoPartial", Model);}
-
             <div id="map"></div>
-        </div>
-        
-        <div class="col-lg-6">
-            <property-calculator params="data: @Html.Raw(EncodeJSON(Model)).ToString()"></property-calculator>
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <p>If Gross Yield is under interest rate, then loss</p>
+                    <p>
+                        5-6% low cashflow - need great growth
+                    </p>
+                    <p>
+                        7-8% break even - still need good growth
+                    </p><p>
+                        9-10% or more - good cashflow
+                    </p>
+                    <p>
+                        If you want to own a lot of properties, then need high yield (that pay for themselves)
+                    </p>
+                    <p>
+                        It keeps banks happy with income
+                    </p>
+                    <p>
+                        property portfolio will pay for itself
+                    </p>
+                    <p>
+                        interest rates will rise at some point, so need a buffer
+                    </p>
+                </div>
+            </div>
         </div>
 
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <h1>Compare</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#" class="remove-scenario btn btn-danger pull-right">Remove Scenario</a>
+                        <a href="#" class="add-scenario btn btn-primary pull-right" style="margin-right:10px;">Add Scenario</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                @for (var i = 0; i < 3; i++)
+                {
+
+                    <div class="col-sm-4 calculator-@i">
+                        <property-calculator params="data: @Html.Raw(EncodeJSON(Model)).ToString()"></property-calculator>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+
     </div>
+</div>
+
+
+
     
-</div>
-<div class="row">
-    <div class="col-sm-12">
 
-        <p>If Gross Yield is under interest rate, then loss</p>
-        <p>
-            5-6% low cashflow - need great growth
-        </p>
-        <p>
-            7-8% break even - still need good growth
-        </p><p>
-            9-10% or more - good cashflow
-        </p>
-        <p>
-            If you want to own a lot of properties, then need high yield (that pay for themselves)
-        </p>
-        <p>
-            It keeps banks happy with income
-        </p>
-        <p>
-            property portfolio will pay for itself
-        </p>
-        <p>
-            interest rates will rise at some point, so need a buffer
-        </p>
-    </div>
-</div>
-
-@functions {
-    string EncodeJSON(object value)
-    {
-        return Newtonsoft.Json.JsonConvert.SerializeObject(value, new Newtonsoft.Json.JsonSerializerSettings
+    @functions {
+        string EncodeJSON(object value)
         {
-            ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
-        });
-    }
-}
-
-@section scripts
-{
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtZa2t_xAZjM5R3eDzB7YsBKOWhqg3Ck0&callback=initMap"></script>
-    <script>
-        require(["app"],
-                    function () {
-                        requirejs(["knockout", "components/PropertyCalculator/propertyCalculatorComponent", "koBindings/PropertyCalculatorBinding", "koBindings/FadeVisibleBinding"],
-                            function (ko) {
-                                ko.applyBindings();
-                            })
-
-                    }
-                );
-
-        var map;
-        var propLatLng = { lat: @Model.GeoLocation.Latitude, lng: @Model.GeoLocation.Longitude };
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: propLatLng,
-                zoom: 15
+            return Newtonsoft.Json.JsonConvert.SerializeObject(value, new Newtonsoft.Json.JsonSerializerSettings
+            {
+                ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
             });
-
-            marker = new google.maps.Marker({
-                position: propLatLng,
-                map: map,
-                title: "@Model.FullAddress",
-            });
-
-            
         }
-    </script>
+    }
+
+    @section scripts
+{
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtZa2t_xAZjM5R3eDzB7YsBKOWhqg3Ck0&callback=initMap"></script>
+        <script>
+            require(["app"],
+                function () {
+                    requirejs(["knockout", "components/PropertyCalculator/comparePropertyCalculatorComponent", "koBindings/PropertyCalculatorBinding"],
+                        function (ko) {
+                            ko.applyBindings();
+
+                            $().ready(function () {
+                                $(".calculator-1").hide();
+                                $(".calculator-2").hide();
+                                $(".remove-scenario").hide();
+
+                                var visible = 1;
+
+                                $(".add-scenario").click(function () {
+                                    if (visible == 3) {
+                                        return;
+                                    }
+                                    var className = ".calculator-" + (visible);
+                                    visible++;
 
 
 
-}
+                                    $(className).show();
+
+                                    if (visible > 1) {
+                                        $(".remove-scenario").show();
+                                    }
+
+                                    if (visible == 3) {
+                                        $(this).hide();
+                                    }
+
+
+
+                                });
+
+                                $(".remove-scenario").click(function () {
+                                    if (visible == 1) {
+                                        return;
+                                    }
+
+                                    visible--;
+
+                                    var className = ".calculator-" + (visible);
+
+                                    $(className).hide();
+
+                                    if (visible < 3) {
+                                        $(".add-scenario").show();
+                                    }
+
+                                    if (visible == 1) {
+                                        $(this).hide();
+                                    }
+                                })
+                            });
+
+                        });
+
+                }
+            );
+
+            var map;
+            var propLatLng = { lat: @Model.GeoLocation.Latitude, lng: @Model.GeoLocation.Longitude };
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: propLatLng,
+                    zoom: 15
+                });
+
+                marker = new google.maps.Marker({
+                    position: propLatLng,
+                    map: map,
+                    title: "@Model.FullAddress",
+                });
+
+            }
+        </script>
+
+
+
+    }
