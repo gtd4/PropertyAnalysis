@@ -122,6 +122,7 @@ function (ko, koMap) {
 
         });
         _vm.calculatedAnnualLoanPayment = ko.computed(function () {
+            
             var loanType = _vm.selectedLoanType();
             var annualLoanPayment;
             var loanTerm = _vm.selectedLoanTerm();

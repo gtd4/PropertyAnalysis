@@ -32,7 +32,7 @@
                         _vm.price(value);
                         _vm.price(_vm.processWrittenValueInt(value));
 
-                        _vm.updateRentAndPropertyManagementCosts();
+                        //_vm.updateRentAndPropertyManagementCosts();
                     }
                 });
 
@@ -133,7 +133,7 @@
                     annualLoanPayment = Math.round(_vm.price() * interestRate);
                 }
                 else {
-                    annualLoanPayment = _vm.price() * (topline / bottomline);
+                    annualLoanPayment = loanAmount * (topline / bottomline);
                 }
 
                 _vm.annualLoanCost(Math.round(annualLoanPayment));
