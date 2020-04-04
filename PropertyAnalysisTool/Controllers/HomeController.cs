@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PropertyAnalysisTool.DTOs;
 using PropertyAnalysisTool.Models;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -13,11 +11,11 @@ namespace PropertyAnalysisTool.Controllers
     public class HomeController : Controller
     {
         //prod details
-        private string consumerKey = "48C11C46E3C1969737776DECD5F144B3";
+        private readonly string consumerKey = "48C11C46E3C1969737776DECD5F144B3";
 
-        private string consumerSecret = "C841EE5BE675F879097974C6BB163202";
-        private string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
-        private string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
+        private readonly string consumerSecret = "C841EE5BE675F879097974C6BB163202";
+        private readonly string oauthToken = "AAF373A7B9ED4157DF12E15F94ECD633";
+        private readonly string oauthSecret = "C640C7AB6D8DBE8B453721FD14E9525D";
 
         private const int pageSize = 12;
 
@@ -224,9 +222,9 @@ namespace PropertyAnalysisTool.Controllers
             return model;
         }
 
-        public ActionResult Compare(int id1 = 0, int id2 = 0, int id3 = 0)
+        public ActionResult Compare(long id1 = 0, long id2 = 0, long id3 = 0)
         {
-            var Ids = new int[] { id1, id2, id3 };
+            var Ids = new long[] { id1, id2, id3 };
             //Get upto 3 properties and compare their values side by side
             var authHeader = string.Format("oauth_consumer_key={0}, oauth_token={1}, oauth_signature_method=PLAINTEXT, oauth_signature={2}&{3}", consumerKey, oauthToken, consumerSecret, oauthSecret);
             var model = new ComparePropertyModel();
@@ -256,6 +254,12 @@ namespace PropertyAnalysisTool.Controllers
         }
 
         public ActionResult Calculator()
+        {
+            var vm = new PropertyModel();
+            return View(vm);
+        }
+
+        public ActionResult HomeOwnerCalculator()
         {
             var vm = new PropertyModel();
             return View(vm);

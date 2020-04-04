@@ -13,5 +13,8 @@ namespace PropertyAnalysisTool.DTOs
 
         [JsonProperty("Large")]
         public string Large { get; set; }
+
+        [JsonProperty("FullSize")]
+        public string FullSize { get; set; }
     }
 }

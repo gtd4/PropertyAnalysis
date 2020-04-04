@@ -6,8 +6,8 @@
     @RenderSection("metatags", false)
     <title>@ViewBag.Title - Property Analysis</title>
     @Styles.Render("~/Content/css")
-    @*@Scripts.Render("~/bundles/modernizr")*@
-    @Scripts.RenderFormat("<script async src='{0}'></script>", "~/ bundles / modernizr")
+    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.RenderFormat("<script async src='{0}'></script>", "~/ bundles / modernizr")*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/custom-font-icons-master/custom-font-icons-master/custom-font-icons.css">
 </head>
@@ -31,6 +31,7 @@
                     <li>@Html.ActionLink("Residential", "Index", "Home")</li>
                     <li>@Html.ActionLink("Sections", "Index", "Home", new { propType = "Sections" }, null)</li>
                     <li>@Html.ActionLink("Calculator", "Calculator", "Home")</li>
+                    <li>@Html.ActionLink("HomeOwnerCalculator", "HomeOwnerCalculator", "Home")</li>
                     @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     @*<li>@Html.ActionLink("CheaperThanRV", "CheaperThanRV", "Home")</li>*@
                 </ul>

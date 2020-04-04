@@ -16,8 +16,7 @@ function (ko, koMap) {
         _vm.loanTerm = ko.observableArray(SetLoanTerm());
         _vm.selectedLoanTerm = ko.observable(30);
 
-        _vm.showTermDropDown = ko.computed(function()
-        {
+        _vm.showTermDropDown = ko.computed(function () {
             return _vm.selectedLoanType() == "Principal and Interest";
         })
 
@@ -30,21 +29,30 @@ function (ko, koMap) {
                     return _vm.price();
                 },
                 write: function (value) {
-
                     _vm.price(value);
                     _vm.price(_vm.processWrittenValueInt(value));
 
                     _vm.updateRentAndPropertyManagementCosts();
                 },
-
             });
 
+        _vm.calculatedDeposit = ko.pureComputed(
+            {
+                read: function () {
+                    return _vm.depositAmount();
+                },
+                write: function (value) {
+                    _vm.depositAmount(value);
+                    //_vm.price(_vm.processWrittenValueInt(value));
+
+                    //_vm.updateRentAndPropertyManagementCosts();
+                },
+            });
         /*
         Property Yield Percentage. Editable
         */
         _vm.calculatedYield = ko.pureComputed({
             read: function () {
-
                 return _vm.initialYieldPercentage();
             },
             write: function (value) {
@@ -53,7 +61,6 @@ function (ko, koMap) {
 
                 _vm.updateRentAndPropertyManagementCosts();
             },
-
         });
 
         /*
@@ -62,7 +69,6 @@ function (ko, koMap) {
         _vm.calculatedRent = ko.pureComputed(
         {
             read: function () {
-
                 return _vm.initialRent();
             },
             write: function (value) {
@@ -107,39 +113,40 @@ function (ko, koMap) {
                     _vm.initialInterestRate(_vm.processWrittenValueFloat(value), true);
                     var annualInterest = Math.round(_vm.price() * _vm.initialInterestRate() / 100);
                     _vm.annualLoanCost(annualInterest);
-
                 }
             });
 
+        _vm.calculatedLoanAmount = ko.computed(function () {
+            var loanAmount = _vm.price() - _vm.depositAmount();
+            return loanAmount;
 
+        });
         _vm.calculatedAnnualLoanPayment = ko.computed(function () {
+            
             var loanType = _vm.selectedLoanType();
             var annualLoanPayment;
             var loanTerm = _vm.selectedLoanTerm();
             var interestRate = _vm.initialInterestRate() / 100;
             var topline = interestRate * Math.pow((1 + interestRate), loanTerm);
             var bottomline = Math.pow((1 + interestRate), loanTerm) - 1;
+            var loanAmount = _vm.price() - _vm.depositAmount();
 
             if (loanType == "Interest Only") {
-                annualLoanPayment = Math.round(_vm.price() * interestRate);
-
+                annualLoanPayment = Math.round(loanAmount * interestRate);
             }
             else {
-                annualLoanPayment = _vm.price() * (topline / bottomline);
+                annualLoanPayment = loanAmount * (topline / bottomline);
             }
 
             _vm.annualLoanCost(Math.round(annualLoanPayment));
             return _vm.annualLoanCost();
-
         });
 
         /*
         How much rent needed to cover interest.
         */
         _vm.calculatedRentToCoverInterest = ko.computed(function () {
-
             return Math.round(_vm.annualLoanCost() / (52 - _vm.initialVacancyRate()));
-
         });
 
         /*
@@ -160,7 +167,6 @@ function (ko, koMap) {
                 write: function (value) {
                     _vm.initialRates(value);
                     _vm.initialRates(_vm.processWrittenValueInt(value));
-
                 }
             });
 
@@ -175,7 +181,6 @@ function (ko, koMap) {
                 write: function (value) {
                     _vm.initialRepairs(value);
                     _vm.initialRepairs(_vm.processWrittenValueInt(value));
-
                 },
             });
 
@@ -199,7 +204,6 @@ function (ko, koMap) {
         _vm.calculatedPropertyManagement = ko.pureComputed(
             {
                 read: function () {
-
                     return _vm.propertyManagementAmount();
                 },
                 write: function (value) {
@@ -211,7 +215,6 @@ function (ko, koMap) {
         _vm.calculatedBodyCorpFee = ko.pureComputed(
             {
                 read: function () {
-
                     return _vm.bodyCorpFee();
                 },
                 write: function (value) {
@@ -224,7 +227,6 @@ function (ko, koMap) {
         Total of all expenses (Rates, Maintenance, Insurance, Property Management)
         */
         _vm.calculatedTotalExpense = ko.computed(function () {
-
             _vm.totalInitialExpense(_vm.initialRates() + _vm.initialRepairs() + _vm.initialInsurance() + _vm.propertyManagementAmount() + _vm.bodyCorpFee());
             return _vm.totalInitialExpense();
         });
@@ -244,7 +246,6 @@ function (ko, koMap) {
         });
 
         _vm.calculateAnnualEarnings = ko.computed(function () {
-
             return _vm.calculatedSurplusAfterExpenses() * (52 - _vm.initialVacancyRate());
         });
 
@@ -252,7 +253,6 @@ function (ko, koMap) {
         Helper Method that Writes values as an int
         */
         _vm.processWrittenValueInt = function (value) {
-
             value = parseInt(value, 10);
 
             return isNaN(value) ? 0 : value;
@@ -262,7 +262,6 @@ function (ko, koMap) {
         Helper Method that writes values as a float, used for our percentage values
         */
         _vm.processWrittenValueFloat = function (value) {
-
             value = value.replace(/[^0-9.]/g, "");
 
             var splitVal = value.split('.');
@@ -317,18 +316,11 @@ function (ko, koMap) {
     return PropertyDetailsViewModel;
 });
 
-function SetLoanTerm()
-{
+function SetLoanTerm() {
     var termArray = [];
-    for(var i = 1; i <= 30; i++)
-    {
+    for (var i = 1; i <= 30; i++) {
         termArray[i - 1] = i
     }
 
     return termArray;
 }
-
-
-
-
-

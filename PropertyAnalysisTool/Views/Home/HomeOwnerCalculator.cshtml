@@ -10,16 +10,17 @@
             <h1>Compare</h1>
         </div>
         <div class="col-sm-6">
-            <a href="#" class="remove-scenario btn btn-danger pull-right">Remove Scenario</a>
+            <a href="#" class="remove-scenario btn btn-danger pull-right" >Remove Scenario</a>
             <a href="#" class="add-scenario btn btn-primary pull-right" style="margin-right:10px;">Add Scenario</a>
         </div>
+
     </div>
 </div>
 <div class="row">
-    @for (var i = 0; i < 6; i++)
+    @for (var i = 0; i < 3; i++)
     {
 
-        <div class="col-sm-2 calculator calculator-@i">
+        <div class="col-sm-4 calculator-@i">
             <property-calculator params="data: @Html.Raw(EncodeJSON(Model)).ToString()"></property-calculator>
         </div>
     }
@@ -40,26 +41,25 @@
     <script>
         require(["app"],
             function () {
-                requirejs(["knockout", "components/PropertyCalculator/comparePropertyCalculatorComponent", "koBindings/PropertyCalculatorBinding"],
+                requirejs(["knockout", "components/PropertyCalculator/compareHomeOwnerPropertyCalculatorComponent", "koBindings/PropertyCalculatorBinding"],
                     function (ko) {
                         ko.applyBindings();
 
                         $().ready(function () {
                             $(".calculator-1").hide();
                             $(".calculator-2").hide();
-                            $(".calculator-3").hide();
-                            $(".calculator-4").hide();
-                            $(".calculator-5").hide();
                             $(".remove-scenario").hide();
 
                             var visible = 1;
 
                             $(".add-scenario").click(function () {
-                                if (visible == 6) {
+                                if (visible == 3) {
                                     return;
                                 }
                                 var className = ".calculator-" + (visible);
                                 visible++;
+
+                                
 
                                 $(className).show();
 
@@ -67,9 +67,11 @@
                                     $(".remove-scenario").show();
                                 }
 
-                                if (visible == 6) {
+                                if (visible == 3) {
                                     $(this).hide();
                                 }
+
+                                
 
                             });
 
@@ -84,7 +86,7 @@
 
                                 $(className).hide();
 
-                                if (visible < 6) {
+                                if (visible < 3) {
                                     $(".add-scenario").show();
                                 }
 

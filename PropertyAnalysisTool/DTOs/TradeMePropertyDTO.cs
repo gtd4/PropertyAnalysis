@@ -12,6 +12,9 @@ namespace PropertyAnalysisTool.DTOs
         [JsonProperty("ListingId")]
         public long ListingId { get; set; }
 
+        [JsonProperty("LandArea")]
+        public int LandArea { get; set; }
+
         [JsonProperty("Title")]
         public string Title { get; set; }
 
