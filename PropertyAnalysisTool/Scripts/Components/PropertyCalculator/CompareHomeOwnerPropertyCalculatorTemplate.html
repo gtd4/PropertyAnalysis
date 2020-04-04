@@ -5,10 +5,10 @@
 
         <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedPrice" />
 
-        <h3>Deposit (30% initial)</h3>
+        <h3>Deposit (20% initial)</h3>
         <input type="text" data-bind="propertyCalculatorText: calculatedDeposit" />
 
-        <h3>Gross Yield %</h3>
+        <!--<h3>Gross Yield %</h3>
 
         <input class="form-control" type="number" data-bind="textInput: calculatedYield" />
 
@@ -23,7 +23,7 @@
         <h3>Yearly Rent</h3>
         <h4>
             <strong data-bind="propertyCalculatorText: proposedAnnualRentalIncome">Annual Rent</strong>
-        </h4>
+        </h4>-->
     </div>
 </div>
 
@@ -44,23 +44,23 @@
 
         <input class="form-control" type="number" data-bind="textInput: calculatedInterestRate" />
 
-        <h3>Yearly Payment</h3>
+        <h3>Yearly Mortgage Payment</h3>
 
         <h4>
             <strong data-bind="propertyCalculatorText: calculatedAnnualLoanPayment">Interest</strong>
         </h4>
 
-        <h3>Weekly Loan Payments</h3>
+        <h3>Weekly Mortgage Payments</h3>
 
         <h4>
             <strong data-bind="propertyCalculatorText: calculatedRentToCoverInterest">Rent For Interest</strong>
         </h4>
 
-        <h3>Surplus Per Week</h3>
+        <!--<h3>Surplus Per Week</h3>
 
         <h4>
             <strong data-bind="propertyCalculatorText: calculateSurplusBeforeExpenses">Surplus before Expenses</strong>
-        </h4>
+        </h4>-->
     </div>
 </div>
 
@@ -77,9 +77,9 @@
         <h3>Insurance</h3>
 
         <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedInsurance" />
-        <h3>Property Management (8%)</h3>
+        <!--<h3>Property Management (8%)</h3>
 
-        <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedPropertyManagement" />
+        <input class="form-control" type="text" data-bind="propertyCalculatorText: calculatedPropertyManagement" />-->
 
         <h3>Body Corp Fees</h3>
 
@@ -91,27 +91,27 @@
             <strong data-bind="propertyCalculatorText: calculatedTotalExpense"></strong>
         </h4>
 
-        <h3>Rent To Cover Mortgage and Expenses</h3>
+        <h3>Payments To Cover Mortgage and Expenses</h3>
 
         <h4>
             <strong data-bind="propertyCalculatorText: calculatedRentToCoverMortgageAndExpenses">Rent to Cover everything</strong>
         </h4>
 
-        <h3>Weekly Earnings</h3>
+        <!--<h3>Weekly Earnings</h3>
 
         <h4>
             <strong data-bind="propertyCalculatorText: calculatedSurplusAfterExpenses">Surplus After Expenses</strong>
-        </h4>
+        </h4>-->
     </div>
 </div>
 
 <div class="col-lg-12 compare">
-    <div class="thumbnail">
+    <!--<div class="thumbnail">
         <h3>Annual <span data-bind="text: calculatedSurplusAfterExpenses() >= 0 ? 'Profit' : 'Loss'"></span> of</h3>
 
         <h4>
 
             <strong data-bind="propertyCalculatorText: calculateAnnualEarnings">Annual Earnings</strong>
         </h4>
-    </div>
+    </div>-->
 </div>

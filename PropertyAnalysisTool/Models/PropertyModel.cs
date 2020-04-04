@@ -7,7 +7,7 @@ namespace PropertyAnalysisTool.Models
 {
     public class PropertyModel
     {
-        public int ListingId { get; set; }
+        public long ListingId { get; set; }
 
         public int LandArea { get; set; }
 
@@ -255,6 +255,14 @@ namespace PropertyAnalysisTool.Models
             get
             {
                 return string.Format("{0:dd MMM yy}", StartDate);
+            }
+        }
+
+        public int DepositAmount
+        {
+            get
+            {
+                return (int)(Price * 30 / 100);
             }
         }
 

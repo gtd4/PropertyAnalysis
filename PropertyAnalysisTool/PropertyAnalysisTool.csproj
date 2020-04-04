@@ -266,6 +266,8 @@
     <None Include="Properties\PublishProfiles\PropertyAnalysis.pubxml" />
     <None Include="Properties\PublishProfiles\propertyAnalysis2 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Components\PropertyCalculator\compareHomeOwnerPropertyCalculatorComponent.js" />
+    <Content Include="Scripts\Components\PropertyCalculator\CompareHomeOwnerPropertyCalculatorTemplate.html" />
     <Content Include="Scripts\Components\PropertyCalculator\ComparePropertyCalculatorTemplate.html" />
     <Content Include="Scripts\Components\PropertyCalculator\comparePropertyCalculatorComponent.js" />
     <Content Include="Scripts\Components\PropertyCalculator\propertyCalculatorComponent.js" />
@@ -291,6 +293,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\text.js" />
     <Content Include="Scripts\ViewModel\appViewModel.js" />
+    <Content Include="Scripts\ViewModel\HomeOwnerPropertyDetailsViewModel.js" />
     <Content Include="Scripts\ViewModel\PropertyDetailsViewModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -340,6 +343,7 @@
     <Content Include="Views\Shared\PropertyDetailsInfoPartial.cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.Mobile.cshtml" />
     <Content Include="Views\Home\Calculator.cshtml" />
+    <Content Include="Views\Home\HomeOwnerCalculator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

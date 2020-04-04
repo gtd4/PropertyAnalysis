@@ -10,7 +10,7 @@ namespace PropertyAnalysisTool.DTOs
     public class TradeMePropertyDTO
     {
         [JsonProperty("ListingId")]
-        public int ListingId { get; set; }
+        public long ListingId { get; set; }
 
         [JsonProperty("LandArea")]
         public int LandArea { get; set; }
