@@ -19,7 +19,7 @@
     @for (var i = 0; i < 6; i++)
     {
 
-        <div class="col-sm-2 calculator calculator-@i">
+        <div class="col-sm-4 calculator calculator-@i">
             <property-calculator params="data: @Html.Raw(EncodeJSON(Model)).ToString()"></property-calculator>
         </div>
     }
