@@ -58,9 +58,19 @@
                                 if (visible == 6) {
                                     return;
                                 }
+
                                 var className = ".calculator-" + (visible);
                                 visible++;
 
+                                if (visible == 4) {
+
+                                    $('.calculator').each(function () {
+
+                                        $(this).removeClass('col-sm-4');
+                                        $(this).addClass('col-sm-2');
+
+                                    });
+                                }
                                 $(className).show();
 
                                 if (visible > 1) {
@@ -79,6 +89,16 @@
                                 }
 
                                 visible--;
+
+                                if (visible == 3) {
+
+                                    $('.calculator').each(function () {
+
+                                        $(this).removeClass('col-sm-2');
+                                        $(this).addClass('col-sm-4');
+
+                                    });
+                                }
 
                                 var className = ".calculator-" + (visible);
 
