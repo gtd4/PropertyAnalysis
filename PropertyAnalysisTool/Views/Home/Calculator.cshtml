@@ -67,6 +67,16 @@
                                     $('.calculator').each(function () {
 
                                         $(this).removeClass('col-sm-4');
+                                        $(this).addClass('col-sm-3');
+
+                                    });
+                                }
+
+                                if (visible == 5) {
+
+                                    $('.calculator').each(function () {
+
+                                        $(this).removeClass('col-sm-3');
                                         $(this).addClass('col-sm-2');
 
                                     });
@@ -90,11 +100,21 @@
 
                                 visible--;
 
-                                if (visible == 3) {
+                                if (visible == 4) {
 
                                     $('.calculator').each(function () {
 
                                         $(this).removeClass('col-sm-2');
+                                        $(this).addClass('col-sm-3');
+
+                                    });
+                                }
+
+                                if (visible == 3) {
+
+                                    $('.calculator').each(function () {
+
+                                        $(this).removeClass('col-sm-3');
                                         $(this).addClass('col-sm-4');
 
                                     });
