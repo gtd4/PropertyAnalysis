@@ -192,7 +192,6 @@ a.prop-link {
 /*-------------------------------------------------*/
 @media only screen and (min-device-width: 1025px) {
 
-
     .zoom-container {
         float: left;
         position: relative;
@@ -228,8 +227,19 @@ a.prop-link {
     }
 
 }
-/*-----------------------------------------------*/
 
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { /* STYLES GO HERE */
+
+    body {
+        padding-top: 200px;
+        padding-bottom: 20px;
+    }
+}
+    
+
+
+/*-----------------------------------------------*/
 .navbar-toggle .icon-bar {
     display: block;
     width: 22px;

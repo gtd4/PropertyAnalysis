@@ -338,12 +338,12 @@
     <Content Include="Views\Shared\ComparePropertyPartial.cshtml" />
     <Content Include="Views\Shared\PropertyImageLargeSliderPartial.cshtml" />
     <Content Include="Views\Shared\PropertyImageListingSliderPartial.cshtml" />
-    <Content Include="Views\Home\Index.Mobile.cshtml" />
     <Content Include="Views\Shared\CalculatorPartial.cshtml" />
     <Content Include="Views\Shared\PropertyDetailsInfoPartial.cshtml" />
     <Content Include="Views\Shared\PropertyListingPartial.Mobile.cshtml" />
     <Content Include="Views\Home\Calculator.cshtml" />
     <Content Include="Views\Home\HomeOwnerCalculator.cshtml" />
+    <Content Include="Views\Home\Index.Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
